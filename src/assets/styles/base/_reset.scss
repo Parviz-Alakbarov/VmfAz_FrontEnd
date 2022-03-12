@@ -1,0 +1,37 @@
+
+html{
+    scroll-behavior: smooth;
+}
+
+@font-face {
+    font-family: "Fira Sans";
+    src: url("../../fonts/FiraSans-Light-300.ttf") format("truetype");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Fira Sans";
+    src: url("../../fonts/FiraSans-Regular-400.ttf") format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Fira Sans";
+    src: url("../../fonts/FiraSans-Medium-500.ttf") format("truetype");
+    font-weight: 500;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+    list-style-type: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'Fira Sans', sans-serif;
+    color: #000;
+    // &::selection{
+    //     color: white;
+    //     background-color: $siteMainBlueColor;
+    // }
+}
