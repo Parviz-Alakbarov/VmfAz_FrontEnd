@@ -1,3 +1,8 @@
-<ul>
-    <li *ngFor="let slider of sliders">{{slider.id}}---{{slider.image}}</li>
-</ul>
+  <section class="slider_banner" style="padding-top: 100px;">
+      <owl-carousel-o [options]="bannerSlider">
+        <ng-template *ngFor="let slider of sliders" carouselSlide>
+            <img src="https://localhost:44337/images/sliders/{{slider.image}}" alt="">
+        </ng-template>  
+       
+      </owl-carousel-o>
+  </section>
