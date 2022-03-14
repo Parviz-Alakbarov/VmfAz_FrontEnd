@@ -6,6 +6,7 @@ header{
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.13) 0px 3px 8px;
   position: fixed;
+  background-color: #fff;
   &_left,
   &_right {
     height: 65px;
@@ -59,6 +60,7 @@ header{
     border-radius: 50px;
     padding: 3px;
     border: 1px solid #7b7b7b;
+    background-color: #fff;
     input {
       font-size: 13px;
       width: 6rem;
@@ -168,6 +170,7 @@ header{
     visibility: hidden;
     opacity: 0;
     transition: opacity .3s linear, visibility .3s linear;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   }
   &_item:not(.profile_name){
     color: black;

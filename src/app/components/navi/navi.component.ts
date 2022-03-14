@@ -10,8 +10,6 @@ import { Setting } from '../../models/entities/setting';
 export class NaviComponent implements OnInit {
   settings:Setting[]=[];
 
-  tempPath:string = "sdf"
-
   constructor(
     private settingService:SettingService
   ) { }
@@ -26,6 +24,9 @@ export class NaviComponent implements OnInit {
     })
   }
 
-  
+  getImagePath(key: string) {
+    let imagePath = this.settings.find(x=>x.key==key)?.value
+    return this.settingService.getImagePath(imagePath)
+  }
 
 }

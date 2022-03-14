@@ -1,0 +1,102 @@
+.services{
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}    
+.service{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+    p{
+        width: 40px;
+        margin-left: 10px;
+        text-transform: uppercase;
+    }
+}
+
+.footer{
+    background-color: #f8f8f8;
+    border-bottom: 1px  solid #eee;
+    padding: 30px 0;
+    &_column{
+        margin-bottom: 25px;
+        &__head{
+            text-decoration: underline;
+            padding-bottom: 5px;
+            font-size: 14px;
+        }
+        &__item{
+            padding: 8px 0;
+            a{
+                font-size: 14px;
+                color: #666;
+            }
+        }
+    }
+    &_subcribe{
+        p{
+            color: #666;
+            padding-bottom: 13px;
+        }
+        &__form{
+            display: inline-block;
+            border-radius: 40px;
+            border: 1px solid;
+            padding: 1px;
+            margin-bottom: 15px;
+            button{
+                padding: 10px 20px;
+                background-color: #333;
+                font-size: 16px;
+                font-weight: 600;
+                color: white;
+                border-radius: 30px;
+            }
+            input{
+                font-size: 14px;
+                background-color: transparent;
+                margin-left: 15px;
+                &:focus{
+                    outline: none;
+                }
+            }
+
+        }
+        .social a{
+            padding-right: 15px;
+            font-size: 24px;
+        }
+    }
+    &_payment{
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        &__img{
+            width: 600px;
+        }
+        img{
+            width: 100%;
+        }
+    }
+}
+
+.services div:not(:last-child){
+    border-right: 2px solid #eee;
+}
+
+@media screen and (max-width: 576px) {
+    .services div:not(:last-child) .service{
+        border-bottom: 2px solid #eee !important;
+    }
+    .services div:nth-child(2n+2) .service{
+        border-right: none;
+    }
+
+    .footer_column,.footer_subcribe{
+        text-align: center;
+    }
+}

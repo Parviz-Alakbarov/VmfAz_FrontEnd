@@ -1,0 +1,17 @@
+.slider_banner .owl-next, .slider_banner .owl-prev{
+    background-color: transparent !important;
+    position: absolute;
+    top: 50%;
+
+    i{
+        color: rgba(133, 133, 133, 0.445) ;
+        font-size: 4rem;
+    }
+}
+.slider_banner .owl-next{
+    right: 0;
+}
+.slider_banner .owl-prev{
+    left: 0;
+}
+

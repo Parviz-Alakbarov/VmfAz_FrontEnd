@@ -30,11 +30,13 @@ export class HomeComponent implements OnInit {
   bannerSlider: OwlOptions = {
     loop: true,
     mouseDrag: true,
+    autoplay:true,
+    autoplayTimeout:3000,
     touchDrag: true,
     pullDrag: true,
     dots: true,
     navSpeed: 700,
-    navText: ['', ''],
+    navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
     responsive: {
       0: {
         items: 1

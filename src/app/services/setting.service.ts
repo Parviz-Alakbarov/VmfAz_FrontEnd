@@ -8,13 +8,17 @@ import { Setting } from '../models/entities/setting';
   providedIn: 'root'
 })
 export class SettingService {
-
+  baseUrl = "https://localhost:44337/";
   apiUrl = "https://localhost:44337/api/settings/";
 
   constructor(private httpClient:HttpClient) { }
 
   getSettings():Observable<ListResponseModel<Setting>>{
     return this.httpClient.get<ListResponseModel<Setting>>(this.apiUrl);
+  }
+
+  getImagePath(imagePath: any) {
+    return this.baseUrl +"images/settings/"+ imagePath
   }
 
 }

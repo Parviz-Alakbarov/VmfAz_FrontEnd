@@ -8,4 +8,11 @@ $(function(){
 		$('.nav_items-res').removeClass('nav_active')
 		$('.nav-res_item').toggleClass('active');
 	})
+	$(window).on('scroll', function (e) {
+		if (window.scrollY>120) {
+			$('#scrool-up').addClass("active");
+		}else{
+			$('#scrool-up').removeClass("active")
+		}
+	});
 });

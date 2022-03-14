@@ -1,9 +1,10 @@
     <!-- Header Start -->
     <header>
+        <a href="" id="#top"></a>
         <nav id="navigation" class="nav">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-md-12">
+                    <div class="col-lg-8">
                         <div class="nav_left">
                             <div class="nav_hamburger">
                                 <span></span>
@@ -16,12 +17,12 @@
                             <div class="nav_logo">
                                 <a href="#">
                                     
-                                    <img [src]="" alt="logo">
+                                    <img [src]="getImagePath('NavigationLogo')" alt="logo">
                                 </a>
                             </div> 
                             <ul class="nav_items nav_items-res">
                                 <li class="nav_item nav_item-res">
-                                    <a href="#" class="nav_item__link">Kişi Saatı</a>
+                                    <a routerLink="/first-component" class="nav_item__link">Kişi Saatı</a>
                                 </li>
                                 <li class="nav_item nav_item-res">
                                     <a href="#" class="nav_item__link">Qadın Saatı</a>

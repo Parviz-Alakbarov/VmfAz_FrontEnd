@@ -1,0 +1,15 @@
+#scrool-up{
+    position: fixed;
+    right: 10px;
+    padding: 25px;
+    bottom: -80px;
+    border-radius: 5px;
+    background-color: #333;
+    transition: bottom .3s cubic-bezier(0,.8,.69,1.61);
+    i{
+        color: #fff;
+    }
+    &.active{
+        bottom: 20px;
+    }
+}
