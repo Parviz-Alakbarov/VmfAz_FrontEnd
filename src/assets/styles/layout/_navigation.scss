@@ -7,6 +7,7 @@ header{
   box-shadow: rgba(0, 0, 0, 0.13) 0px 3px 8px;
   position: fixed;
   background-color: #fff;
+  z-index: 12;
   &_left,
   &_right {
     height: 65px;

@@ -3,18 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/responses/listResponseModel';
 import { Setting } from '../models/entities/setting';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingService {
-  baseUrl = "https://localhost:44337/";
-  apiUrl = "https://localhost:44337/api/settings/";
+  private baseUrl = environment.BASE_URL;
 
   constructor(private httpClient:HttpClient) { }
 
   getSettings():Observable<ListResponseModel<Setting>>{
-    return this.httpClient.get<ListResponseModel<Setting>>(this.apiUrl);
+    let newUrl = this.baseUrl+"api/settings";
+    return this.httpClient.get<ListResponseModel<Setting>>(newUrl);
   }
 
   getImagePath(imagePath: any) {

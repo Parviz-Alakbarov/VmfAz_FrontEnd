@@ -21,6 +21,5 @@ export interface Product{
     costPrice:number;
     discountPercent:number;
     description:string;
-    isDeleted:boolean;
     
 }

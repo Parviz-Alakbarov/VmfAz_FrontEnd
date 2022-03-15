@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   }
 
 
+
   bannerSlider: OwlOptions = {
     loop: true,
     mouseDrag: true,
