@@ -1,0 +1,42 @@
+@use '../abstracts/colors'as c;
+.section-50{
+    padding: 50px 0;
+}
+
+.section-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    &_text{
+        font-weight: 400;
+        font-size: 1.56rem;
+        position: relative;
+        &::before{
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            
+            background-color: c.$main-brown;
+        }
+    }
+    &_link , &_link *{
+        color: c.$main-brown;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .section-header_empty{
+        display: none;
+    }    
+    .section-header_text::before{
+        left: 0;
+        transform: none;
+        top: 30px;
+    }
+}

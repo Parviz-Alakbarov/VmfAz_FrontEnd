@@ -1,7 +1,13 @@
-@import "base/reset",
-        "layout/grid",
+@use "abstracts/colors";
+@use "base/typography";
+@use "base/reset";
+@use "components/productCard";
+
+@import "layout/grid",
         "layout/navigation",
         "pages/home",
         "layout/footer",
-        "components/scrollUp";
+        "components/scrollUp",
+        "layout/section";
+        // "pages/shop";
 

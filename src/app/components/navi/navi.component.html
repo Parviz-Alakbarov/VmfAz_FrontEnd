@@ -1,80 +1,80 @@
-    <!-- Header Start -->
-    <header>
-        <a href="" id="#top"></a>
-        <nav id="navigation" class="nav">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="nav_left">
-                            <div class="nav_hamburger">
-                                <span></span>
-                                <span></span>
-                                <span></span>
+        <!-- Header Start -->
+        <header>
+            <a href="" id="#top"></a>
+            <nav id="navigation" class="nav">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="nav_left">
+                                <div class="nav_hamburger">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="nav_item__link nav_search-res">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </div>
+                                <div class="nav_logo">
+                                    <a href="#">
+                                        
+                                        <img [src]="getImagePath('NavigationLogo')" alt="logo">
+                                    </a>
+                                </div> 
+                                <ul class="nav_items nav_items-res">
+                                    <li class="nav_item nav_item-res">
+                                        <a routerLink="/first-component" class="nav_item__link">Kişi Saatı</a>
+                                    </li>
+                                    <li class="nav_item nav_item-res">
+                                        <a href="#" class="nav_item__link">Qadın Saatı</a>
+                                    </li>
+                                    <li class="nav_item nav_item-res">
+                                        <a href="#" class="nav_item__link">Uşaq Saatı</a>
+                                    </li>
+                                    <li class="nav_item nav_item-res">
+                                        <a href="#" class="nav_item__link">Markalar</a>
+                                    </li>
+                                    <li class="nav_item nav_item-res">
+                                        <a href="#" class="nav_item__link special">Endirimler</a>
+                                    </li>
+                                </ul>                       
                             </div>
-                            <div class="nav_item__link nav_search-res">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </div>
-                            <div class="nav_logo">
-                                <a href="#">
-                                    
-                                    <img [src]="getImagePath('NavigationLogo')" alt="logo">
-                                </a>
-                            </div> 
-                            <ul class="nav_items nav_items-res">
-                                <li class="nav_item nav_item-res">
-                                    <a routerLink="/first-component" class="nav_item__link">Kişi Saatı</a>
+                        </div>
+                        <div class="col-lg-4">
+                            <ul class="nav_items flex-end">
+                                <li class="nav_item nav-res_item">
+                                    <div href="#" class="nav_item__link nav-res_item__link  nohover">
+                                        <form action="" method="post" class="nav_search">
+                                            <input type="text" placeholder="Axtar...">
+                                            <button type="submit">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </li>
-                                <li class="nav_item nav_item-res">
-                                    <a href="#" class="nav_item__link">Qadın Saatı</a>
+                                <li class="nav_item profile">
+                                    <a href="#" class="nav_item__link">
+                                        <i class="far fa-user"></i>
+                                    </a>
+                                    <ul class="profile_items">
+                                        <li class="profile_item profile_name"><a href="#"> User name</a></li>
+                                        <li class="profile_item"><a href="#">Profile</a></li>
+                                        <li class="profile_item"><a href="#">Sifarişlər</a></li>
+                                        <li class="profile_item"><a href="#">Seçilmişlər</a></li>
+                                        <li class="profile_item"><a href="#">Çıxış</a></li>
+                                    </ul>
                                 </li>
-                                <li class="nav_item nav_item-res">
-                                    <a href="#" class="nav_item__link">Uşaq Saatı</a>
+                                <li class="nav_item">
+                                    <a href="#" class="nav_item__link nav_basket">
+                                        <i class="fas fa-archive"></i>
+                                        <p class="nav_basket-count">0</p>
+                                    </a>
                                 </li>
-                                <li class="nav_item nav_item-res">
-                                    <a href="#" class="nav_item__link">Markalar</a>
-                                </li>
-                                <li class="nav_item nav_item-res">
-                                    <a href="#" class="nav_item__link special">Endirimler</a>
-                                </li>
-                            </ul>                       
+                            </ul>   
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <ul class="nav_items flex-end">
-                            <li class="nav_item nav-res_item">
-                                <div href="#" class="nav_item__link nav-res_item__link  nohover">
-                                    <form action="" method="post" class="nav_search">
-                                        <input type="text" placeholder="Axtar...">
-                                        <button type="submit">
-                                            <i class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </li>
-                            <li class="nav_item profile">
-                                <a href="#" class="nav_item__link">
-                                    <i class="far fa-user"></i>
-                                </a>
-                                <ul class="profile_items">
-                                    <li class="profile_item profile_name"><a href="#"> User name</a></li>
-                                    <li class="profile_item"><a href="#">Profile</a></li>
-                                    <li class="profile_item"><a href="#">Sifarişlər</a></li>
-                                    <li class="profile_item"><a href="#">Seçilmişlər</a></li>
-                                    <li class="profile_item"><a href="#">Çıxış</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav_item">
-                                <a href="#" class="nav_item__link nav_basket">
-                                    <i class="fas fa-archive"></i>
-                                    <p class="nav_basket-count">0</p>
-                                </a>
-                            </li>
-                        </ul>   
-                    </div>
                 </div>
-            </div>
-        </nav>
-        
+            </nav>
+            
 
-    </header>
-    <!-- Header End -->
+        </header>
+        <!-- Header End -->

@@ -1,7 +1,8 @@
+@use "../abstracts/colors" as c;
 .services{
     padding: 15px 0;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
+    border-top: 1px solid c.$footerBorderBottom;
+    border-bottom: 1px solid c.$footerBorderBottom;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -19,8 +20,8 @@
 }
 
 .footer{
-    background-color: #f8f8f8;
-    border-bottom: 1px  solid #eee;
+    background-color: c.$border-dusty;
+    border-bottom: 1px  solid c.$footerBorderBottom;
     padding: 30px 0;
     &_column{
         margin-bottom: 25px;
@@ -53,7 +54,7 @@
                 background-color: #333;
                 font-size: 16px;
                 font-weight: 600;
-                color: white;
+                color: c.$white;
                 border-radius: 30px;
             }
             input{
@@ -85,12 +86,16 @@
 }
 
 .services div:not(:last-child){
-    border-right: 2px solid #eee;
+    border-right: 2px solid c.$footerBorderBottom;
 }
 
 @media screen and (max-width: 576px) {
+    .services div:not(:last-child){
+        border-right: none;
+    }
+
     .services div:not(:last-child) .service{
-        border-bottom: 2px solid #eee !important;
+        border-bottom: 2px solid c.$footerBorderBottom !important;
     }
     .services div:nth-child(2n+2) .service{
         border-right: none;
