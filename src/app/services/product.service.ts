@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/responses/listResponseModel';
 import { Product } from '../models/entities/product';
 import { environment } from '../../environments/environment';
+import { ProductGetDto } from '../models/dtos/productGetDto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,14 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<Product>>(newUrl);
   }
 
-
   getProductsByBrand(brandId:number):Observable<ListResponseModel<Product>>{
     let newUrl = this.baseUrl+"api/products/getbybrand"+brandId;
     return this.httpClient.get<ListResponseModel<Product>>(newUrl);
+  }
+
+  getBestSellers(count:number):Observable<ListResponseModel<ProductGetDto>>{
+    let newUrl = this.baseUrl+"api/products/getbestseller";
+    return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
   }
   
 }

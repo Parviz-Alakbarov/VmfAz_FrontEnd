@@ -1,8 +1,31 @@
   <section class="slider_banner">
       <owl-carousel-o [options]="bannerSlider">
-        <ng-template *ngFor="let slider of sliders" carouselSlide>
+        <ng-template *ngFor="let slider of sliders" style="width: 100%;" carouselSlide>
             <img src="https://localhost:44337/images/sliders/{{slider.image}}" alt="">
         </ng-template>  
        
       </owl-carousel-o>
   </section>
+
+  <section id="bestSellers"  class="section-50 slider_banner">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-header_empty"></div>
+        <h3 class="section-header_text">ƏN ÇOX SATILANLAR</h3>
+        <a href="#" class="section-header_link">Hamısı <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <owl-carousel-o [options]="bestSellerSlider">
+        <ng-template *ngFor="let product of bestSellers" style="width: 100%;" carouselSlide>
+          <div class="product-card">
+            <a href="#" class="product-card_link">
+              <div class="product-card_image">
+                <img src="https://localhost:44337/images/products/{{product.image}}" alt="">
+              </div>
+              <div class="product-card_name">{{product.name}}</div>
+              <p class="product-card_price">{{product.salePrice}} AZN</p>
+            </a>
+          </div>
+        </ng-template>  
+      </owl-carousel-o>
+    </div>
+</section>

@@ -20,7 +20,7 @@
 }
 
 .footer{
-    background-color: c.$border-dusty;
+    background-color: c.$dusty-white;
     border-bottom: 1px  solid c.$footerBorderBottom;
     padding: 30px 0;
     &_column{
@@ -29,6 +29,7 @@
             text-decoration: underline;
             padding-bottom: 5px;
             font-size: 14px;
+            letter-spacing: 1px;
         }
         &__item{
             padding: 8px 0;
