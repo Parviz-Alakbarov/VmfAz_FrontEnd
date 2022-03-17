@@ -22,9 +22,10 @@ export class FooterComponent implements OnInit {
     })
   }
 
-  getImagePath(key: string) {
-    let imagePath = this.settings.find(x=>x.key==key)?.value
-    return this.settingService.getImagePath(imagePath)
+  getSettingImage(key:string){
+    let imageName = this.settings.find(x=>x.key==key)?.value;
+    let path = this.settingService.getSettingImagePath();
+    return path+imageName
   }
 
 }

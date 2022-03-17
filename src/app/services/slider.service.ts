@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Slider } from '../models/entities/slider';
 import { ListResponseModel } from '../models/responses/listResponseModel';
 
@@ -9,12 +10,19 @@ import { ListResponseModel } from '../models/responses/listResponseModel';
 })
 export class SliderService {
 
-  apiUrl = "https://localhost:44337/api/sliders/";
+
+  private baseUrl = environment.BASE_URL;
+  
 
   constructor(private httpClient:HttpClient) { }
 
   getSliders():Observable<ListResponseModel<Slider>>{
-    return this.httpClient.get<ListResponseModel<Slider>>(this.apiUrl);
+    let newUrl = this.baseUrl+"api/sliders";
+    return this.httpClient.get<ListResponseModel<Slider>>(newUrl);
+  }
+
+  getSliderImagePath(){
+    return this.baseUrl+`images/sliders/`;
   }
   
 }

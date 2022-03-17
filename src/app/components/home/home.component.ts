@@ -4,6 +4,8 @@ import { SliderService } from './../../services/slider.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ProductService } from './../../services/product.service';
 import { ProductGetDto } from 'src/app/models/dtos/productGetDto';
+import { SettingService } from 'src/app/services/setting.service';
+import { Setting } from 'src/app/models/entities/setting';
 
 
 @Component({
@@ -14,17 +16,20 @@ import { ProductGetDto } from 'src/app/models/dtos/productGetDto';
 export class HomeComponent implements OnInit {
 
   sliders:Slider[]=[];
-  bestSellers:ProductGetDto[];
+  bestSellers:ProductGetDto[]=[];
+  settings:Setting[]=[];
 
 
   constructor(
     private sliderService:SliderService,
-    private productService:ProductService
+    private productService:ProductService,
+    private settingService:SettingService
     ) { }
 
   ngOnInit(): void {
     this.getSliders();
     this.getBestSellers();
+    this.getSettings();
   }
 
   getSliders(){
@@ -33,11 +38,34 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getSettings(){
+    this.settingService.getSettings().subscribe(response=>{
+      this.settings = response.data;
+    })
+  }
+
   getBestSellers(){
     this.productService.getBestSellers(5).subscribe(response=>{
       this.bestSellers = response.data;
     })
   }
+
+  getSliderImagePath(imageName: string){
+    return this.sliderService.getSliderImagePath()+imageName
+  }
+
+  getProductImagePath(imageName:string){
+    return this.productService.getProductImagePath()+imageName
+  }
+
+
+  getSettingImage(key:string){
+    let imageName = this.settings.find(x=>x.key==key)?.value;
+    let path = this.settingService.getSettingImagePath();
+    return path+imageName
+  }
+
+
 
 
 

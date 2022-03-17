@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ListResponseModel } from '../models/responses/listResponseModel';
 import { Setting } from '../models/entities/setting';
 import { environment } from 'src/environments/environment';
+import { SingleResponseModel } from '../models/responses/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,17 @@ export class SettingService {
     return this.httpClient.get<ListResponseModel<Setting>>(newUrl);
   }
 
-  getImagePath(imagePath: any) {
-    return this.baseUrl +"images/settings/"+ imagePath
+  getSettingImageByKey(settingKey: any):Observable<SingleResponseModel<Setting>> {
+    let newUrl = this.baseUrl+`api/settings/getbykey?key=${settingKey}`;
+    return this.httpClient.get<SingleResponseModel<Setting>>(newUrl);
   }
+
+  getSettingImagePath(){
+    return this.baseUrl+"images/settings/"
+  }
+ 
+  
+
+
 
 }

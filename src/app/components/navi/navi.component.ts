@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingService } from './../../services/setting.service';
 import { Setting } from '../../models/entities/setting';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-navi',
@@ -24,9 +25,10 @@ export class NaviComponent implements OnInit {
     })
   }
 
-  getImagePath(key: string) {
-    let imagePath = this.settings.find(x=>x.key==key)?.value
-    return this.settingService.getImagePath(imagePath)
+  getSettingImage(key:string){
+    let imageName = this.settings.find(x=>x.key==key)?.value;
+    let path = this.settingService.getSettingImagePath();
+    return path+imageName
   }
 
 }

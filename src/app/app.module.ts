@@ -12,6 +12,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductComponent } from './components/product/product.component';
 import { HomeComponent } from './components/home/home.component';
+import { BrandComponent } from './components/brand/brand.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { HomeComponent } from './components/home/home.component';
     FooterComponent,
     ProductComponent,
     HomeComponent,
+    BrandComponent,
   ],
   imports: [
     BrowserModule,

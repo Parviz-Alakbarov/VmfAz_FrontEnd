@@ -1,7 +1,7 @@
   <section class="slider_banner">
       <owl-carousel-o [options]="bannerSlider">
         <ng-template *ngFor="let slider of sliders" style="width: 100%;" carouselSlide>
-            <img src="https://localhost:44337/images/sliders/{{slider.image}}" alt="">
+            <img [src]="getSliderImagePath(slider.image)" alt="">
         </ng-template>  
        
       </owl-carousel-o>
@@ -19,7 +19,7 @@
           <div class="product-card">
             <a href="#" class="product-card_link">
               <div class="product-card_image">
-                <img src="https://localhost:44337/images/products/{{product.image}}" alt="">
+                <img [src]="getProductImagePath(product.image)" alt="">
               </div>
               <div class="product-card_name">{{product.name}}</div>
               <p class="product-card_price">{{product.salePrice}} AZN</p>
@@ -28,4 +28,11 @@
         </ng-template>  
       </owl-carousel-o>
     </div>
+</section>
+
+<section class="ADVT">
+  <div class="ADVT_banner">
+    <img [src]="getSettingImage('SectionAdvertisement1')" alt="">
+  </div>
+  <a class="ADVT_link" href="#">Indi Alın</a>
 </section>
