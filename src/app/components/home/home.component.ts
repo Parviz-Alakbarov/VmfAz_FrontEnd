@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   sliders:Slider[]=[];
   bestSellers:ProductGetDto[]=[];
+  bestSellersByBrand:ProductGetDto[]=[];
   settings:Setting[]=[];
 
 
@@ -29,6 +30,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getSliders();
     this.getBestSellers();
+    this.getBrandBestSeller(2);
     this.getSettings();
   }
 
@@ -47,6 +49,12 @@ export class HomeComponent implements OnInit {
   getBestSellers(){
     this.productService.getBestSellers(5).subscribe(response=>{
       this.bestSellers = response.data;
+    })
+  }
+
+  getBrandBestSeller(brandId:number){
+    this.productService.getBrandBestSellers(2,5).subscribe(response=>{
+      this.bestSellersByBrand = response.data;
     })
   }
 
@@ -97,6 +105,34 @@ export class HomeComponent implements OnInit {
   }
 
   bestSellerSlider: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    autoplay:false,
+    autoplayTimeout:3000,
+    touchDrag: true,
+    pullDrag: true,
+    dots: true,
+    margin:40,
+    navSpeed: 700,
+    navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 2
+      },
+      740: {
+        items: 3
+      },
+      940: {
+        items: 4
+      }
+    },
+    nav: true
+  }
+
+  bestSellerSlider2: OwlOptions = {
     loop: true,
     mouseDrag: true,
     autoplay:false,

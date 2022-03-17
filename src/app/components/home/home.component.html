@@ -36,3 +36,28 @@
   </div>
   <a class="ADVT_link" href="#">Indi Alın</a>
 </section>
+
+<section id="Hamilton"  class="section-50 slider_banner">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header_empty"></div>
+      <h3 class="section-header_text">Hamilton</h3>
+      <a routerLink="/brands/2" class="section-header_link">Hamısı <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <owl-carousel-o [options]="bestSellerSlider2">
+      <ng-template *ngFor="let product of bestSellersByBrand" style="width: 100%;" carouselSlide>
+        <div class="product-card">
+          <a href="#" class="product-card_link">
+            <div class="product-card_image">
+              <img [src]="getProductImagePath(product.image)" alt="">
+            </div>
+            <div class="product-card_name">{{product.name}}</div>
+            <p class="product-card_price">{{product.salePrice}} AZN</p>
+          </a>
+        </div>
+      </ng-template>  
+    </owl-carousel-o>
+  </div>
+</section>
+
+

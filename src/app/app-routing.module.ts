@@ -8,6 +8,7 @@ const routes: Routes = [
   { path : "" ,pathMatch:"full", component: HomeComponent },
   { path : "home" , component: HomeComponent },
   { path : "products" , component: ProductComponent },
+  { path : "products/man" , component: ProductComponent },
   { path : "brands" , component: BrandComponent },
   // { path : '**', component: PageNotFoundComponent },
 ];

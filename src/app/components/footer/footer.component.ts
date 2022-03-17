@@ -8,6 +8,7 @@ import { SettingService } from 'src/app/services/setting.service';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
+  dataLoaded = false;
   settings:Setting[]=[];
 
   constructor(private settingService:SettingService) { }
@@ -19,13 +20,20 @@ export class FooterComponent implements OnInit {
   getSettings(){
     this.settingService.getSettings().subscribe(response=>{
       this.settings = response.data;
+      this.dataLoaded = true;
     })
   }
 
-  getSettingImage(key:string){
+  getSettingImage(key:string):string{
     let imageName = this.settings.find(x=>x.key==key)?.value;
     let path = this.settingService.getSettingImagePath();
     return path+imageName
   }
+
+  getValueOfKey(key:string){
+    return this.settings.find(x=>x.key == key)?.value;
+  }
+
+
 
 }

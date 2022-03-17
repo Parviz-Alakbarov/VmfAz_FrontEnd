@@ -65,11 +65,11 @@
                                 Abunə ol
                             </button>
                         </form>
-                        <div class="social">
-                            <a href="">
+                        <div *ngIf="dataLoaded" class="social">
+                            <a [href]="getValueOfKey('FacebookLink')">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="">
+                            <a [href]="getValueOfKey('InstagramLink')">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         </div>

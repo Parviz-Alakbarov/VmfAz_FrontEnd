@@ -30,8 +30,12 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
   }
 
+  getBrandBestSellers(brandId:number,count:number):Observable<ListResponseModel<ProductGetDto>>{
+    let newUrl = this.baseUrl+`api/products/getbrandbestseller?brandId=${brandId}&count=${count}`;
+    return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
+  }
+
   getProductImagePath(){
     return this.baseUrl+"images/products/";
   }
-  
 }
