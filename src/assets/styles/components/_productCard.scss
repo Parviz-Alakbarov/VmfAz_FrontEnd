@@ -36,10 +36,10 @@
     }
 }
 #bestSellers {
-    [class *= "col-"]{
+    &[class *= "col-"]{
         padding: 0 25px;
     }
-    .row{
+    &.row{
         margin-right: -25px;
         margin-left: -25px;
     }

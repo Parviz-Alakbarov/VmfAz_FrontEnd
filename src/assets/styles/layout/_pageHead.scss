@@ -1,0 +1,55 @@
+@use "../abstracts/colors" as c;
+
+
+.page-head {
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 40px;
+  &_text {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &_header {
+    color: c.$white;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  &_img {
+    width: 100%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+.breadcrumb {
+  display: flex;
+  &-item a{
+    position: relative;
+    font-size: 1.1rem;
+    color: c.$white;
+  }
+  :not(:last-child) a{
+    margin-right: 20px;
+    color: c.$main-dark-brown;
+    &::before {
+      content: "/";
+      position: absolute;
+      right: -14px;
+    }
+  }
+}

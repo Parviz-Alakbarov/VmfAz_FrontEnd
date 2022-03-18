@@ -9,9 +9,9 @@
     text-decoration: none;
     box-sizing: border-box;
     font-family: 'Fira Sans', sans-serif;
-    color: #000;
+    color: c.$black;
     &::selection{
-        color: white;
+        color: c.$white;
         background-color: c.$main-brown;
     }
 }

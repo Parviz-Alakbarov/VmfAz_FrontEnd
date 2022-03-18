@@ -6,6 +6,8 @@ import { ProductService } from './../../services/product.service';
 import { ProductGetDto } from 'src/app/models/dtos/productGetDto';
 import { SettingService } from 'src/app/services/setting.service';
 import { Setting } from 'src/app/models/entities/setting';
+import { Brand } from 'src/app/models/entities/brand';
+import { BrandService } from './../../services/brand.service';
 
 
 @Component({
@@ -19,18 +21,21 @@ export class HomeComponent implements OnInit {
   bestSellers:ProductGetDto[]=[];
   bestSellersByBrand:ProductGetDto[]=[];
   settings:Setting[]=[];
+  brands:Brand[]=[];
 
-
+ 
   constructor(
     private sliderService:SliderService,
     private productService:ProductService,
-    private settingService:SettingService
+    private settingService:SettingService,
+    private brandService:BrandService
     ) { }
 
   ngOnInit(): void {
     this.getSliders();
     this.getBestSellers();
     this.getBrandBestSeller(2);
+    this.getBrands();
     this.getSettings();
   }
 
@@ -58,12 +63,22 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getBrands(){
+    this.brandService.getBrands().subscribe(response=>{
+      this.brands = response.data;
+    })
+  }
+
   getSliderImagePath(imageName: string){
     return this.sliderService.getSliderImagePath()+imageName
   }
 
   getProductImagePath(imageName:string){
     return this.productService.getProductImagePath()+imageName
+  }
+
+  getBrandImagePath(imageName:string){
+    return this.brandService.getBrandImagePath()+imageName
   }
 
 
@@ -117,12 +132,13 @@ export class HomeComponent implements OnInit {
     navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
     responsive: {
       0: {
-        items: 1
+        items: 1,
       },
       400: {
-        items: 2
+        items: 2,
+        margin:10 
       },
-      740: {
+      768: {
         items: 3
       },
       940: {

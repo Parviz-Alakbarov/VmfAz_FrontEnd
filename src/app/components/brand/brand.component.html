@@ -1,1 +1,32 @@
-<p>brand works!</p>
+<section id="page-head" class="page-head">
+    <div class="page-head_text">
+      <h3 class="page-head_header">MARKALAR</h3>
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a routerlink="/">Home</a></li>
+        <li class="breadcrumb-item"><a routerlink="/">Brands</a></li>
+      </ul>
+    </div>
+    <div class="page-head_img">
+      <img src="{{headBannerImagePath}}" alt="banner" />
+    </div>
+  </section>
+
+  <section class="brands">
+    <div class="container">
+     
+      <div class="row">
+  
+        <div *ngFor="let brand of brands" class="col-5lg-2 col-lg-3 col-md-4 col-s-6">
+          <div class="brands_item">
+  
+            <a class="brands_item__link" routerLink="/brands/{{brand.id}}">
+              <img [src]="getBrandImagePath(brand.image)" alt="">
+            </a>
+  
+          </div>
+        </div>
+       
+      </div>
+    </div>
+  </section>
+  

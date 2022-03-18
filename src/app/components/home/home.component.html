@@ -60,4 +60,25 @@
   </div>
 </section>
 
+<section class="brands">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header_empty"></div>
+      <h3 class="section-header_text">MARKALAR</h3>
+      <a href="#" class="section-header_link"></a>
+    </div>
+    <div class="row">
 
+      <div *ngFor="let brand of brands" class="col-5lg-2 col-lg-3 col-md-4 col-s-6">
+        <div class="brands_item">
+
+          <a class="brands_item__link" routerLink="/brands/{{brand.id}}">
+            <img [src]="getBrandImagePath(brand.image)" alt="">
+          </a>
+
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</section>
