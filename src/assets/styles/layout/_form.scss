@@ -1,0 +1,177 @@
+@use "../abstracts/colors" as c;
+.form{
+    margin-bottom: 50px;
+    &_main{
+        width: 40%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    &_head{
+        font-size: 2.1rem;
+        margin: 20px 0;
+        color: c.$form-headColor;
+    }
+    &_form{
+        display: flex;
+        flex-direction: column;
+        input,select{
+            margin-bottom: 15px;
+            border: 1px solid c.$formBorder;
+            border-radius: 5px;
+            padding: 15px 0px 15px 15px;
+            font-size: 16px;
+            &:focus-visible{
+                outline: 2px solid c.$main-dark-brown;
+            }
+        }
+        label span{
+            font-size: 16px; 
+            margin-left: 15px;
+        }
+    }
+    &_submitBtn{
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 4px;
+        font-size: 18px;
+        background-color: c.$main-dark-brown;
+        color: c.$white;
+    }
+    &_registerLink{
+        font-size: 1.2rem;
+        a{
+            color: c.$main-dark-brown;
+            text-decoration: underline;
+            text-underline-offset: 1px;
+        }
+    }
+    &_label{
+        text-align: left;
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+        color: c.$form-headColor;
+    }
+}
+
+
+
+@media screen and (max-width: 992px){
+    .form_main{
+        width: 70%;
+
+    }
+}
+
+@media screen and (max-width: 576px){
+    .form_main{
+        width: 100%;
+
+    }
+}
+
+
+
+
+
+
+
+.checkbox {
+    --background: #fff;
+    --border: #D1D6EE;
+    --border-hover: #BBC1E1;
+    --border-active: #a87430;
+    --tick: #fff;
+    position: relative;
+    margin-right: 15px;
+    input,
+    svg {
+        width:18px;
+        height: 18px;
+        display: block;
+    }
+    input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        position: relative;
+        outline: none;
+        background: var(--background);
+        border: none;
+        margin: 0;
+        padding: 0;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: box-shadow .3s;
+        box-shadow: inset 0 0 0 var(--s, 1px) var(--b, var(--border));
+        &:hover {
+            --s: 2px;
+            --b: var(--border-hover);
+        }
+        &:checked {
+            --b: var(--border-active);
+        }
+    }
+    svg {
+        pointer-events: none;
+        fill: none;
+        stroke-width: 2px;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke: var(--stroke, var(--border-active));
+        position: absolute;
+        top: 0;
+        left: 0;
+        width:18px;
+        height: 18px;
+        transform: scale(var(--scale, 1)) translateZ(0);
+    }
+    &.path {
+        input {
+            &:checked {
+                --s: 2px;
+                transition-delay: .4s;
+                & + svg {
+                    --a: 16.1 86.12;
+                    --o: 102.22;
+                }
+            }
+        }
+        svg {
+            stroke-dasharray: var(--a, 86.12);
+            stroke-dashoffset: var(--o, 86.12);
+            transition: stroke-dasharray .6s, stroke-dashoffset .6s;
+        }
+    }
+    &.bounce {
+        --stroke: var(--tick);
+        input {
+            &:checked {
+                --s: 11px;
+                & + svg {
+                    animation: bounce .4s linear forwards .2s;
+                }
+            }
+        }
+        svg {
+            --scale: 0;
+        }
+    }
+}
+
+@keyframes bounce {
+    50% {
+        transform: scale(1.2);
+    }
+    75% {
+        transform: scale(.9);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+
+
+

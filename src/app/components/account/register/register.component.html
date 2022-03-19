@@ -1,1 +1,47 @@
-<p>register works!</p>
+<section id="loginForm" class="form">
+    <div class="container">
+      <div class="form_main">
+        <h3 class="form_head">Qeydiyyatdan keç</h3>
+        <form action="" method="post" class="form_form">
+
+          <label class="form_label" for="formName">Ad</label>
+          <input id="formName" type="text" autocomplete="name" />
+
+          <label class="form_label" for="formSurname" >Soyad</label>
+          <input id="formSurname" type="text" autocomplete="family-name" />
+
+          <label class="form_label" for="email">Email</label>
+          <input id="email" type="email" autocomplete="email" />
+
+          <label class="form_label" for="formPhone">Telefon</label>
+          <input id="formPhone" type="text" autocomplete="tel" />
+
+          <label class="form_label" for="formCountry">Ölkə</label>
+            <select name="Country" id="formCountry" autocomplete="country-name">
+                <option disabled selected aria-readonly="true">Ölkə seçin</option>
+            </select>
+
+          <label class="form_label" for="formCity">Şəhər</label>
+            <select name="City" id="formCity" autocomplete="address-level2">
+                <option disabled selected aria-readonly="true">Şəhər seçin</option>
+            </select>
+
+          <label class="form_label" for="formAdress">Ünvan</label>
+          <input id="formAdress" type="text" autocomplete="street-address" />
+
+          <label class="form_label" for="password">Şifrə</label>
+          <input id="password" type="password" autocomplete="new-password"/>
+
+          <label class="form_label" for="passwordConf">Şifrə(Təkrar)</label>
+          <input id="passwordConf" type="password" autocomplete="new-password" />
+
+          <button class="form_submitBtn">Qeydiyyat</button>
+
+          <p class="form_registerLink">
+            və ya <a routerLink="register">Daxil ol</a>
+          </p>
+
+        </form>
+      </div>
+    </div>
+  </section>

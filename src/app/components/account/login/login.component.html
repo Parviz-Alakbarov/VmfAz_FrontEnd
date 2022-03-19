@@ -1,1 +1,28 @@
-<p>login works!</p>
+<section id="loginForm" class="form">
+    <div class="container">
+      <div class="form_main">
+        <h3 class="form_head">Giriş</h3>
+        <form action="" method="post" class="form_form">
+          <input type="email" class="form_email" placeholder="Email" autocomplete="email" />
+          <input
+            type="password"
+            class="form_password"
+            placeholder="Şifrə"
+            autocomplete="current-password"
+          />
+
+          <label style="display: flex" class="checkbox bounce">
+            <input type="checkbox" />
+            <svg viewBox="0 0 21 21">
+              <polyline points="5 10.75 8.5 14.25 16 6"></polyline>
+            </svg>
+            <span>Yadda saxla</span>
+          </label>
+          <button class="form_submitBtn">Giriş</button>
+          <p class="form_registerLink">
+            və ya <a routerLink="register">Qeydiyyatdan keç</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
