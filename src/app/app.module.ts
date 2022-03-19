@@ -13,6 +13,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ProductComponent } from './components/product/product.component';
 import { HomeComponent } from './components/home/home.component';
 import { BrandComponent } from './components/brand/brand.component';
+import { LoginComponent } from './components/account/login/login.component';
+import { RegisterComponent } from './components/account/register/register.component';
+import { AccountLayoutComponent } from './components/account/account-layout/account-layout.component';
+import { DynamicScriptLoaderService } from './services/dynamic-script-loader-service.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,9 @@ import { BrandComponent } from './components/brand/brand.component';
     ProductComponent,
     HomeComponent,
     BrandComponent,
+    LoginComponent,
+    RegisterComponent,
+    AccountLayoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,9 @@ import { BrandComponent } from './components/brand/brand.component';
     BrowserAnimationsModule,
     CarouselModule,
   ],
-  providers: [],
+  providers: [
+    DynamicScriptLoaderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

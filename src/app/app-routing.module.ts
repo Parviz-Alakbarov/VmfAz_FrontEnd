@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountLayoutComponent } from './components/account/account-layout/account-layout.component';
+import { LoginComponent } from './components/account/login/login.component';
+import { RegisterComponent } from './components/account/register/register.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
@@ -17,14 +20,15 @@ const routes: Routes = [
     ]
       
   },
-  { path : "products/man" , component: ProductComponent },
   { path : "brands" , component: BrandComponent },
-  // {
-  //   path: 'account', component: AccountLayoutComponent, children: [
-  //     { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
-  //     { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] }
-  //   ]
-  // }
+  {
+    path: 'account', component: AccountLayoutComponent, children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      // { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+      // { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] }
+    ]
+  }
   // { path : '**', component: PageNotFoundComponent },
 ];
 
