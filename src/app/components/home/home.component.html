@@ -16,13 +16,23 @@
       </div>
       <owl-carousel-o [options]="bestSellerSlider">
         <ng-template *ngFor="let product of bestSellers" style="width: 100%;" carouselSlide>
+
           <div class="product-card">
             <a href="#" class="product-card_link">
+              <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
               <div class="product-card_image">
                 <img [src]="getProductImagePath(product.image)" alt="">
               </div>
               <div class="product-card_name">{{product.name}}</div>
-              <p class="product-card_price">{{product.salePrice}} AZN</p>
+              <p class="product-card_price">
+                <span *ngIf="product.discountPersent>0; then discountedPrice else normalPrice"></span>
+                <ng-template #discountedPrice>
+                  <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPersent/100)}} AZN
+                </ng-template>
+                <ng-template #normalPrice>
+                  {{product.salePrice}} AZN
+                </ng-template>
+              </p>
             </a>
           </div>
         </ng-template>  
