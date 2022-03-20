@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
   sliders:Slider[]=[];
   bestSellers:ProductGetDto[]=[];
   bestSellersByBrand:ProductGetDto[]=[];
+  discountedProducts:ProductGetDto[]=[];
   settings:Setting[]=[];
   brands:Brand[]=[];
 
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
     this.getSliders();
     this.getBestSellers();
     this.getBrandBestSeller(2);
+    this.getDiscountedProducts();
     this.getBrands();
     this.getSettings();
   }
@@ -48,6 +50,12 @@ export class HomeComponent implements OnInit {
   getSettings(){
     this.settingService.getSettings().subscribe(response=>{
       this.settings = response.data;
+    })
+  }
+
+  getDiscountedProducts(){
+    this.productService.getDiscountedProdcuts().subscribe(response=>{
+      this.discountedProducts = response.data;
     })
   }
 
@@ -119,7 +127,7 @@ export class HomeComponent implements OnInit {
     nav: true
   }
 
-  bestSellerSlider: OwlOptions = {
+  productSlider: OwlOptions = {
     loop: true,
     mouseDrag: true,
     autoplay:false,

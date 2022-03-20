@@ -7,16 +7,17 @@
       </owl-carousel-o>
   </section>
 
+
   <section id="bestSellers"  class="section-50 slider_banner">
     <div class="container">
       <div class="section-header">
         <div class="section-header_empty"></div>
-        <h3 class="section-header_text">ƏN ÇOX SATILANLAR</h3>
+        <h3 class="section-header_text">NOVRUZ GƏLİR YAZ GƏLİR</h3>
         <a href="#" class="section-header_link">Hamısı <i class="fa-solid fa-arrow-right"></i></a>
       </div>
-      <owl-carousel-o [options]="bestSellerSlider">
-        <ng-template *ngFor="let product of bestSellers" style="width: 100%;" carouselSlide>
-
+      <owl-carousel-o [options]="productSlider">
+        <ng-template *ngFor="let product of discountedProducts" style="width: 100%;" carouselSlide>
+  
           <div class="product-card">
             <a href="#" class="product-card_link">
               <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
@@ -38,7 +39,54 @@
         </ng-template>  
       </owl-carousel-o>
     </div>
-</section>
+  </section>
+
+  <section id="firstPromotion" class="promotions">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-s-12">
+          <a href="#">
+            <div class="promotion">
+              <div class="promotion_name">
+                <h2>Longines</h2>
+                <p href="#" class="promotion_buyNow">INDI ALIN</p>
+              </div>
+              <div class="promotion_product">
+                <img [src]="getSettingImage('Promotion1product1')">
+              </div>
+            </div>
+        </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-s-12">
+          <a href="#">
+            <div class="promotion">
+              <div class="promotion_name">
+                <h2>MAURICE LACROIX</h2>
+                <p href="#" class="promotion_buyNow">INDI ALIN</p>
+              </div>
+              <div class="promotion_product">
+                <img [src]="getSettingImage('Promotion1product2')" alt="">
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6 col-s-12">
+          <a href="#">
+            <div class="promotion">
+              <div class="promotion_name">
+                <h2>Rado</h2>
+                <p href="#" class="promotion_buyNow">INDI ALIN</p>
+              </div>
+              <div class="promotion_product">
+                <img [src]="getSettingImage('Promotion1product3')" alt="">
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
 <section class="ADVT">
   <div class="ADVT_banner">
@@ -46,6 +94,47 @@
   </div>
   <a class="ADVT_link" href="#">Indi Alın</a>
 </section>
+
+<section id="bestSellers"  class="section-50 slider_banner">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header_empty"></div>
+      <h3 class="section-header_text">ƏN ÇOX SATILANLAR</h3>
+      <a href="#" class="section-header_link">Hamısı <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <owl-carousel-o [options]="productSlider">
+      <ng-template *ngFor="let product of bestSellers" style="width: 100%;" carouselSlide>
+
+        <div class="product-card">
+          <a href="#" class="product-card_link">
+            <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
+            <div class="product-card_image">
+              <img [src]="getProductImagePath(product.image)" alt="">
+            </div>
+            <div class="product-card_name">{{product.name}}</div>
+            <p class="product-card_price">
+              <span *ngIf="product.discountPersent>0; then discountedPrice else normalPrice"></span>
+              <ng-template #discountedPrice>
+                <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPersent/100)}} AZN
+              </ng-template>
+              <ng-template #normalPrice>
+                {{product.salePrice}} AZN
+              </ng-template>
+            </p>
+          </a>
+        </div>
+      </ng-template>  
+    </owl-carousel-o>
+  </div>
+</section>
+
+<section class="ADVT">
+  <div class="ADVT_banner">
+    <img [src]="getSettingImage('SectionAdvertisement2')" alt="">
+  </div>
+  <a class="ADVT_link" href="#">Indi Alın</a>
+</section>
+
 
 <section id="Hamilton"  class="section-50 slider_banner">
   <div class="container">
@@ -69,6 +158,51 @@
     </owl-carousel-o>
   </div>
 </section>
+
+
+<section id="secondPromotion" class="promotions">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-s-12">
+        <a href="#">
+          <div class="secPromotion">
+            <img class="secPromotion_backImage" [src]="getSettingImage('Promotion2product1')" alt="">
+            <div class="secPromotion_overlay">
+              <div class="secPromotion_frame">
+                <p class="secPromotion_brandName">Hamilton</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6 col-s-12">
+        <a href="#">
+          <div class="secPromotion">
+            <img class="secPromotion_backImage" [src]="getSettingImage('Promotion2product2')"  alt="">
+            <div class="secPromotion_overlay">
+              <div class="secPromotion_frame">
+                <p class="secPromotion_brandName">Certino</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-4 col-md-6 col-s-12">
+        <a href="#">
+          <div class="secPromotion">
+            <img class="secPromotion_backImage" [src]="getSettingImage('Promotion2product3')"  alt="">
+            <div class="secPromotion_overlay">
+              <div class="secPromotion_frame">
+                <p class="secPromotion_brandName">Tissot</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <section class="brands">
   <div class="container">

@@ -35,7 +35,14 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
   }
 
+  getDiscountedProdcuts(){
+    let newUrl = this.baseUrl+"api/products/getdiscountedproducts";
+    return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
+  }
+
+
   getProductImagePath(){
     return this.baseUrl+"images/products/";
   }
+
 }
