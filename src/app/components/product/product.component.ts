@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/entities/product';
+import { SettingService } from 'src/app/services/setting.service';
 import { ProductService } from './../../services/product.service';
 
 @Component({
@@ -12,8 +13,15 @@ export class ProductComponent implements OnInit {
 
   products:Product[] = [];
   dataLoaded:boolean = false;
-  constructor(private productService:ProductService,
-    private activatedRoute:ActivatedRoute) { }
+  headBannerImagePath:string;
+
+
+  constructor(
+    private productService:ProductService,
+    private activatedRoute:ActivatedRoute,
+    private settingService:SettingService
+
+    ) { }
 
   ngOnInit(): void {
     
@@ -24,6 +32,8 @@ export class ProductComponent implements OnInit {
         this.getProducts();
       }
     })
+
+    this.getHeadBannerFromSetting('pageHeadBanner');
 
   }
 
@@ -39,6 +49,13 @@ export class ProductComponent implements OnInit {
       this.products = response.data;
       this.dataLoaded = true;
     })
+  }
+
+
+  getHeadBannerFromSetting(key:string){
+    this.settingService.getSettingImageByKey(key).subscribe(response=>{
+      this.headBannerImagePath=this.settingService.getSettingImagePath()+response.data.value;
+    });
   }
 
 }

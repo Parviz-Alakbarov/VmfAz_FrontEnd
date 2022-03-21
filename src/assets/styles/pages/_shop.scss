@@ -1,0 +1,139 @@
+@use "../abstracts/colors" as c;
+
+
+.shop [class *= "col-"]{
+    padding: 0 10px;
+  }
+
+.filter-tab{
+    margin-bottom: 25px;
+    &:not(.lowerCase) &_checkbox{
+        text-transform: uppercase;
+    }
+    &_header{
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: c.$filter-tabHeader;
+        position: relative;
+        &::before{
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: c.$main-dark-brown;
+    
+        }
+    }
+    &_items{
+        max-height: 240px;
+        overflow-y: auto;
+        padding-top: 5px;
+    }
+
+    &_checkbox{
+        padding: 10px 0 10px 25px;
+        font-size: 13px;
+        position: relative;
+        color: c.$form-headColor;
+        display: block;
+      
+        &::before{
+            content: "";
+            position: absolute;
+            border: 1px solid c.$checkbox-borderColor;
+            height: 1.14rem;
+            width: 1.14rem;
+            left: 0;
+            top: 7px;
+        }
+        &::after{
+            content: "";
+            position: absolute;
+            width: 0.7rem;
+            height: 0.3rem;
+            border-left: 2px solid c.$main-dark-brown;
+            border-bottom: 2px solid c.$main-dark-brown;
+            left: 4px;
+            top: 12px;
+            transform: rotate(310deg) scale(0);
+            transition: transform .2s linear;
+        }
+        &.isChecked::after{
+            transform:  rotate(310deg) scale(1);
+        }
+        &.isChecked::before{
+            border-color: c.$main-dark-brown;
+        }
+    }
+}
+.filter-result{
+
+    &_head{
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 15px;
+    }
+    &_count{
+        font-size: 18px;
+    }
+
+    &_sort{
+        select{
+            padding: 5px 10px;
+            color: c.$main-dark-brown;
+            border: 1px solid c.$main-brown;
+            border-radius: 5px;
+            &:focus,&:hover{
+                outline: none;
+            }
+        }
+    }
+    *{
+        color: c.$main-text-color;
+    }
+    
+}
+
+.filter-products{
+    padding: 20px 0 30px 0;
+    border-bottom: 1px solid c.$footerBorderBottom;
+    border-top: 1px solid c.$footerBorderBottom;
+}
+
+.filter-pagination{
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_items{
+        display: flex;
+    }
+ 
+    &_link{
+        display: block;
+        padding: 15px;
+        width: 48px;
+        font-weight: 500;
+        text-align: center;
+        &.active{
+            border-radius: 50%;
+            background-color: black;
+            color: white;
+        }
+        &:hover:not(.active){
+            border-radius: 50%;
+            background-color: c.$main-brown-light;
+        }
+    }
+    &_arrow{
+        i{
+            color: c.$main-dark-brown;
+        }
+        &.disabled a{
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+}

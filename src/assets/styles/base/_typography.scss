@@ -1,34 +1,31 @@
-
-
-
-html{
-    scroll-behavior: smooth;
+html {
+  scroll-behavior: smooth;
 }
 
-main{
-    padding-top: 65px;
+main {
+  padding-top: 65px;
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    src: url("../../fonts/FiraSans-Light-300.ttf") format("truetype");
-    font-weight: 300;
+  font-family: "Fira Sans";
+  src: url("../../fonts/FiraSans-Light-300.ttf") format("truetype");
+  font-weight: 300;
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    src: url("../../fonts/FiraSans-Regular-400.ttf") format("truetype");
-    font-weight: 400;
+  font-family: "Fira Sans";
+  src: url("../../fonts/FiraSans-Regular-400.ttf") format("truetype");
+  font-weight: 400;
 }
 
 @font-face {
-    font-family: "Fira Sans";
-    src: url("../../fonts/FiraSans-Medium-500.ttf") format("truetype");
-    font-weight: 500;
+  font-family: "Fira Sans";
+  src: url("../../fonts/FiraSans-Medium-500.ttf") format("truetype");
+  font-weight: 500;
 }
 
 @media only screen and (max-width: 992px) {
-    html{
-      font-size: 12px;
-    }
+  html {
+    font-size: 12px;
   }
+}

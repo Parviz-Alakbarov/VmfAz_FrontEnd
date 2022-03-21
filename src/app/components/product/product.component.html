@@ -1,3 +1,200 @@
-<ul>
-    <li *ngFor="let product of products">{{product.name}}</li>
-</ul>
+<section id="page-head" class="page-head">
+  <div class="page-head_text">
+    <h3 class="page-head_header">Məhsullar</h3>
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a routerlink="/">Home</a></li>
+      <li class="breadcrumb-item"><a routerlink="/">Saatlar</a></li>
+    </ul>
+  </div>
+  <div class="page-head_img">
+    <img src="{{headBannerImagePath}}" alt="banner" />
+  </div>
+</section>
+
+<section class="shop">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="filter">
+          <div class="filter-tab">
+            <p class="filter-tab_header">Markalar</p>
+            <ul class="filter-tab_items">
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
+              </li>
+
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> Longines </a>
+              </li>
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> swatch </a>
+              </li>
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> raymond weil </a>
+              </li>
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
+              </li>
+
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
+              </li>
+
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
+              </li>
+
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="filter-tab lowerCase">
+            <p class="filter-tab_header">Saatın Funksionalı</p>
+            <ul class="filter-tab_items">
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox isChecked" href="#">
+                  Saat/Dəqiqə/Saniyə
+                </a>
+              </li>
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#">
+                  Saat/Dəqiqə/Saniyə/Tarix
+                </a>
+              </li>
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#">
+                  Saat/Dəqiqə/Saniyəölçən
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="filter-tab lowerCase">
+            <p class="filter-tab_header">Cins</p>
+            <ul class="filter-tab_items">
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox isChecked" href="#"> Kişi </a>
+              </li>
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> Qadın </a>
+              </li>
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> Uşaq </a>
+              </li>
+              <li class="filter-tab_item">
+                <a class="filter-tab_checkbox" href="#"> Unisex </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-9 col-md-12">
+        <div class="filter-result">
+          <div class="filter-result_head">
+            <p class="filter-result_count">130 Məhsul</p>
+            <label for="sort-result" class="filter-result_sort"
+              >Sırala:
+              <select
+                name=""
+                id="sort-result"
+                class="filter-result_sort__select"
+              >
+                <option value="">Seçin</option>
+                <option value="">Qiymet Azalan</option>
+                <option value="">Qiymet Artan</option>
+                <option value="">Tarixə Görə</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div class="filter-products">
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="product-card">
+                <a href="#" class="product-card_link">
+                  <span class="discount_ribbon">-50% <i></i></span>
+                  <div class="product-card_image">
+                    <img src="../media/home/tissot3.png" alt="" />
+                  </div>
+                  <div class="product-card_name">VMF İDMAN BALANS</div>
+                  <div class="product-card_price">
+                    <span class="old-price">238 AZN </span> 210 AZN
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="product-card">
+                <a href="#" class="product-card_link">
+                  <span class="discount_ribbon">-50% <i></i></span>
+                  <div class="product-card_image">
+                    <img src="../media/home/tissot1.jpg" alt="" />
+                  </div>
+                  <div class="product-card_name">VMF İDMAN BALANS</div>
+                  <div class="product-card_price">
+                    <span class="old-price">238 AZN </span> 210 AZN
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="product-card">
+                <a href="#" class="product-card_link">
+                  <span class="discount_ribbon">-50% <i></i></span>
+                  <div class="product-card_image">
+                    <img src="../media/home/tissot4.png" alt="" />
+                  </div>
+                  <div class="product-card_name">VMF İDMAN BALANS</div>
+                  <div class="product-card_price">
+                    <span class="old-price">238 AZN </span> 210 AZN
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="filter-pagination">
+          <span class="filter-pagination_arrow disabled"
+            ><a href="#" class="filter-pagination_link"
+              ><i class="fa-solid fa-arrow-left"></i></a
+          ></span>
+          <ul class="filter-pagination_items">
+            <li class="filter-pagination_item">
+              <a class="filter-pagination_link active" href="#">1</a>
+            </li>
+            <li class="filter-pagination_item">
+              <a class="filter-pagination_link" href="#">2</a>
+            </li>
+            <li class="filter-pagination_item">
+              <a class="filter-pagination_link" href="#">3</a>
+            </li>
+            <li class="filter-pagination_item">
+              <a class="filter-pagination_link" href="#">4</a>
+            </li>
+            <li class="filter-pagination_item">
+              <a class="filter-pagination_link" href="#">5</a>
+            </li>
+          </ul>
+          <span class="filter-pagination_arrow"
+            ><a href="#" class="filter-pagination_link"
+              ><i class="fa-solid fa-arrow-right"></i></a
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+
+  document.querySelectorAll(".filter-tab_checkbox").forEach((element) =>
+    element.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.target.classList.toggle("isChecked");
+    })
+  );
+</script>
+
+
