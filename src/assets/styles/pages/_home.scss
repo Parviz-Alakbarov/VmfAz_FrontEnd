@@ -43,7 +43,7 @@
     position: absolute;
     height: 100%;
     img {
-      @include imgSetting();
+      @include imgSetting(cover);
     }
   }
   &_link {
@@ -99,7 +99,7 @@
     height: 100%;
     overflow: hidden;
     img {
-      @include imgSetting();
+      @include imgSetting(cover);
       transition: transform 0.2s linear;
     }
   }
@@ -120,7 +120,7 @@
   position: relative;
   margin-bottom: 40px;
   &_backImage {
-    @include imgSetting();
+    @include imgSetting(cover);
   }
   &_overlay {
     position: absolute;

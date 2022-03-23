@@ -5,6 +5,7 @@ import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { HomeComponent } from './components/home/home.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductComponent } from './components/product/product.component';
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
       
   },
   { path : "brands" , component: BrandComponent },
+  { path : "productDetail/:productId" , component: ProductDetailComponent },
   {
     path: 'account', component: AccountLayoutComponent, children: [
       { path: 'login', component: LoginComponent },

@@ -13,8 +13,15 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-@mixin imgSetting() {
+
+@mixin imgSetting($objFit) {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: $objFit;
+}
+
+@mixin oldPrice() {
+  text-decoration: line-through;
+  text-decoration-color: c.$oldPrice-redLineColor;
+  color: c.$oldPrice-color;
 }

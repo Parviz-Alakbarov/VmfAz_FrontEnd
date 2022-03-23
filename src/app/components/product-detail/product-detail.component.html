@@ -1,0 +1,245 @@
+<section class="prDetail">
+  <div class="container">
+    <ul class="prDetail_breadcrumbs">
+      <li class="prDetail_breadcrumb"><a routerlink="/">Ana səhifə</a></li>
+      <li class="prDetail_breadcrumb"><a routerlink="/">{{productDetailDto.brandName}}</a></li>
+      <li class="prDetail_breadcrumb"><a>{{productDetailDto.name}}</a></li>
+    </ul>
+  </div>
+  <hr />
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-7 col-md-12">
+        <div class="prDetail_preview">
+          <div class="prDetail_preview__little">
+            <div class="prDetail_preview__little-item active">
+              <img [src]="getProductImagePath(productDetailDto.posterImage)" alt="" />
+            </div>
+            <div class="prDetail_preview__little-item">
+              <img src="../media/home/tissot3.png" alt="" />
+            </div>
+            <div class="prDetail_preview__little-item">
+              <img src="../media/home/tissot1.jpg" alt="" />
+            </div>
+            <div class="prDetail_preview__little-item">
+              <img src="../media/home/tissot4.png" alt="" />
+            </div>
+            <div class="prDetail_preview__little-item">
+              <img src="../media/home/tissot3.png" alt="" />
+            </div>
+          </div>
+          <div class="prDetail_preview__main">
+            <span *ngIf="productDetailDto.discountPercent>0" class="discount_ribbon">-{{productDetailDto.discountPercent}}% <i></i></span>
+            <div class="prDetail_preview__wrapper">
+              <img
+                class="prDetail_preview__wrapper-img"
+                [src]="getProductImagePath(productDetailDto.posterImage)"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 col-md-12">
+        <h1 class="prDetail_head">{{productDetailDto.name}}</h1>
+        <p class="prDetail_model">{{productDetailDto.brandName}} / {{productDetailDto.name}}</p>
+        <p class="prDetail_price">
+          <span *ngIf="productDetailDto.discountPercent>0" class="prDetail_price-old">{{productDetailDto.salePrice}} AZN </span> {{productDetailDto.discountedPrice}}<span
+            class="price_currency"
+          >
+            AZN</span
+          >
+        </p>
+        <p class="prDetail_desc">
+          {{productDetailDto.description}}
+        </p>
+
+        <div class="prDetail_accordion-wrapper">
+          <div class="prDetail_accordion">
+            <div class="prDetail_accordion_head">
+              <h4>Xüsusiyyətləri</h4>
+              <i class="fas fa-angle-down arrow"></i>
+            </div>
+            <div class="prDetail_accordion_content">
+              <div *ngIf="productDetailDto.style!=null" class="content_wrapper">
+                <div class="content-left">Tərz</div>
+                <div class="content-right">{{productDetailDto.style}}</div>
+              </div>
+              <div *ngIf="productDetailDto.mechanism!=null" class="content_wrapper">
+                <div class="content-left">Mexanizm Növü</div>
+                <div class="content-right">{{productDetailDto.mechanism}}</div>
+              </div>
+              <div *ngIf="productDetailDto.glassType!=null" class="content_wrapper">
+                <div class="content-left">Şüşə Növü</div>
+                <div class="content-right">{{productDetailDto.glassType}}</div>
+              </div>
+              <div *ngIf="productDetailDto.waterResistance!=null" class="content_wrapper">
+                <div class="content-left">Su Keçirməzlik</div>
+                <div class="content-right">{{productDetailDto.waterResistance}}</div>
+              </div>
+              <div *ngIf="productDetailDto.warrantyLimit!=null" class="content_wrapper">
+                <div class="content-left">Zəmanət</div>
+                <div class="content-right">{{productDetailDto.warrantyLimit}} il</div>
+              </div>
+              <div *ngIf="productDetailDto.productionCountry!=null" class="content_wrapper">
+                <div class="content-left">İstehsal Ölkəsi</div>
+                <div class="content-right">{{productDetailDto.productionCountry}}</div>
+              </div>
+              <div *ngIf="productDetailDto.caseShape!=null" class="content_wrapper">
+                <div class="content-left">Korpusun Ölçüsü</div>
+                <div class="content-right">{{productDetailDto.caseShape}}</div>
+              </div>
+              <div *ngIf="productDetailDto.caseMaterial!=null" class="content_wrapper">
+                <div class="content-left">Korpusun Forması</div>
+                <div class="content-right">{{productDetailDto.caseMaterial}}</div>
+              </div>
+              <div *ngIf="productDetailDto.toolCount!=null" class="content_wrapper">
+                <div class="content-left">Alət sayı</div>
+                <div class="content-right">{{productDetailDto.toolCount}}</div>
+              </div>
+              <div *ngIf="productDetailDto.caseSize!=null" class="content_wrapper">
+                <div class="content-left">Korpusun Ölçüsü</div>
+                <div class="content-right">{{productDetailDto.caseSize}}</div>
+              </div>
+              <div *ngIf="productDetailDto.beltType!=null" class="content_wrapper">
+                <div class="content-left">Kəmər/Qolbağ</div>
+                <div class="content-right">{{productDetailDto.beltType}}</div>
+              </div>
+              <div *ngIf="productDetailDto.beltColor!=null" class="content_wrapper">
+                <div class="content-left">Kəmərin/Qolbağın Rəngi</div>
+                <div class="content-right">{{productDetailDto.beltColor}}</div>
+              </div>
+              <div *ngIf="productDetailDto.dialColor!=null" class="content_wrapper">
+                <div class="content-left">Siferblatın Rəngi</div>
+                <div class="content-right">{{productDetailDto.dialColor}}</div>
+              </div>
+              <div *ngIf="productDetailDto.gender!=null" class="content_wrapper">
+                <div class="content-left">Cins</div>
+                <div class="content-right">{{productDetailDto.gender}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="prDetail_accordion">
+            <div class="prDetail_accordion_head">
+              <h4>Hansı Mağazada?</h4>
+              <i class="fas fa-angle-down arrow"></i>
+            </div>
+            <div class="prDetail_accordion_content">
+              <div class="content_wrapper">
+                <div class="content-note">
+                  *Bütün ölkə ərazisi üzrə 1 gün ərzində çatdırılma!
+                </div>
+              </div>
+
+              <div *ngFor="let shop of productShops" class="content_wrapper">
+                <div class="content-shop">
+                  <a href="" class="content-shop-name">{{shop.name}}</a>
+                  <p class="content-shop-address">
+                    {{shop.address}} iş
+                    rejimi-{{shop.openHour}}:{{shop.openMinute==0?"00":shop.openMinute}}-{{shop.closeHour}}:{{shop.closeMinute==0?"00":shop.closeMinute}}
+                  </p>
+                  <p class="content-shop-tel">
+                    <a *ngIf="shop.phoneNumber1!=null"
+                      href="tel:{{shop.phoneNumber1}}"
+                      class="content-shop-tel-num"
+                      >{{shop.phoneNumber1}}</a
+                    >
+                    <a *ngIf="shop.phoneNumber2!=null"
+                      href="tel:{{shop.phoneNumber2}}"
+                      class="content-shop-tel-num"
+                      >{{shop.phoneNumber2}}</a
+                    >
+                  </p>
+                </div>
+              </div>
+              <!-- <div class="content_wrapper">
+                <div class="content-shop">
+                  <a href="" class="content-shop-name">Longines - Şəki</a>
+                  <p class="content-shop-address">
+                    Şəki şəh., Mirzə Fətəli Axundzadə küç.76 İş rejimi 10:00 -
+                    19:30
+                  </p>
+                  <p class="content-shop-tel">
+                    <a href="tel:+994 50 257 80 13" class="content-shop-tel-num"
+                      >+994 50 257 80 13</a
+                    >
+                  </p>
+                </div>
+              </div>
+              <div class="content_wrapper">
+                <div class="content-shop">
+                  <a href="" class="content-shop-name">Raymond Weil</a>
+                  <p class="content-shop-address">
+                    Bakı şəh., İnşaatçılar pr., 104 B İş rejimi 10:00 - 20:00
+                  </p>
+                  <p class="content-shop-tel">
+                    <a
+                      href="tel:+994 12 510 07 32 "
+                      class="content-shop-tel-num"
+                      >+994 12 510 07 32</a
+                    >
+                    <a
+                      href="tel:+994 50 257 80 09 "
+                      class="content-shop-tel-num"
+                      >+994 50 257 80 09</a
+                    >
+                  </p>
+                </div>
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="prDetail_sale">
+          <div class="prDetail_sale__count">
+            <i class="fa-solid fa-minus" id="count-inc"></i>
+            <input
+              id="prDetailCount"
+              type="number"
+              value="1"
+              min="1"
+              max="10"
+            />
+            <i class="fa-solid fa-plus" id="count-dec"></i>
+          </div>
+          <p class="prDetail_sale__addToCart">
+            <i class="fa-solid fa-check"></i>SƏBƏTƏ AT
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="bestSellers"  class="section-50 slider_banner">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-header_empty"></div>
+      <h3 class="section-header_text">DİGƏR MƏHSULLAR</h3>
+      <a href="#" class="section-header_link">Hamısı <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <owl-carousel-o [options]="productSlider">
+      <ng-template *ngFor="let product of relatedProducts" style="width: 100%;" carouselSlide>
+
+        <div class="product-card">
+          <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
+            <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
+            <div class="product-card_image">
+              <img [src]="getProductImagePath(product.image)" alt="">
+            </div>
+            <div class="product-card_name">{{product.name}}</div>
+            <p class="product-card_price">
+              <span *ngIf="product.discountPersent>0; then discountedPrice else normalPrice"></span>
+              <ng-template #discountedPrice>
+                <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPersent/100)}} AZN
+              </ng-template>
+              <ng-template #normalPrice>
+                {{product.salePrice}} AZN
+              </ng-template>
+            </p>
+          </a>
+        </div>
+      </ng-template>  
+    </owl-carousel-o>
+  </div>
+</section>

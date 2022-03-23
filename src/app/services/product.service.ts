@@ -5,6 +5,8 @@ import { ListResponseModel } from '../models/responses/listResponseModel';
 import { Product } from '../models/entities/product';
 import { environment } from '../../environments/environment';
 import { ProductGetDto } from '../models/dtos/productGetDto';
+import { ProductDetailDto } from '../models/dtos/productDetailDto';
+import { SingleResponseModel } from './../models/responses/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,11 @@ export class ProductService {
   getProducts():Observable<ListResponseModel<Product>>{
     let newUrl = this.baseUrl+"api/products/getall";
     return this.httpClient.get<ListResponseModel<Product>>(newUrl);
+  }
+
+  getProductDetail(productId:number):Observable<SingleResponseModel<ProductDetailDto>>{
+    let newUrl = this.baseUrl+"api/products/getProductDetail/"+productId;
+    return this.httpClient.get<SingleResponseModel<ProductDetailDto>>(newUrl);
   }
 
   getProductsByBrand(brandId:number):Observable<ListResponseModel<Product>>{

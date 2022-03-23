@@ -19,7 +19,7 @@
         <ng-template *ngFor="let product of discountedProducts" style="width: 100%;" carouselSlide>
   
           <div class="product-card">
-            <a href="#" class="product-card_link">
+            <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
               <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
               <div class="product-card_image">
                 <img [src]="getProductImagePath(product.image)" alt="">
@@ -45,7 +45,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 col-s-12">
-          <a href="#">
+          <a routerLink="/productDetail">
             <div class="promotion">
               <div class="promotion_name">
                 <h2>Longines</h2>
@@ -106,7 +106,7 @@
       <ng-template *ngFor="let product of bestSellers" style="width: 100%;" carouselSlide>
 
         <div class="product-card">
-          <a href="#" class="product-card_link">
+          <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
             <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
             <div class="product-card_image">
               <img [src]="getProductImagePath(product.image)" alt="">
@@ -146,7 +146,7 @@
     <owl-carousel-o [options]="bestSellerSlider2">
       <ng-template *ngFor="let product of bestSellersByBrand" style="width: 100%;" carouselSlide>
         <div class="product-card">
-          <a href="#" class="product-card_link">
+          <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
             <div class="product-card_image">
               <img [src]="getProductImagePath(product.image)" alt="">
             </div>
@@ -216,7 +216,7 @@
       <div *ngFor="let brand of brands" class="col-5lg-2 col-lg-3 col-md-4 col-s-6">
         <div class="brands_item">
 
-          <a class="brands_item__link" routerLink="/brands/{{brand.id}}">
+          <a class="brands_item__link" routerLink="/products?brandId={{brand.id}}">
             <img [src]="getBrandImagePath(brand.image)" alt="">
           </a>
 

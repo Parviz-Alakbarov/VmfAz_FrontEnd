@@ -6,6 +6,11 @@ main {
   padding-top: 65px;
 }
 
+hr {
+  height: 1px;
+  background: #eee;
+}
+
 @font-face {
   font-family: "Fira Sans";
   src: url("../../fonts/FiraSans-Light-300.ttf") format("truetype");

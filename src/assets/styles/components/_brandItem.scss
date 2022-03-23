@@ -1,4 +1,5 @@
 @use '../abstracts/colors' as c;
+@import '../abstracts/mixin';
 .brands_item{
     border: 2px solid c.$models-borderColor ;
     height: 120px;
@@ -9,8 +10,6 @@
         padding:  15px;
     }
     img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+        @include imgSetting(contain);
     }
 }

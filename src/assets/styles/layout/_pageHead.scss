@@ -1,5 +1,5 @@
 @use "../abstracts/colors" as c;
-
+@import "../abstracts/mixin";
 
 .page-head {
   height: 150px;
@@ -29,9 +29,7 @@
     width: 100%;
     height: 100%;
     img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      @include imgSetting(cover);
     }
   }
 }

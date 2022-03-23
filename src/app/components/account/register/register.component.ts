@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   private loadScripts() {
     this.dynamicScriptLoader.load('registerpage').then(data => {
       console.log('script loaded ', data);
-  }).catch(error => console.log(error));
+    }).catch(error => console.log(error));
   }
 
 }

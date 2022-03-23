@@ -17,6 +17,7 @@ import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
 import { AccountLayoutComponent } from './components/account/account-layout/account-layout.component';
 import { DynamicScriptLoaderService } from './services/dynamic-script-loader-service.service';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DynamicScriptLoaderService } from './services/dynamic-script-loader-ser
     LoginComponent,
     RegisterComponent,
     AccountLayoutComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

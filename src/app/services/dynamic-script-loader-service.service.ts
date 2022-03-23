@@ -18,6 +18,10 @@ export const ScriptStore: Scripts[] = [
     name: 'registerpage',
     src: '../../../assets/scripts/register.js',
   },
+  {
+    name: 'detailpage',
+    src: '../../../assets/scripts/shop.js',
+  },
 ];
 
 declare var document: any;
