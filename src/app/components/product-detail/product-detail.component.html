@@ -15,18 +15,11 @@
             <div class="prDetail_preview__little-item active">
               <img [src]="getProductImagePath(productDetailDto.posterImage)" alt="" />
             </div>
-            <div class="prDetail_preview__little-item">
-              <img src="../media/home/tissot3.png" alt="" />
+
+            <div *ngFor="let img of productImages" class="prDetail_preview__little-item">
+              <img [src]="getProductImagePath(img.imagePath)" alt="" />
             </div>
-            <div class="prDetail_preview__little-item">
-              <img src="../media/home/tissot1.jpg" alt="" />
-            </div>
-            <div class="prDetail_preview__little-item">
-              <img src="../media/home/tissot4.png" alt="" />
-            </div>
-            <div class="prDetail_preview__little-item">
-              <img src="../media/home/tissot3.png" alt="" />
-            </div>
+
           </div>
           <div class="prDetail_preview__main">
             <span *ngIf="productDetailDto.discountPercent>0" class="discount_ribbon">-{{productDetailDto.discountPercent}}% <i></i></span>

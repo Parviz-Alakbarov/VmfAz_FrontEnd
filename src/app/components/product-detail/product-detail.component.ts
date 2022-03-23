@@ -7,6 +7,8 @@ import { Shop } from 'src/app/models/entities/shop';
 import { ShopService } from './../../services/shop.service';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ProductGetDto } from 'src/app/models/dtos/productGetDto';
+import { ProductImage } from './../../models/entities/productImage';
+import { ProductImageService } from './../../services/product-image.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,6 +20,7 @@ export class ProductDetailComponent implements OnInit {
   productDetailDto:ProductDetailDto;
   dataLoaded:boolean = false;
   productShops:Shop[]=[];
+  productImages:ProductImage[];
   relatedProducts:ProductGetDto[];
 
 
@@ -25,7 +28,8 @@ export class ProductDetailComponent implements OnInit {
     private dynamicScriptLoader: DynamicScriptLoaderService,
     private productService:ProductService,
     private activatedRoute:ActivatedRoute,
-    private shopService:ShopService
+    private shopService:ShopService,
+    private productImageService:ProductImageService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +38,7 @@ export class ProductDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params=>{
       this.getProductDetail(params["productId"]);
       this.getProductShops(params["productId"]);
+      this.getProductImages(params["productId"])
     })
   }
 
@@ -54,9 +59,16 @@ export class ProductDetailComponent implements OnInit {
     this.shopService.getShopsByProduct(productId).subscribe(response=>{
       this.productShops = response.data;
       this.dataLoaded = true;
-      console.log(response.data)
     })
   }
+
+  getProductImages(productId:number){
+    this.productImageService.getProductImages(productId).subscribe(response=>{
+      this.productImages = response.data;
+      this.dataLoaded = true;
+    })
+  }
+
 
   getProductImagePath(imageName:string){
     return this.productService.getProductImagePath()+imageName
