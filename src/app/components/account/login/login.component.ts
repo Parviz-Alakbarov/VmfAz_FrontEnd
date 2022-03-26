@@ -13,14 +13,14 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loadScripts();
+
   }
 
 
-  private loadScripts() {
-    this.dynamicScriptLoader.load('loginpage').then(data => {
-      console.log('script loaded ', data);
-  }).catch(error => console.log(error));
-  }
+  // private loadScripts() {
+  //   this.dynamicScriptLoader.load('loginpage').then(data => {
+  //     console.log('script loaded ', data);
+  // }).catch(error => console.log(error));
+  // }
 
 }

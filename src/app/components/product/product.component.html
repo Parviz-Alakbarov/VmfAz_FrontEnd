@@ -14,38 +14,13 @@
 <section class="shop">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-md-6 col-xs-8 responsive-filter">
         <div class="filter">
           <div class="filter-tab">
             <p class="filter-tab_header">Markalar</p>
             <ul class="filter-tab_items">
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
-              </li>
-
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> Longines </a>
-              </li>
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> swatch </a>
-              </li>
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> raymond weil </a>
-              </li>
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
-              </li>
-
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
-              </li>
-
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
-              </li>
-
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> Hamilton </a>
+              <li *ngFor="let brand of brands" class="filter-tab_item">
+                <a class="filter-tab_checkbox" > {{brand.name}} </a>
               </li>
             </ul>
           </div>
@@ -93,108 +68,52 @@
       <div class="col-lg-9 col-md-12">
         <div class="filter-result">
           <div class="filter-result_head">
+            <p class="filter-result_res-count"><i class="fa-solid fa-filter"></i> Filter(130)</p>
             <p class="filter-result_count">130 Məhsul</p>
-            <label for="sort-result" class="filter-result_sort"
-              >Sırala:
-              <select
-                name=""
-                id="sort-result"
-                class="filter-result_sort__select"
-              >
-                <option value="">Seçin</option>
-                <option value="">Qiymet Azalan</option>
-                <option value="">Qiymet Artan</option>
-                <option value="">Tarixə Görə</option>
+            <label for="sort-result" class="filter-result_sort">Sırala: 
+              <select name="" id="sort-result" class="filter-result_sort__select">
+                <option value=""> Seçin </option>
+                <option value=""> Qiymet Azalan </option>
+                <option value=""> Qiymet Artan </option>
+                <option value=""> Tarixə Görə </option>
               </select>
             </label>
           </div>
         </div>
-        <div class="filter-products">
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="product-card">
-                <a href="#" class="product-card_link">
-                  <span class="discount_ribbon">-50% <i></i></span>
-                  <div class="product-card_image">
-                    <img src="../media/home/tissot3.png" alt="" />
-                  </div>
-                  <div class="product-card_name">VMF İDMAN BALANS</div>
-                  <div class="product-card_price">
-                    <span class="old-price">238 AZN </span> 210 AZN
-                  </div>
-                </a>
+          <div class="filter-products">
+            <div class="row">
+              <div *ngFor="let product of products" class="col-lg-4 col-md-6 col-xs-12">
+                <div class="product-card">
+                    <a href="#" class="product-card_link">
+                      <span *ngIf="product.discountPercent>0" class="discount_ribbon">-{{product.discountPercent}}% <i></i></span>
+                      <div class="product-card_image">
+                        <img [src]="getProductImagePath(product.image)" alt="">
+                      </div>
+                      <div class="product-card_name">VMF İDMAN BALANS</div>
+                      <div class="product-card_price"><span class="old-price">238 AZN </span> 210 AZN</div>
+                    </a>
+                </div>
               </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="product-card">
-                <a href="#" class="product-card_link">
-                  <span class="discount_ribbon">-50% <i></i></span>
-                  <div class="product-card_image">
-                    <img src="../media/home/tissot1.jpg" alt="" />
-                  </div>
-                  <div class="product-card_name">VMF İDMAN BALANS</div>
-                  <div class="product-card_price">
-                    <span class="old-price">238 AZN </span> 210 AZN
-                  </div>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="product-card">
-                <a href="#" class="product-card_link">
-                  <span class="discount_ribbon">-50% <i></i></span>
-                  <div class="product-card_image">
-                    <img src="../media/home/tissot4.png" alt="" />
-                  </div>
-                  <div class="product-card_name">VMF İDMAN BALANS</div>
-                  <div class="product-card_price">
-                    <span class="old-price">238 AZN </span> 210 AZN
-                  </div>
-                </a>
-              </div>
+ 
             </div>
           </div>
-        </div>
-        <div class="filter-pagination">
-          <span class="filter-pagination_arrow disabled"
-            ><a href="#" class="filter-pagination_link"
-              ><i class="fa-solid fa-arrow-left"></i></a
-          ></span>
-          <ul class="filter-pagination_items">
-            <li class="filter-pagination_item">
-              <a class="filter-pagination_link active" href="#">1</a>
-            </li>
-            <li class="filter-pagination_item">
-              <a class="filter-pagination_link" href="#">2</a>
-            </li>
-            <li class="filter-pagination_item">
-              <a class="filter-pagination_link" href="#">3</a>
-            </li>
-            <li class="filter-pagination_item">
-              <a class="filter-pagination_link" href="#">4</a>
-            </li>
-            <li class="filter-pagination_item">
-              <a class="filter-pagination_link" href="#">5</a>
-            </li>
-          </ul>
-          <span class="filter-pagination_arrow"
-            ><a href="#" class="filter-pagination_link"
-              ><i class="fa-solid fa-arrow-right"></i></a
-          ></span>
-        </div>
+          <div class="filter-pagination">
+              <span class="filter-pagination_arrow disabled"><a href="#" class="filter-pagination_link"><i  class="fa-solid fa-arrow-left"></i></a></span>
+              <ul class="filter-pagination_items">
+                  <li class="filter-pagination_item"><a class="filter-pagination_link active" href="#">1</a></li>
+                  <li class="filter-pagination_item"><a class="filter-pagination_link" href="#">2</a></li>
+                  <li class="filter-pagination_item"><a class="filter-pagination_link" href="#">3</a></li>
+                  <li class="filter-pagination_item"><a class="filter-pagination_link" href="#">4</a></li>
+                  <li class="filter-pagination_item"><a class="filter-pagination_link" href="#">5</a></li>
+              </ul>
+              <span class="filter-pagination_arrow"><a href="#" class="filter-pagination_link"><i  class="fa-solid fa-arrow-right"></i></a></span>
+          </div>
       </div>
     </div>
   </div>
 </section>
 
-<script>
+<div class="res-overlay"></div>
 
-  document.querySelectorAll(".filter-tab_checkbox").forEach((element) =>
-    element.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.target.classList.toggle("isChecked");
-    })
-  );
-</script>
 
 

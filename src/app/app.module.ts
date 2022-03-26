@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -31,6 +32,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     RegisterComponent,
     AccountLayoutComponent,
     ProductDetailComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     HttpClientModule,
     BrowserAnimationsModule,
     CarouselModule,
+    ReactiveFormsModule
   ],
   providers: [
     DynamicScriptLoaderService

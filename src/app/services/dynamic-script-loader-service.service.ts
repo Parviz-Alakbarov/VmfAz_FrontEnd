@@ -20,6 +20,10 @@ export const ScriptStore: Scripts[] = [
   },
   {
     name: 'detailpage',
+    src: '../../../assets/scripts/prDetail.js',
+  },
+  {
+    name: 'shoppage',
     src: '../../../assets/scripts/shop.js',
   },
 ];

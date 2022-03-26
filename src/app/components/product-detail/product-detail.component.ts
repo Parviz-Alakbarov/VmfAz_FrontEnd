@@ -76,8 +76,6 @@ export class ProductDetailComponent implements OnInit {
 
 
 
-
-
   productSlider: OwlOptions = {
     loop: true,
     mouseDrag: true,

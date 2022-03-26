@@ -22,14 +22,19 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<Product>>(newUrl);
   }
 
+  getProdcutsInGetDto():Observable<ListResponseModel<ProductGetDto>>{
+    let newUrl = this.baseUrl+"api/products/";
+    return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
+  }
+
   getProductDetail(productId:number):Observable<SingleResponseModel<ProductDetailDto>>{
     let newUrl = this.baseUrl+"api/products/getProductDetail/"+productId;
     return this.httpClient.get<SingleResponseModel<ProductDetailDto>>(newUrl);
   }
 
-  getProductsByBrand(brandId:number):Observable<ListResponseModel<Product>>{
+  getProductsByBrand(brandId:number):Observable<ListResponseModel<ProductGetDto>>{
     let newUrl = this.baseUrl+"api/products/getbybrand"+brandId;
-    return this.httpClient.get<ListResponseModel<Product>>(newUrl);
+    return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
   }
 
   getBestSellers(count:number):Observable<ListResponseModel<ProductGetDto>>{
@@ -47,9 +52,7 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
   }
 
-
   getProductImagePath(){
     return this.baseUrl+"images/products/";
   }
-
 }

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/models/entities/product';
 import { SettingService } from 'src/app/services/setting.service';
 import { ProductService } from './../../services/product.service';
+import { BrandWithOnlyNameDto } from './../../models/dtos/brandDtos/brandWithOnlyNameDto';
+import { BrandService } from './../../services/brand.service';
+import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader-service.service';
+import { ProductGetDto } from './../../models/dtos/productGetDto';
 
 @Component({
   selector: 'app-product',
@@ -11,44 +14,60 @@ import { ProductService } from './../../services/product.service';
 })
 export class ProductComponent implements OnInit {
 
-  products:Product[] = [];
+  products:ProductGetDto[] = [];
+  brands:BrandWithOnlyNameDto[]=[];
   dataLoaded:boolean = false;
   headBannerImagePath:string;
-
+  queryBrandParams:number[]=[];
 
   constructor(
     private productService:ProductService,
     private activatedRoute:ActivatedRoute,
-    private settingService:SettingService
+    private settingService:SettingService,
+    private brandService:BrandService,
+    private dynamicScriptLoader: DynamicScriptLoaderService,
 
     ) { }
 
   ngOnInit(): void {
-    
+    this.loadScripts();
+
     this.activatedRoute.params.subscribe(params=>{
       if (params['brandId']) {
-        this.getProductsByBrands(params['brandId']);
+        this.getProductsByBrand(params['brandId']);
       }else{
-        this.getProducts();
+        this.getProductsInGetDto();
       }
     })
-
+    this.getBrands();
     this.getHeadBannerFromSetting('pageHeadBanner');
 
   }
 
-  getProducts(){
-    this.productService.getProducts().subscribe(response=>{
+
+  private loadScripts() {
+    this.dynamicScriptLoader.load('shoppage').then(data => {
+      console.log('script loaded ', data);
+    }).catch(error => console.log(error));
+  }
+
+
+  getProductsInGetDto(){
+    this.productService.getProdcutsInGetDto().subscribe(response=>{
       this.products = response.data;
       this.dataLoaded = true;
     })
   }
 
-  getProductsByBrands(brandId:number){
-    this.productService.getProducts().subscribe(response=>{
+  getProductsByBrand(brandId:number){
+    this.productService.getProductsByBrand(brandId).subscribe(response=>{
       this.products = response.data;
       this.dataLoaded = true;
     })
+  }
+
+  getProductImagePath(imageName:string){
+    return this.productService.getProductImagePath()+imageName
   }
 
 
@@ -58,4 +77,14 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  getBrands(){
+    this.brandService.getBrandsWithOnlyName().subscribe(response=>{
+      this.brands= response.data;
+    });
+  }
+
+  addBrandToQueryParams(e:any,id:number){
+    console.log(e.target);
+    
+  }
 }

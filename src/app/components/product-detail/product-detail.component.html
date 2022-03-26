@@ -194,6 +194,7 @@
             />
             <i class="fa-solid fa-plus" id="count-dec"></i>
           </div>
+          <!-- <p class="prDetail_sale__addToCart" (click)="addToCart(productDetailDto.id,)"> -->
           <p class="prDetail_sale__addToCart">
             <i class="fa-solid fa-check"></i>SƏBƏTƏ AT
           </p>
@@ -204,7 +205,7 @@
 </section>
 
 
-<section id="bestSellers"  class="section-50 slider_banner">
+<!-- <section id="bestSellers"  class="section-50 slider_banner">
   <div class="container">
     <div class="section-header">
       <div class="section-header_empty"></div>
@@ -216,15 +217,15 @@
 
         <div class="product-card">
           <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
-            <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
+            <span *ngIf="product.discountPercent>0" class="discount_ribbon">-{{product.discountPercent}}% <i></i></span>
             <div class="product-card_image">
               <img [src]="getProductImagePath(product.image)" alt="">
             </div>
             <div class="product-card_name">{{product.name}}</div>
             <p class="product-card_price">
-              <span *ngIf="product.discountPersent>0; then discountedPrice else normalPrice"></span>
+              <span *ngIf="product.discountPercent>0; then discountedPrice else normalPrice"></span>
               <ng-template #discountedPrice>
-                <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPersent/100)}} AZN
+                <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPercent/100)}} AZN
               </ng-template>
               <ng-template #normalPrice>
                 {{product.salePrice}} AZN
@@ -235,4 +236,4 @@
       </ng-template>  
     </owl-carousel-o>
   </div>
-</section>
+</section> -->

@@ -20,15 +20,15 @@
   
           <div class="product-card">
             <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
-              <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
+              <span *ngIf="product.discountPercent>0" class="discount_ribbon">-{{product.discountPercent}}% <i></i></span>
               <div class="product-card_image">
                 <img [src]="getProductImagePath(product.image)" alt="">
               </div>
               <div class="product-card_name">{{product.name}}</div>
               <p class="product-card_price">
-                <span *ngIf="product.discountPersent>0; then discountedPrice else normalPrice"></span>
+                <span *ngIf="product.discountPercent>0; then discountedPrice else normalPrice"></span>
                 <ng-template #discountedPrice>
-                  <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPersent/100)}} AZN
+                  <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPercent/100)}} AZN
                 </ng-template>
                 <ng-template #normalPrice>
                   {{product.salePrice}} AZN
@@ -107,15 +107,15 @@
 
         <div class="product-card">
           <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
-            <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
+            <span *ngIf="product.discountPercent>0" class="discount_ribbon">-{{product.discountPercent}}% <i></i></span>
             <div class="product-card_image">
               <img [src]="getProductImagePath(product.image)" alt="">
             </div>
             <div class="product-card_name">{{product.name}}</div>
             <p class="product-card_price">
-              <span *ngIf="product.discountPersent>0; then discountedPrice else normalPrice"></span>
+              <span *ngIf="product.discountPercent>0; then discountedPrice else normalPrice"></span>
               <ng-template #discountedPrice>
-                <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPersent/100)}} AZN
+                <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPercent/100)}} AZN
               </ng-template>
               <ng-template #normalPrice>
                 {{product.salePrice}} AZN
