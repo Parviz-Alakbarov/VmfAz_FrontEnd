@@ -38,7 +38,8 @@ export class ProductDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe(params=>{
       this.getProductDetail(params["productId"]);
       this.getProductShops(params["productId"]);
-      this.getProductImages(params["productId"])
+      this.getProductImages(params["productId"]);
+      this.getRelatedProducts(params["productId"]);
     })
   }
 
@@ -66,6 +67,13 @@ export class ProductDetailComponent implements OnInit {
     this.productImageService.getProductImages(productId).subscribe(response=>{
       this.productImages = response.data;
       this.dataLoaded = true;
+    })
+  }
+
+  getRelatedProducts(productId:number){
+    this.productService.getRelatedProducts(productId).subscribe(response=>{
+      this.relatedProducts = response.data;
+      // this.dataLoaded = true;
     })
   }
 

@@ -38,7 +38,7 @@
         position: relative;
         color: c.$form-headColor;
         display: block;
-      
+      cursor: pointer;
         &::before{
             content: "";
             position: absolute;
@@ -169,7 +169,7 @@
     }
     .shop .responsive-filter{
         top: 65px;
-        left: -400px;
+        left: -600px;
         position: absolute;
         background-color: #fff;
         z-index: 99;

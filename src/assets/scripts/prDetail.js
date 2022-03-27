@@ -1,5 +1,4 @@
 $(function(){
-	console.log("asdfasdfasfe");
     $(document).on('click','.prDetail_preview__little-item',function (e) {
         $('.prDetail_preview__little-item').removeClass('active');
         $(this).addClass('active');

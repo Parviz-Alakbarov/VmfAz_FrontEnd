@@ -6,6 +6,7 @@ import { BrandWithOnlyNameDto } from './../../models/dtos/brandDtos/brandWithOnl
 import { BrandService } from './../../services/brand.service';
 import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader-service.service';
 import { ProductGetDto } from './../../models/dtos/productGetDto';
+import { PaginationResult } from 'src/app/models/entities/pagination';
 
 @Component({
   selector: 'app-product',
@@ -19,6 +20,12 @@ export class ProductComponent implements OnInit {
   dataLoaded:boolean = false;
   headBannerImagePath:string;
   queryBrandParams:number[]=[];
+  paginatedResult:PaginationResult<ProductGetDto> = new PaginationResult<ProductGetDto>();
+
+  pageNumber=1;
+  pageSize=2;
+
+
 
   constructor(
     private productService:ProductService,
@@ -31,6 +38,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScripts();
+    this.getPaginatedProduct()
 
     this.activatedRoute.params.subscribe(params=>{
       if (params['brandId']) {
@@ -42,6 +50,16 @@ export class ProductComponent implements OnInit {
     this.getBrands();
     this.getHeadBannerFromSetting('pageHeadBanner');
 
+  }
+
+  getPaginatedProduct(){
+    this.productService.getPaginatedProducts(this.pageNumber,this.pageSize).subscribe(response=>{
+      this.paginatedResult.result = response.body.data; 
+      if (response.headers.get('Pagination') !== null) {
+        this.paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))  
+      }
+      console.log(this.paginatedResult)
+    })
   }
 
 
@@ -84,7 +102,11 @@ export class ProductComponent implements OnInit {
   }
 
   addBrandToQueryParams(e:any,id:number){
-    console.log(e.target);
-    
+    if (e.target.classList.contains('isChecked')) {
+      this.queryBrandParams = this.queryBrandParams.filter(x=>x!=id)
+    }
+    else{
+      this.queryBrandParams.push(id)
+    }   
   }
 }

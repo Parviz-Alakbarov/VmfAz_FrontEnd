@@ -20,7 +20,7 @@
             <p class="filter-tab_header">Markalar</p>
             <ul class="filter-tab_items">
               <li *ngFor="let brand of brands" class="filter-tab_item">
-                <a class="filter-tab_checkbox" > {{brand.name}} </a>
+                <a class="filter-tab_checkbox" (click)="addBrandToQueryParams($event,brand.id)" > {{brand.name}} </a>
               </li>
             </ul>
           </div>
@@ -84,13 +84,21 @@
             <div class="row">
               <div *ngFor="let product of products" class="col-lg-4 col-md-6 col-xs-12">
                 <div class="product-card">
-                    <a href="#" class="product-card_link">
-                      <span *ngIf="product.discountPercent>0" class="discount_ribbon">-{{product.discountPercent}}% <i></i></span>
+                    <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
+                      <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
                       <div class="product-card_image">
                         <img [src]="getProductImagePath(product.image)" alt="">
                       </div>
-                      <div class="product-card_name">VMF İDMAN BALANS</div>
-                      <div class="product-card_price"><span class="old-price">238 AZN </span> 210 AZN</div>
+                      <div class="product-card_name">{{product.name}}</div>
+                      <p class="product-card_price">
+                        <span *ngIf="product.discountPersent>0; then discountedPrice else normalPrice"></span>
+                        <ng-template #discountedPrice>
+                          <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPersent/100)}} AZN
+                        </ng-template>
+                        <ng-template #normalPrice>
+                          {{product.salePrice}} AZN
+                        </ng-template>
+                      </p>
                     </a>
                 </div>
               </div>

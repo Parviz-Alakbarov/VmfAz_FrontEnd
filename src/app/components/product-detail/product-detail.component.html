@@ -145,40 +145,6 @@
                   </p>
                 </div>
               </div>
-              <!-- <div class="content_wrapper">
-                <div class="content-shop">
-                  <a href="" class="content-shop-name">Longines - Şəki</a>
-                  <p class="content-shop-address">
-                    Şəki şəh., Mirzə Fətəli Axundzadə küç.76 İş rejimi 10:00 -
-                    19:30
-                  </p>
-                  <p class="content-shop-tel">
-                    <a href="tel:+994 50 257 80 13" class="content-shop-tel-num"
-                      >+994 50 257 80 13</a
-                    >
-                  </p>
-                </div>
-              </div>
-              <div class="content_wrapper">
-                <div class="content-shop">
-                  <a href="" class="content-shop-name">Raymond Weil</a>
-                  <p class="content-shop-address">
-                    Bakı şəh., İnşaatçılar pr., 104 B İş rejimi 10:00 - 20:00
-                  </p>
-                  <p class="content-shop-tel">
-                    <a
-                      href="tel:+994 12 510 07 32 "
-                      class="content-shop-tel-num"
-                      >+994 12 510 07 32</a
-                    >
-                    <a
-                      href="tel:+994 50 257 80 09 "
-                      class="content-shop-tel-num"
-                      >+994 50 257 80 09</a
-                    >
-                  </p>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -205,7 +171,7 @@
 </section>
 
 
-<!-- <section id="bestSellers"  class="section-50 slider_banner">
+<section id="bestSellers"  class="section-50 slider_banner">
   <div class="container">
     <div class="section-header">
       <div class="section-header_empty"></div>
@@ -217,15 +183,15 @@
 
         <div class="product-card">
           <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
-            <span *ngIf="product.discountPercent>0" class="discount_ribbon">-{{product.discountPercent}}% <i></i></span>
+            <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
             <div class="product-card_image">
               <img [src]="getProductImagePath(product.image)" alt="">
             </div>
             <div class="product-card_name">{{product.name}}</div>
             <p class="product-card_price">
-              <span *ngIf="product.discountPercent>0; then discountedPrice else normalPrice"></span>
+              <span *ngIf="product.discountPersent>0; then discountedPrice else normalPrice"></span>
               <ng-template #discountedPrice>
-                <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPercent/100)}} AZN
+                <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPersent/100)}} AZN
               </ng-template>
               <ng-template #normalPrice>
                 {{product.salePrice}} AZN
@@ -236,4 +202,4 @@
       </ng-template>  
     </owl-carousel-o>
   </div>
-</section> -->
+</section>

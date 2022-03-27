@@ -4,7 +4,7 @@ export interface ProductGetDto{
     brandId:number;
     genderId:number;
     salePrice:number;
-    discountPercent:number;
+    discountPersent:number;
     image:string;
     productFunctionalityId:number;
     createDate:Date;
