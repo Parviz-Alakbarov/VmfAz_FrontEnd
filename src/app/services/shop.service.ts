@@ -18,5 +18,10 @@ export class ShopService {
     return this.httpClient.get<ListResponseModel<Shop>>(newUrl);
   }
 
+  getShops():Observable<ListResponseModel<Shop>>{
+    let newUrl = this.baseUrl+"api/shops/";
+    return this.httpClient.get<ListResponseModel<Shop>>(newUrl);
+  }
+
 
 }

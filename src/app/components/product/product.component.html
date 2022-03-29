@@ -20,7 +20,7 @@
             <p class="filter-tab_header">Markalar</p>
             <ul class="filter-tab_items">
               <li *ngFor="let brand of brands" class="filter-tab_item">
-                <a class="filter-tab_checkbox" (click)="addBrandToQueryParams($event,brand.id)" > {{brand.name}} </a>
+                <a class="filter-tab_checkbox" (click)="addBrandToQueryParams(brand.id)" > {{brand.name}} </a>
               </li>
             </ul>
           </div>
@@ -28,12 +28,12 @@
           <div class="filter-tab lowerCase">
             <p class="filter-tab_header">Saatın Funksionalı</p>
             <ul class="filter-tab_items">
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox isChecked" href="#">
-                  Saat/Dəqiqə/Saniyə
+              <li *ngFor="let func of productFunctionalities" class="filter-tab_item">
+                <a class="filter-tab_checkbox" (click)="addFunctionalityToQueryParams(func.id)">
+                  {{func.name}}
                 </a>
               </li>
-              <li class="filter-tab_item">
+              <!-- <li class="filter-tab_item">
                 <a class="filter-tab_checkbox" href="#">
                   Saat/Dəqiqə/Saniyə/Tarix
                 </a>
@@ -42,7 +42,7 @@
                 <a class="filter-tab_checkbox" href="#">
                   Saat/Dəqiqə/Saniyəölçən
                 </a>
-              </li>
+              </li> -->
             </ul>
           </div>
 

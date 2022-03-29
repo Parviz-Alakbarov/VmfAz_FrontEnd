@@ -1,0 +1,36 @@
+<section id="page-head" class="page-head">
+    <div class="page-head_text">
+      <h3 class="page-head_header">Məhsullar</h3>
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item"><a routerlink="/">Home</a></li>
+        <li class="breadcrumb-item"><a routerlink="/">Saatlar</a></li>
+      </ul>
+    </div>
+    <div class="page-head_img">
+      <img src="{{headBannerImagePath}}" alt="banner" />
+    </div>
+</section>
+
+<section id="shops" class="shop">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-s-12">
+                <ul class="shop_items">
+                  <li *ngFor="let shop of shops" class="shop_item ">
+                    <a href="" >
+                      <h4 class="shop_item__head">{{shop.name}}</h4>
+                      <a href="mailto:{{shop.email}}" class="shop_item__email">Email: {{shop.email}}</a>
+                      <p class="shop_item__tel">Tel: <a href="tel:{{shop.phoneNumber1}}">{{shop.phoneNumber1}}</a> / <a href="tel:{{shop.phoneNumber2}}">{{shop.phoneNumber2}} </a> </p>
+                      <p class="shop_item__addrs">{{shop.address}} iş rejimi-{{shop.openHour}}:{{shop.openMinute==0?'00':shop.openMinute}}-{{shop.closeHour}}:{{shop.closeMinute==0?'00':shop.closeMinute}}</p>
+                    </a>
+                  </li>
+                </ul>
+            </div>
+            <div class="col-lg-8 col-s-12">
+                <div class="map_wrapper">
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

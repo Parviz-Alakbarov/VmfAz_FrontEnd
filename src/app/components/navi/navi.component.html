@@ -43,7 +43,7 @@
                                 <li class="nav_item nav-res_item">
                                     <div href="#" class="nav_item__link nav-res_item__link  nohover">
                                         <form action="" method="post" class="nav_search">
-                                            <input type="text" placeholder="Axtar...">
+                                            <input type="text" placeholder="Axtar..." name="search" (keyup)="onChangeEvent($event)">
                                             <button type="submit">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
                                             </button>

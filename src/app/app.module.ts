@@ -19,6 +19,7 @@ import { RegisterComponent } from './components/account/register/register.compon
 import { AccountLayoutComponent } from './components/account/account-layout/account-layout.component';
 import { DynamicScriptLoaderService } from './services/dynamic-script-loader-service.service';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ShopsComponent } from './components/shops/shops.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     RegisterComponent,
     AccountLayoutComponent,
     ProductDetailComponent,
+    ShopsComponent,
 
   ],
   imports: [

@@ -7,6 +7,7 @@ import { BrandService } from './../../services/brand.service';
 import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader-service.service';
 import { ProductGetDto } from './../../models/dtos/productGetDto';
 import { PaginationResult } from 'src/app/models/entities/pagination';
+import { ProductFunctionalityDto } from './../../models/dtos/productFeatureDtos/productFunctionalityDto';
 
 @Component({
   selector: 'app-product',
@@ -17,11 +18,14 @@ export class ProductComponent implements OnInit {
 
   products:ProductGetDto[] = [];
   brands:BrandWithOnlyNameDto[]=[];
+  productFunctionalities:ProductFunctionalityDto[];
   dataLoaded:boolean = false;
   headBannerImagePath:string;
-  queryBrandParams:number[]=[];
   paginatedResult:PaginationResult<ProductGetDto> = new PaginationResult<ProductGetDto>();
 
+
+  queryBrandParams:number[]=[];
+  queryFunctionalityParams:number[]=[];
   pageNumber=1;
   pageSize=2;
 
@@ -48,6 +52,7 @@ export class ProductComponent implements OnInit {
       }
     })
     this.getBrands();
+    this.getProductFunctionalities();
     this.getHeadBannerFromSetting('pageHeadBanner');
 
   }
@@ -101,12 +106,27 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  addBrandToQueryParams(e:any,id:number){
-    if (e.target.classList.contains('isChecked')) {
+  getProductFunctionalities(){
+    this.settingService.getProductFuntionalities().subscribe(response=>{
+      this.productFunctionalities= response.data;
+    });
+  }
+  
+  addBrandToQueryParams(id:number){
+    if (this.queryBrandParams.includes(id)) {
       this.queryBrandParams = this.queryBrandParams.filter(x=>x!=id)
     }
     else{
       this.queryBrandParams.push(id)
-    }   
+    } 
+  }
+
+  addFunctionalityToQueryParams(id:number){
+    if (this.queryFunctionalityParams.includes(id)) {
+      this.queryFunctionalityParams = this.queryFunctionalityParams.filter(x=>x!=id)
+    }
+    else{
+      this.queryFunctionalityParams.push(id)
+    } 
   }
 }

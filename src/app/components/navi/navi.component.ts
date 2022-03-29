@@ -31,4 +31,8 @@ export class NaviComponent implements OnInit {
     return path+imageName
   }
 
+  onChangeEvent(event: any){
+    
+  }
+
 }

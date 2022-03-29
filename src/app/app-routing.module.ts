@@ -7,6 +7,7 @@ import { BrandComponent } from './components/brand/brand.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductComponent } from './components/product/product.component';
+import { ShopsComponent } from './components/shops/shops.component';
 
 const routes: Routes = [
   { path : "" ,pathMatch:"full", component: HomeComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
     ]
       
   },
+  {path:'shops', component:ShopsComponent},
   { path : "brands" , component: BrandComponent },
   { path : "productDetail/:productId" , component: ProductDetailComponent },
   {

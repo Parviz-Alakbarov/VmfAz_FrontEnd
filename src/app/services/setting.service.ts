@@ -5,6 +5,7 @@ import { ListResponseModel } from '../models/responses/listResponseModel';
 import { Setting } from '../models/entities/setting';
 import { environment } from 'src/environments/environment';
 import { SingleResponseModel } from '../models/responses/singleResponseModel';
+import { ProductFunctionalityDto } from './../models/dtos/productFeatureDtos/productFunctionalityDto';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class SettingService {
     return this.baseUrl+"images/settings/"
   }
  
+  getProductFuntionalities():Observable<ListResponseModel<ProductFunctionalityDto>>{
+    let newUrl = this.baseUrl+"api/settings/getproductfunctionality";
+    return this.httpClient.get<ListResponseModel<ProductFunctionalityDto>>(newUrl);
+  }
   
 
 
