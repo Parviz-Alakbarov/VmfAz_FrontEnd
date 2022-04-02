@@ -40,15 +40,33 @@
                         </div>
                         <div class="col-lg-4">
                             <ul class="nav_items flex-end">
-                                <li class="nav_item nav-res_item">
+                                <li class="nav_item nav-res_item nav_item__search">
                                     <div href="#" class="nav_item__link nav-res_item__link  nohover">
                                         <form action="" method="post" class="nav_search">
-                                            <input type="text" placeholder="Axtar..." name="search" (keyup)="onChangeEvent($event)">
+                                            <input id="searchInput" type="text" placeholder="Axtar..." name="search" autocomplete="off" (keyup)="onChangeEvent($event)">
                                             <button type="submit">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
                                             </button>
                                         </form>
                                     </div>
+                                    <ul class="search_items">
+                                        <li *ngIf="searchProducts.length==0" class="noitem">
+                                          <i class="fa-solid fa-triangle-exclamation"></i>
+                                          Tapılmadı
+                                        </li>
+                                        <li *ngFor="let product of searchProducts" class="search_item">
+                                          <a href="">
+                                            <div class="search_item__img">
+                                                <img [src]="getProductImagePath(product.image)" alt="">
+                                            </div>
+                                            <div class="search_item-wrap">
+                                              <p class="search_item__name">{{product.name}}</p>
+                                              <p class="search_item__price product-card_price"><span *ngIf="product.discountPersent>0" class="old-price">{{product.salePrice}} AZN </span> {{product.salePrice*(1-(product.discountPersent/100))}} AZN</p>
+                                            </div>
+                                          </a>
+                                        </li>
+                                        
+                                      </ul>
                                 </li>
                                 <li class="nav_item profile">
                                     <a href="#" class="nav_item__link">
@@ -63,7 +81,7 @@
                                     </ul>
                                 </li>
                                 <li class="nav_item">
-                                    <a href="#" class="nav_item__link nav_basket">
+                                    <a routerLink="/cart" class="nav_item__link nav_basket">
                                         <i class="fas fa-archive"></i>
                                         <p class="nav_basket-count">0</p>
                                     </a>

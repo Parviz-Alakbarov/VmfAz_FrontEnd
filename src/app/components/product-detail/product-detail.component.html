@@ -2,7 +2,7 @@
   <div class="container">
     <ul class="prDetail_breadcrumbs">
       <li class="prDetail_breadcrumb"><a routerlink="/">Ana səhifə</a></li>
-      <li class="prDetail_breadcrumb"><a routerlink="/">{{productDetailDto.brandName}}</a></li>
+      <li *ngIf="productDetailDto.brandName!=undefined" class="prDetail_breadcrumb"><a routerlink="/">{{productDetailDto.brandName}}</a></li>
       <li class="prDetail_breadcrumb"><a>{{productDetailDto.name}}</a></li>
     </ul>
   </div>
@@ -24,11 +24,17 @@
           <div class="prDetail_preview__main">
             <span *ngIf="productDetailDto.discountPercent>0" class="discount_ribbon">-{{productDetailDto.discountPercent}}% <i></i></span>
             <div class="prDetail_preview__wrapper">
-              <img
+              <!-- <img
                 class="prDetail_preview__wrapper-img"
                 [src]="getProductImagePath(productDetailDto.posterImage)"
                 alt=""
-              />
+              /> -->
+              <img
+                class="prDetail_preview__wrapper-img"
+                [src]="getProductImagePath(productDetailDto.posterImage)"
+                [redZoom]="getProductImagePath(productDetailDto.posterImage)"
+                redZoomClass="red-zoom--style--window"
+              >
             </div>
           </div>
         </div>
@@ -72,7 +78,7 @@
               </div>
               <div *ngIf="productDetailDto.warrantyLimit!=null" class="content_wrapper">
                 <div class="content-left">Zəmanət</div>
-                <div class="content-right">{{productDetailDto.warrantyLimit}} il</div>
+                <div class="content-right">{{productDetailDto.warrantyLimit==0?"yoxdur":productDetailDto.warrantyLimit} il</div>
               </div>
               <div *ngIf="productDetailDto.productionCountry!=null" class="content_wrapper">
                 <div class="content-left">İstehsal Ölkəsi</div>
@@ -152,16 +158,18 @@
           <div class="prDetail_sale__count">
             <i class="fa-solid fa-minus" id="count-inc"></i>
             <input
-              id="prDetailCount"
-              type="number"
-              value="1"
-              min="1"
-              max="10"
+            name="productCount"
+            id="prDetailCount"
+            type="number"
+            value="1"
+            min="1"
+            max="10"
+            #productCount
             />
             <i class="fa-solid fa-plus" id="count-dec"></i>
           </div>
           <!-- <p class="prDetail_sale__addToCart" (click)="addToCart(productDetailDto.id,)"> -->
-          <p class="prDetail_sale__addToCart">
+          <p class="prDetail_sale__addToCart" (click)="addToCart(productDetailDto.id,productCount.value)">
             <i class="fa-solid fa-check"></i>SƏBƏTƏ AT
           </p>
         </div>

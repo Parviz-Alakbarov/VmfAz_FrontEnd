@@ -13,7 +13,8 @@ $(function(){
     });
 
     let countInput = $('#prDetailCount');
-    $('#count-dec').on('click',function () {
+    $(document).on('click','#count-dec',function () {
+        console.log("click");
         if (countInput.val()>=10) {
             return;
         }
@@ -22,7 +23,7 @@ $(function(){
         });
     })
 
-    $('#count-inc').on('click',function () {
+    $(document).on('click','#count-inc',function () {
         if (countInput.val()<=1) {
             return;
         }

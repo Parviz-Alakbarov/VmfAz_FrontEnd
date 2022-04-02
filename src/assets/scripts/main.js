@@ -7,6 +7,7 @@ $(function(){
 	$('.nav_search-res').click(function () {
 		$('.nav_items-res').removeClass('nav_active')
 		$('.nav-res_item').toggleClass('active');
+		$('.search_items').removeClass('active');
 	})
 	$(window).on('scroll', function (e) {
 		if (window.scrollY>120) {
@@ -15,4 +16,20 @@ $(function(){
 			$('#scrool-up').removeClass("active")
 		}
 	});
+	$('#searchInput').focus(function () { 
+		if ($(this).val()!="") {
+			$('.search_items').addClass('active');;
+		}
+	});
+	$('#searchInput').focusout(function () {
+		$('.search_items').removeClass('active');;
+	});
+
+	$(document).on('keyup','#searchInput',function () {
+		if ($(this).val()==="") {
+			$('.search_items').removeClass('active');;
+		}else{
+			$('.search_items').addClass('active');;
+		}
+	})
 });

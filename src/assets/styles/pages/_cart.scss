@@ -1,0 +1,93 @@
+@use "../abstracts/colors" as c;
+@import "../abstracts/mixin";
+
+
+.cart{
+    &_head{
+        margin: 20px 0;
+        font-size: 2rem;
+        color: c.$main-text-color;
+    }
+    &_table{
+        border-collapse: collapse;
+        width: 100%;
+        // overflow-x: auto;
+        &__head{
+            font-size: 13px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            th{
+                color: c.$table-headColor;
+                padding-bottom: 10px;
+            }
+        }
+        &__body{
+            th{
+                margin: 0 auto;
+            }
+            tr:not(:last-child){
+                border-bottom: 1px solid #ddd;
+            }
+            .prDetail_sale{
+                justify-content: center;
+                div{
+                    margin-right: 0;
+                }
+            }
+        }
+        &__cross i{
+            font-size: 25px;
+            color: c.$main-brown;
+        }
+        &__img{
+            width: 100px;
+            margin: 0 auto;
+            img{
+                @include imgSetting(contain);
+            }
+        }
+        &__name{
+            max-width: 400px;
+            margin: 0 auto;
+            font-weight: 400;
+            @include text-overflow(1);
+        }
+        &__price{
+            color: c.$main-text-color;
+            .old-price{
+                font-weight: 400;
+                @include oldPrice();
+            }
+        }
+        &__total{
+            color: c.$main-brown;
+        }
+    }
+    &_total-price{
+        .current_price{
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 15px;
+            span{
+                color: c.$main-text-color;
+                font-size: 16px;
+            }
+            span:last-child{
+                font-weight: 600;
+
+            }
+        }
+    }
+    &_continue{
+        margin-top: 15px;
+        padding: 20px 25px;
+        background-color: c.$main-dark-brown;
+        color: c.$white;
+        font-size: 13px;
+        font-weight: 500;
+        display: inline-block;
+        border-radius: 5px;
+    }
+}
+

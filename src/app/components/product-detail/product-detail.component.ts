@@ -9,6 +9,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { ProductGetDto } from 'src/app/models/dtos/productGetDto';
 import { ProductImage } from './../../models/entities/productImage';
 import { ProductImageService } from './../../services/product-image.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-detail',
@@ -29,18 +30,19 @@ export class ProductDetailComponent implements OnInit {
     private productService:ProductService,
     private activatedRoute:ActivatedRoute,
     private shopService:ShopService,
-    private productImageService:ProductImageService
+    private productImageService:ProductImageService,
+    private toastrService:ToastrService
   ) { }
 
   ngOnInit(): void {
-    this.loadScripts();
-
+    
     this.activatedRoute.params.subscribe(params=>{
       this.getProductDetail(params["productId"]);
       this.getProductShops(params["productId"]);
       this.getProductImages(params["productId"]);
       this.getRelatedProducts(params["productId"]);
     })
+    this.loadScripts();
   }
 
   private loadScripts() {
@@ -53,6 +55,8 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProductDetail(productId).subscribe(response=>{
       this.productDetailDto = response.data;
       this.dataLoaded = true;
+      console.log(this.productDetailDto.brandName);
+      
     })
   }
 
@@ -77,9 +81,14 @@ export class ProductDetailComponent implements OnInit {
     })
   }
 
-
   getProductImagePath(imageName:string){
     return this.productService.getProductImagePath()+imageName
+  }
+
+  addToCart(productId:number,productCount:string){
+    
+    this.toastrService.success(productCount,"Səbətə əlavə olundu");
+
   }
 
 

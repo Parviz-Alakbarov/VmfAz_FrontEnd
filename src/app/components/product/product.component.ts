@@ -7,7 +7,7 @@ import { BrandService } from './../../services/brand.service';
 import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader-service.service';
 import { ProductGetDto } from './../../models/dtos/productGetDto';
 import { PaginationResult } from 'src/app/models/entities/pagination';
-import { ProductFunctionalityDto } from './../../models/dtos/productFeatureDtos/productFunctionalityDto';
+import { ProductEntryDto } from '../../models/dtos/productFeatureDtos/productEntryDto';
 
 @Component({
   selector: 'app-product',
@@ -18,7 +18,7 @@ export class ProductComponent implements OnInit {
 
   products:ProductGetDto[] = [];
   brands:BrandWithOnlyNameDto[]=[];
-  productFunctionalities:ProductFunctionalityDto[];
+  productFunctionalities:ProductEntryDto[];
   dataLoaded:boolean = false;
   headBannerImagePath:string;
   paginatedResult:PaginationResult<ProductGetDto> = new PaginationResult<ProductGetDto>();

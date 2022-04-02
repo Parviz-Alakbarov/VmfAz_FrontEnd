@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader-service.service';
+import { FormGroup, FormBuilder, FormControl, Validator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,19 +8,32 @@ import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-load
 })
 export class LoginComponent implements OnInit {
 
+  loginForm:FormGroup;
+
   constructor(
-    private dynamicScriptLoader: DynamicScriptLoaderService
+    private formBuilder:FormBuilder,
   ) { }
 
   ngOnInit(): void {
-
+    this.createLoginForm();
   }
 
+  createLoginForm(){
+    this.loginForm = this.formBuilder.group({
+      email:["", [Validators.required,Validators.email]],
+      password:["", 
+        [  
+          Validators.required, 
+          Validators.minLength(8), 
+          Validators.maxLength(25), 
+          Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,25}$')
+        ]
+      ]
+    })
+  }
 
-  // private loadScripts() {
-  //   this.dynamicScriptLoader.load('loginpage').then(data => {
-  //     console.log('script loaded ', data);
-  // }).catch(error => console.log(error));
-  // }
+  login(){
+    let loginModel  =  Object.assign({}, this.loginForm.value)
+  }
 
 }

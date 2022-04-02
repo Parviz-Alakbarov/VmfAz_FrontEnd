@@ -2,40 +2,40 @@
     <div class="container">
       <div class="form_main">
         <h3 class="form_head">Qeydiyyatdan keç</h3>
-        <form action="" method="post" class="form_form">
+        <form [formGroup]="registerForm" action="" method="post" class="form_form">
 
           <label class="form_label" for="formName">Ad</label>
-          <input id="formName" type="text" autocomplete="name" />
+          <input formControlName="firstName" id="formName" type="text" autocomplete="name" />
 
           <label class="form_label" for="formSurname" >Soyad</label>
-          <input id="formSurname" type="text" autocomplete="family-name" />
+          <input formControlName="lastName" id="formSurname" type="text" autocomplete="family-name" />
 
           <label class="form_label" for="email">Email</label>
-          <input id="email" type="email" autocomplete="email" />
+          <input formControlName="email" id="email" type="email" autocomplete="email" />
 
           <label class="form_label" for="formPhone">Telefon</label>
-          <input id="formPhone" type="text" autocomplete="tel" />
+          <input formControlName="phoneNumber" id="formPhone" type="text" autocomplete="tel" />
 
           <label class="form_label" for="formCountry">Ölkə</label>
-            <select name="Country" id="formCountry" autocomplete="country-name">
+            <select formControlName="countryId" name="Country" id="formCountry" autocomplete="country-name">
                 <option disabled selected aria-readonly="true">Ölkə seçin</option>
             </select>
 
           <label class="form_label" for="formCity">Şəhər</label>
-            <select name="City" id="formCity" autocomplete="address-level2">
+            <select formControlName="cityId" name="City" id="formCity" autocomplete="address-level2">
                 <option disabled selected aria-readonly="true">Şəhər seçin</option>
             </select>
 
           <label class="form_label" for="formAdress">Ünvan</label>
-          <input id="formAdress" type="text" autocomplete="street-address" />
+          <input formControlName="address" id="formAdress" type="text" autocomplete="street-address" />
 
           <label class="form_label" for="password">Şifrə</label>
-          <input id="password" type="password" autocomplete="new-password"/>
+          <input formControlName="password" id="password" type="password" autocomplete="new-password"/>
 
           <label class="form_label" for="passwordConf">Şifrə(Təkrar)</label>
-          <input id="passwordConf" type="password" autocomplete="new-password" />
+          <input formControlName="password" id="passwordConf" type="password" autocomplete="new-password" />
 
-          <button class="form_submitBtn">Qeydiyyat</button>
+          <button (click)="register()" class="form_submitBtn">Qeydiyyat</button>
 
           <p class="form_registerLink">
             və ya <a routerLink="/account/login">Daxil ol</a>

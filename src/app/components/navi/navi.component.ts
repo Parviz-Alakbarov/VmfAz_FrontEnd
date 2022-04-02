@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SettingService } from './../../services/setting.service';
 import { Setting } from '../../models/entities/setting';
 import { environment } from 'src/environments/environment';
+import { ProductService } from './../../services/product.service';
+import { ProductGetDto } from 'src/app/models/dtos/productGetDto';
 
 @Component({
   selector: 'app-navi',
@@ -10,9 +12,11 @@ import { environment } from 'src/environments/environment';
 })
 export class NaviComponent implements OnInit {
   settings:Setting[]=[];
+  searchProducts:ProductGetDto[]=[];
 
   constructor(
-    private settingService:SettingService
+    private settingService:SettingService,
+    private productService:ProductService
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +35,17 @@ export class NaviComponent implements OnInit {
     return path+imageName
   }
 
+  getProductImagePath(imageName:string){
+    return this.productService.getProductImagePath()+imageName
+  }
+
   onChangeEvent(event: any){
-    
+    console.log(event.target.value)
+    this.productService.searchProducts(event.target.value).subscribe(response=>{
+      this.searchProducts=response.data;
+      console.log(this.searchProducts)
+    })
+
   }
 
 }

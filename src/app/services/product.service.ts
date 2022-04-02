@@ -71,6 +71,11 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
   }
 
+  searchProducts(text:string):Observable<ListResponseModel<ProductGetDto>>{
+    let newUrl = this.baseUrl+`api/products/search/${text}`;
+    return this.httpClient.get<ListResponseModel<ProductGetDto>>(newUrl);
+  }
+
   getProductImagePath(){
     return this.baseUrl+"images/products/";
   }

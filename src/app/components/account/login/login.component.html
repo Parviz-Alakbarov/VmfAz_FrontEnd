@@ -2,12 +2,13 @@
     <div class="container">
       <div class="form_main">
         <h3 class="form_head">Giriş</h3>
-        <form action="" method="post" class="form_form">
-          <input type="email" class="form_email" placeholder="Email" autocomplete="email" />
+        <form [formGroup]="loginForm" action="" method="post" class="form_form">
+          <input formControlName="email" type="email" class="form_email" placeholder="Email" autocomplete="email" />
           <input
             type="password"
             class="form_password"
             placeholder="Şifrə"
+            formControlName="password"
             autocomplete="current-password"
           />
 
@@ -18,7 +19,7 @@
             </svg>
             <span>Yadda saxla</span>
           </label>
-          <button class="form_submitBtn">Giriş</button>
+          <button (click)="login()" class="form_submitBtn">Giriş</button>
           <p class="form_registerLink">
             və ya <a routerLink="/account/register">Qeydiyyatdan keç</a>
           </p>

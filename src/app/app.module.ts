@@ -20,6 +20,11 @@ import { AccountLayoutComponent } from './components/account/account-layout/acco
 import { DynamicScriptLoaderService } from './services/dynamic-script-loader-service.service';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ShopsComponent } from './components/shops/shops.component';
+import { CartComponent } from './components/cart/cart.component';
+
+import { RedZoomModule } from 'ngx-red-zoom';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -34,6 +39,7 @@ import { ShopsComponent } from './components/shops/shops.component';
     AccountLayoutComponent,
     ProductDetailComponent,
     ShopsComponent,
+    CartComponent,
 
   ],
   imports: [
@@ -42,7 +48,17 @@ import { ShopsComponent } from './components/shops/shops.component';
     HttpClientModule,
     BrowserAnimationsModule,
     CarouselModule,
-    ReactiveFormsModule
+    FormsModule,  
+    ReactiveFormsModule,
+    RedZoomModule,
+    ToastrModule.forRoot({
+      positionClass:'toast-bottom-right',
+      progressBar:true,
+      progressAnimation:'increasing',
+      maxOpened:5,
+      autoDismiss:true,
+      closeButton:true,
+    }),
   ],
   providers: [
     DynamicScriptLoaderService

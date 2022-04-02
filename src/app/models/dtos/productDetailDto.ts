@@ -1,4 +1,5 @@
 export interface ProductDetailDto{
+    id:number;
     name:string;
     posterImage:string;
     salePrice:number;

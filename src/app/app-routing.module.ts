@@ -4,6 +4,7 @@ import { AccountLayoutComponent } from './components/account/account-layout/acco
 import { LoginComponent } from './components/account/login/login.component';
 import { RegisterComponent } from './components/account/register/register.component';
 import { BrandComponent } from './components/brand/brand.component';
+import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductComponent } from './components/product/product.component';
@@ -22,7 +23,11 @@ const routes: Routes = [
     ]
       
   },
-  {path:'shops', component:ShopsComponent},
+  { path:'shops', component:ShopsComponent},
+  { 
+    path:'cart',
+    component:CartComponent
+  },
   { path : "brands" , component: BrandComponent },
   { path : "productDetail/:productId" , component: ProductDetailComponent },
   {
@@ -32,7 +37,8 @@ const routes: Routes = [
       // { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
       // { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] }
     ]
-  }
+  },
+
   // { path : '**', component: PageNotFoundComponent },
 ];
 
