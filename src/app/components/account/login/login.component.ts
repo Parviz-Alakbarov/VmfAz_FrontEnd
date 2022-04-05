@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validator, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from './../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder:FormBuilder,
+    private authService:AuthService,
+    private toastrService:ToastrService,
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +37,21 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    let loginModel  =  Object.assign({}, this.loginForm.value)
+    if (this.loginForm.valid) {
+      let loginModel  =  Object.assign({}, this.loginForm.value)
+      this.authService.login(loginModel).subscribe(response=>{
+        console.log(response.data.accessToken.token); 
+        console.log(response.data.accessToken.expirationDate); 
+        
+        this.toastrService.success("Daxil olundu!","Success")
+      },responseError=>{
+        console.log(responseError);
+        
+      });
+    }
+    else{
+      this.toastrService.error("Form Düzgün deyil!","Error")
+    }
   }
 
 }

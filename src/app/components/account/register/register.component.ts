@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validator, Validators } from '@angular/forms';
 
 import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader-service.service';
+import { AuthService } from './../../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +17,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private dynamicScriptLoader: DynamicScriptLoaderService,
     private formBuilder:FormBuilder,
+    private authService:AuthService,
+    private toastrService:ToastrService
 
   ) { }
 
@@ -44,7 +48,14 @@ export class RegisterComponent implements OnInit {
   }
 
   register(){
-
+    if (this.registerForm.valid) {
+      let registerModel = Object.assign({},this.registerForm.value);
+      this.authService.register(registerModel).subscribe(response=>{
+        this.toastrService.success("Daxil olundu!","Success")
+      },responseError=>{
+        console.log(responseError);
+      })
+    }
   }
 
 
