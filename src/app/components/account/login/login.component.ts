@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validator, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../../services/auth.service';
+import { ValidationErrorResponseModel } from './../../../models/responses/validationErrorResponseModel';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +15,14 @@ export class LoginComponent implements OnInit {
 
   loginForm:FormGroup;
 
+  validationErrors:ValidationErrorResponseModel[] = []; 
+
   constructor(
     private formBuilder:FormBuilder,
     private authService:AuthService,
     private toastrService:ToastrService,
+    private router:Router,
+    private storageService:LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -40,13 +47,12 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       let loginModel  =  Object.assign({}, this.loginForm.value)
       this.authService.login(loginModel).subscribe(response=>{
-        console.log(response.data.accessToken.token); 
-        console.log(response.data.accessToken.expirationDate); 
-        
-        this.toastrService.success("Daxil olundu!","Success")
+        this.toastrService.success("Hesabiniza daxil olundu!","Success");
+        this.storageService.add('token',response.data.accessToken.token);
+        this.storageService.add('refreshToken',response.data.refreshToken.token);
+        this.router.navigateByUrl('/')
       },responseError=>{
-        console.log(responseError);
-        
+        this.validationErrors = responseError.error.ValidationErrors; 
       });
     }
     else{

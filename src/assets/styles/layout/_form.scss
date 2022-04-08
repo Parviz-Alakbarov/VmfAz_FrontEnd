@@ -16,7 +16,7 @@
     flex-direction: column;
     input,
     select {
-      margin-bottom: 15px;
+      margin-bottom: 5px;
       border: 1px solid c.$formBorder;
       border-radius: 5px;
       padding: 15px 0px 15px 15px;
@@ -38,6 +38,9 @@
     background-color: c.$main-dark-brown;
     color: c.$white;
     cursor: pointer;
+    &:disabled{
+      cursor: no-drop;
+    }
   }
   &_registerLink {
     font-size: 1.2rem;
@@ -53,6 +56,30 @@
     margin-bottom: 5px;
     font-size: 1.2rem;
     color: c.$form-headColor;
+  }
+  &_error{
+    display: none;
+    margin-bottom: 15px;
+    color: red;
+    text-align: start;
+    font-size: 16px;
+  }
+ &_error-list{
+   text-align: left;
+ } 
+ &_error_item{
+   padding: 10px 0;
+   color: red;
+ }
+  &_is-invalid ~ .form_error{
+    display: block;
+  }
+  &_is-invalid{
+    border: 1px solid red !important;
+  }
+  &-group{
+    display: flex;
+    flex-direction: column;
   }
 }
 

@@ -1,47 +1,216 @@
 <section id="loginForm" class="form">
-    <div class="container">
-      <div class="form_main">
-        <h3 class="form_head">Qeydiyyatdan keç</h3>
-        <form [formGroup]="registerForm" action="" method="post" class="form_form">
-
+  <div class="container">
+    <div class="form_main">
+      <h3 class="form_head">Qeydiyyatdan keç</h3>
+      <form
+        [formGroup]="registerForm"
+        method="post"
+        class="form_form"
+        (ngSubmit)="registerForm.valid && register()"
+      >
+        <div class="form-group">
           <label class="form_label" for="formName">Ad</label>
-          <input formControlName="firstName" id="formName" type="text" autocomplete="name" />
-
-          <label class="form_label" for="formSurname" >Soyad</label>
-          <input formControlName="lastName" id="formSurname" type="text" autocomplete="family-name" />
-
-          <label class="form_label" for="email">Email</label>
-          <input formControlName="email" id="email" type="email" autocomplete="email" />
-
-          <label class="form_label" for="formPhone">Telefon</label>
-          <input formControlName="phoneNumber" id="formPhone" type="text" autocomplete="tel" />
-
-          <label class="form_label" for="formCountry">Ölkə</label>
-            <select formControlName="countryId" name="Country" id="formCountry" autocomplete="country-name">
-                <option disabled selected aria-readonly="true">Ölkə seçin</option>
-            </select>
-
-          <label class="form_label" for="formCity">Şəhər</label>
-            <select formControlName="cityId" name="City" id="formCity" autocomplete="address-level2">
-                <option disabled selected aria-readonly="true">Şəhər seçin</option>
-            </select>
-
-          <label class="form_label" for="formAdress">Ünvan</label>
-          <input formControlName="address" id="formAdress" type="text" autocomplete="street-address" />
-
-          <label class="form_label" for="password">Şifrə</label>
-          <input formControlName="password" id="password" type="password" autocomplete="new-password"/>
-
-          <label class="form_label" for="passwordConf">Şifrə(Təkrar)</label>
-          <input formControlName="password" id="passwordConf" type="password" autocomplete="new-password" />
-
-          <button (click)="register()" class="form_submitBtn">Qeydiyyat</button>
-
-          <p class="form_registerLink">
-            və ya <a routerLink="/account/login">Daxil ol</a>
+          <input
+            formControlName="firstName"
+            id="formName"
+            type="text"
+            autocomplete="name"
+            [class.form_is-invalid]='registerForm.get("firstName").errors && registerForm.get("firstName").touched'
+          />
+          <p
+            *ngIf="registerForm.get('firstName').hasError('required')"
+            class="form_error"
+          >
+            *Adınızı daxil edin!
           </p>
+        </div>
 
-        </form>
-      </div>
+        <div class="form-group">
+          <label class="form_label" for="formSurname">Soyad</label>
+          <input
+            formControlName="lastName"
+            id="formSurname"
+            type="text"
+            autocomplete="family-name"
+            [class.form_is-invalid]='registerForm.get("lastName").errors && registerForm.get("lastName").touched'
+
+          />
+          <p
+            *ngIf="registerForm.get('lastName').hasError('required')"
+            class="form_error"
+          >
+            *Soyadınızı daxil edin!
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label class="form_label" for="email">Email</label>
+          <input
+            formControlName="email"
+            id="email"
+            type="email"
+            autocomplete="email"
+            [class.form_is-invalid]='registerForm.get("email").errors && registerForm.get("email").touched'
+
+          />
+          <p
+            *ngIf="registerForm.get('email').hasError('email')"
+            class="form_error"
+          >
+            *Email düzgün deyil!
+          </p>
+          <p
+            *ngIf="registerForm.get('email').hasError('required')"
+            class="form_error"
+          >
+            *Emailinizi daxil edin!
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label class="form_label" for="formPhone">Telefon</label>
+          <input
+            formControlName="phoneNumber"
+            id="formPhone"
+            type="text"
+            autocomplete="tel"
+            [class.form_is-invalid]='registerForm.get("phoneNumber").errors && registerForm.get("phoneNumber").touched'
+          />
+          <p
+            *ngIf="registerForm.get('phoneNumber').hasError('required')"
+            class="form_error"
+          >
+            *Telefon nömrənizi daxil edin!
+          </p>
+          <p *ngIf='registerForm.get("phoneNumber").hasError("minlength")' class="form_error">*Min. uzunluq 9-dur!</p>
+        </div>
+
+        <div class="form-group">
+          <label class="form_label" for="formCountry">Ölkə</label>
+          <select
+            formControlName="countryId"
+            name="Country"
+            id="formCountry"
+            autocomplete="country-name"
+            [class.form_is-invalid]='registerForm.get("countryId").errors && registerForm.get("countryId").touched'
+          >
+            <option class="defaultCountrySelect" selected aria-readonly="true">Ölkə seçin</option>
+          </select>
+          <p
+            *ngIf="registerForm.get('countryId').hasError('required')"
+            class="form_error"
+          >
+            *Ölkənizi seçin!
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label class="form_label" for="formCity">Şəhər</label>
+          <select
+            formControlName="cityId"
+            name="City"
+            id="formCity"
+            autocomplete="address-level2"
+            [class.form_is-invalid]='registerForm.get("cityId").errors && registerForm.get("cityId").touched'
+          >
+            <option disabled selected aria-readonly="true">Şəhər seçin</option>
+          </select>
+          <p
+            *ngIf="registerForm.get('cityId').hasError('required')"
+            class="form_error"
+          >
+            *Şəhər seçin!
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label class="form_label" for="formAdress">Ünvan</label>
+          <input
+            formControlName="address"
+            id="formAdress"
+            type="text"
+            autocomplete="street-address"
+            [class.form_is-invalid]='registerForm.get("address").errors && registerForm.get("address").touched'
+
+          />
+          <p
+            *ngIf="registerForm.get('address').hasError('required')"
+            class="form_error"
+          >
+            *Address daxil edin!
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label class="form_label" for="password">Şifrə</label>
+          <input
+            formControlName="password"
+            id="password"
+            type="password"
+            autocomplete="new-password"
+            [class.form_is-invalid]='registerForm.get("password").errors && registerForm.get("password").touched'
+
+          />
+          <p
+            *ngIf="registerForm.get('password').hasError('required')"
+            class="form_error"
+          >
+            *Password daxil edin!
+          </p>
+          <p
+            *ngIf="registerForm.get('password').hasError('minlength')"
+            class="form_error"
+          >
+            *Min. uzunluq 8-dir!
+          </p>
+          <p
+            *ngIf="registerForm.get('password').hasError('maxlength')"
+            class="form_error"
+          >
+            *Max. uzunluq 25-dir!
+          </p>
+          <p
+            *ngIf="registerForm.get('password').hasError('pattern')"
+            class="form_error"
+          >
+            *Password-a böyük hərf, kiçik hərf, rəqəm və simvol daxil olmalıdır!
+          </p>
+        </div>
+
+        <div class="form-group">
+          <label class="form_label" for="passwordConf">Şifrə(Təkrar)</label>
+          <input
+            formControlName="confirmPassword"
+            id="passwordConf"
+            type="password"
+            autocomplete="new-password"
+            [class.form_is-invalid]='registerForm.get("confirmPassword").errors && registerForm.get("confirmPassword").touched'
+
+          />
+          <p
+            *ngIf="registerForm.get('confirmPassword').hasError('required')"
+            class="form_error"
+          >
+            *Passwordunuzu təstiqləyin!
+          </p>
+          <p
+          *ngIf="registerForm.get('confirmPassword').hasError('isMatching')"
+          class="form_error"
+        >
+          *Daxil etdiyiniz password-lar eyni deyil!
+        </p>
+        </div>
+
+        <ul *ngIf="validationErrors" class="form_error-list">
+          <li *ngFor="let error of validationErrors" class="form_error_item">*{{error.ErrorMessage}}</li>
+        </ul>
+
+        <button [disabled]="!registerForm.valid" type="submit" class="form_submitBtn">Qeydiyyat</button>
+
+        <p class="form_registerLink">
+          və ya <a routerLink="/account/login">Daxil ol</a>
+        </p>
+      </form>
     </div>
-  </section>
+  </div>
+</section>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +24,11 @@ import { CartComponent } from './components/cart/cart.component';
 
 import { RedZoomModule } from 'ngx-red-zoom';
 import { ToastrModule } from 'ngx-toastr';
+import { TextInputComponent } from './components/forms/text-input/text-input.component';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ServerErrorComponent } from './components/server-error/server-error.component';
 
 
 @NgModule({
@@ -40,6 +45,9 @@ import { ToastrModule } from 'ngx-toastr';
     ProductDetailComponent,
     ShopsComponent,
     CartComponent,
+    TextInputComponent,
+    NotFoundComponent,
+    ServerErrorComponent,
 
   ],
   imports: [
@@ -61,7 +69,9 @@ import { ToastrModule } from 'ngx-toastr';
     }),
   ],
   providers: [
-    DynamicScriptLoaderService
+    DynamicScriptLoaderService,
+    { provide:HTTP_INTERCEPTORS, useClass : ErrorInterceptor, multi:true },
+    { provide:HTTP_INTERCEPTORS, useClass : AuthInterceptor,  multi:true },
   ],
   bootstrap: [AppComponent]
 })

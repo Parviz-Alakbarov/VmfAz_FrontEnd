@@ -1,0 +1,15 @@
+<div class="form-group">
+    <input 
+        type={{type}} 
+      class={{class}}
+      [formControl]="ngControl.control"
+      placeholder={{label}}   
+      autocomplete={{autoComplete}}
+      [class.form_is-invalid]="ngControl.touched && ngControl.invalid"
+      />
+    <p *ngIf="ngControl.control.errors?.required" class="form_error">*{{label}} məcburidir!</p>
+    <p *ngIf="ngControl.control.errors?.minlength" class="form_error">*Min. uzunluq {{ngControl.control.errors.minlength['requiredLength']}}!</p>
+    <p *ngIf="ngControl.control.errors?.maxlength" class="form_error">*Max. uzunluq {{ngControl.control.errors.maxlength['requiredLength']}}!</p>
+    <p *ngIf="ngControl.control.errors?.pattern" class="form_error">*Password-a böyük hərf, kiçik hərf, rəqəm və simvol daxil olmalıdır!</p>
+    <p *ngIf="ngControl.control.errors?.isMatching" class="form_error">*Daxil etdiyiniz password-lar eyni deyil!</p>
+  </div> 

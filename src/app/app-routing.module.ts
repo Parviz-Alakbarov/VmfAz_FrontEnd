@@ -6,12 +6,23 @@ import { RegisterComponent } from './components/account/register/register.compon
 import { BrandComponent } from './components/brand/brand.component';
 import { CartComponent } from './components/cart/cart.component';
 import { HomeComponent } from './components/home/home.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { ProductComponent } from './components/product/product.component';
+import { ServerErrorComponent } from './components/server-error/server-error.component';
 import { ShopsComponent } from './components/shops/shops.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path : "" ,pathMatch:"full", component: HomeComponent },
+  {
+    path : "" ,
+    runGuardsAndResolvers: 'always',
+    canActivate:[LoginGuard],
+    children : [
+      { path : 'profile' ,  component : CartComponent},
+    ]
+  },
   { path : "home" , component: HomeComponent },
   { 
     path : "products" , 
@@ -23,11 +34,8 @@ const routes: Routes = [
     ]
       
   },
-  { path:'shops', component:ShopsComponent},
-  { 
-    path:'cart',
-    component:CartComponent
-  },
+  { path : 'shops',  component : ShopsComponent},
+  { path : 'cart' ,  component : CartComponent},
   { path : "brands" , component: BrandComponent },
   { path : "productDetail/:productId" , component: ProductDetailComponent },
   {
@@ -38,12 +46,15 @@ const routes: Routes = [
       // { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] }
     ]
   },
-
-  // { path : '**', component: PageNotFoundComponent },
+  { path:'not-found', component:NotFoundComponent },
+  { path:'server-error', component:ServerErrorComponent },
+  { path : '**', component: NotFoundComponent, pathMatch:'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled', //This configuration automatically displays the top of the page when the route changes.
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

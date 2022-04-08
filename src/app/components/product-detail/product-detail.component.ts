@@ -35,6 +35,7 @@ export class ProductDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loadScripts();
     
     this.activatedRoute.params.subscribe(params=>{
       this.getProductDetail(params["productId"]);
@@ -42,7 +43,6 @@ export class ProductDetailComponent implements OnInit {
       this.getProductImages(params["productId"]);
       this.getRelatedProducts(params["productId"]);
     })
-    this.loadScripts();
   }
 
   private loadScripts() {

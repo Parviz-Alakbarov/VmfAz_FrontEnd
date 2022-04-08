@@ -20,16 +20,24 @@ export class AuthService {
     return  this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,user);
   }
 
-  register(registerModel:RegisterModel){
+  register(registerModel:RegisterModel):Observable<SingleResponseModel<TokenRespoinseModel>>{
     let newPath = this.baseUrl+"api/auth/register";
-    console.log(registerModel);
-    
-    return this.httpClient.post(newPath,registerModel);
+    return this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,registerModel);
   }
 
   logout(){
     let newPath = this.baseUrl+"api/auth/logout";
     return this.httpClient.delete(newPath);
   }
+
+  isAuthenticated(){
+    if (localStorage.getItem('token')) {
+      return true;
+    }else{
+      return false;
+    }
+
+  }
+
 
 }

@@ -2,16 +2,27 @@
     <div class="container">
       <div class="form_main">
         <h3 class="form_head">Giriş</h3>
-        <form [formGroup]="loginForm" action="" method="post" class="form_form">
-          <input formControlName="email" type="email" class="form_email" placeholder="Email" autocomplete="email" />
-          <input
-            type="password"
-            class="form_password"
-            placeholder="Şifrə"
-            formControlName="password"
-            autocomplete="current-password"
-          />
+        <form [formGroup]="loginForm"
+              method="post"
+              class="form_form"
+              (ngSubmit)="loginForm.valid && login()"
+        >
+        <app-text-input 
+            [formControl]='loginForm.controls["email"]' 
+            [label]='"Email"' 
+            [class]='"form_email"' 
+            [autoComplete]='"email"'
+            [type]='"email"'>
+        </app-text-input>
 
+        <app-text-input 
+          [formControl]='loginForm.controls["password"]' 
+          [label]='"Password"' 
+          [class]='"form_password"' 
+          [autoComplete]='"password"'
+          [type]='"password"'>
+        </app-text-input>
+     
           <label style="display: flex" class="checkbox bounce">
             <input type="checkbox" />
             <svg viewBox="0 0 21 21">
@@ -19,7 +30,13 @@
             </svg>
             <span>Yadda saxla</span>
           </label>
-          <button (click)="login()" class="form_submitBtn">Giriş</button>
+
+          <ul *ngIf="validationErrors.length>0" class="form_error-list">
+            <li *ngFor="let error of validationErrors" class="form_error_item">*{{error}}</li>
+          </ul>
+
+
+          <button [disabled]="!loginForm.valid" type="submit" class="form_submitBtn">Giriş</button>
           <p class="form_registerLink">
             və ya <a routerLink="/account/register">Qeydiyyatdan keç</a>
           </p>

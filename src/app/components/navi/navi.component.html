@@ -74,10 +74,10 @@
                                     </a>
                                     <ul class="profile_items">
                                         <li class="profile_item profile_name"><a href="#"> User name</a></li>
-                                        <li class="profile_item"><a href="#">Profile</a></li>
-                                        <li class="profile_item"><a href="#">Sifarişlər</a></li>
+                                        <li class="profile_item"><a routerLink="/account">Profile</a></li>
+                                        <li class="profile_item"><a routerLink="/orders">Sifarişlər</a></li>
                                         <li class="profile_item"><a href="#">Seçilmişlər</a></li>
-                                        <li class="profile_item"><a href="#">Çıxış</a></li>
+                                        <li (click)="logout()" class="profile_item"><a >Çıxış</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav_item">

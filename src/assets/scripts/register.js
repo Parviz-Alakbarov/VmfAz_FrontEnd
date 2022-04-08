@@ -4,7 +4,8 @@ $(function(){
     getCountries();
 
     $(document).on('change','#formCountry', function (e) {
-        console.log($('#formCity').html(`<option disabled selected aria-readonly="true">Şəhər seçin</option>`));
+        $('#formCity').html(`<option disabled selected aria-readonly="true">Şəhər seçin</option>`);
+        $('.defaultCountrySelect').prop('disabled', 'disabled');
         getCitiesByCountry(this.value)
     });
 
