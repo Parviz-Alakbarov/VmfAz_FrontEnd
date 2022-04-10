@@ -8,13 +8,19 @@
     text-decoration: none;
     box-sizing: border-box;
     font-family: 'Fira Sans', sans-serif;
-    color: c.$black;
+    // color: c.$black;
+    
     &::selection{
         color: c.$white;
         background-color: c.$main-brown;
     }
 }
-
+a[routerlink] {
+  color: black;
+}
+a{
+  color: black;
+}
 select {
   cursor: pointer;
 }

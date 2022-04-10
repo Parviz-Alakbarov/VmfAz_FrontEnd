@@ -9,6 +9,7 @@ import { Setting } from 'src/app/models/entities/setting';
 import { Brand } from 'src/app/models/entities/brand';
 import { BrandService } from './../../services/brand.service';
 
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-home',
@@ -23,57 +24,76 @@ export class HomeComponent implements OnInit {
   discountedProducts:ProductGetDto[]=[];
   settings:Setting[]=[];
   brands:Brand[]=[];
+  dataLoaded:boolean = false;
 
  
   constructor(
     private sliderService:SliderService,
     private productService:ProductService,
     private settingService:SettingService,
-    private brandService:BrandService
+    private brandService:BrandService,
+    private spinner: NgxSpinnerService
     ) { }
 
   ngOnInit(): void {
-    this.getSliders();
-    this.getBestSellers();
-    this.getBrandBestSeller(2);
-    this.getDiscountedProducts();
-    this.getBrands();
-    this.getSettings();
+    this.spinner.show();
+      this.getSettings();
+      this.getSliders();
+      this.getBestSellers();
+      this.getBrandBestSeller(2);
+      this.getDiscountedProducts();
+      this.getBrands();
+      setTimeout(() => {
+        this.spinner.hide();
+      }, 1000);
   }
 
   getSliders(){
+    this.dataLoaded= false;
     this.sliderService.getSliders().subscribe(response=>{
       this.sliders = response.data;
+      this.dataLoaded= true;
     })
   }
 
   getSettings(){
+    this.dataLoaded= false;
     this.settingService.getSettings().subscribe(response=>{
       this.settings = response.data;
+      this.dataLoaded= true;
     })
   }
 
   getDiscountedProducts(){
+    this.dataLoaded= false;
     this.productService.getDiscountedProdcuts().subscribe(response=>{
       this.discountedProducts = response.data;
+      this.dataLoaded= true;
     })
+    this.dataLoaded = true;
   }
 
   getBestSellers(){
+    this.dataLoaded= false;
     this.productService.getBestSellers(5).subscribe(response=>{
       this.bestSellers = response.data;
+      this.dataLoaded= true;
     })
   }
 
   getBrandBestSeller(brandId:number){
+    this.dataLoaded= false;
     this.productService.getBrandBestSellers(2,5).subscribe(response=>{
       this.bestSellersByBrand = response.data;
+      this.dataLoaded= true;
     })
   }
 
   getBrands(){
+    this.dataLoaded= false;
     this.brandService.getBrands().subscribe(response=>{
       this.brands = response.data;
+      this.dataLoaded= true;
     })
   }
 

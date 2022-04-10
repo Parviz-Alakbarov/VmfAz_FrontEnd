@@ -20,6 +20,7 @@
     "@angular/router": "~13.2.0",
     "ngx-owl-carousel-o": "^7.0.1",
     "ngx-red-zoom": "^0.9.0",
+    "ngx-spinner": "^13.1.1",
     "ngx-toastr": "^14.2.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.1",

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
@@ -31,7 +31,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ServerErrorComponent } from './components/server-error/server-error.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 
-
+import { NgxSpinnerModule } from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -62,6 +62,7 @@ import { ProfileComponent } from './components/account/profile/profile.component
     FormsModule,  
     ReactiveFormsModule,
     RedZoomModule,
+    NgxSpinnerModule,
     ToastrModule.forRoot({
       positionClass:'toast-bottom-right',
       progressBar:true,
@@ -76,6 +77,7 @@ import { ProfileComponent } from './components/account/profile/profile.component
     { provide:HTTP_INTERCEPTORS, useClass : AuthInterceptor,  multi:true },
     { provide:HTTP_INTERCEPTORS, useClass : ErrorInterceptor, multi:true },
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,7 @@
-  <section class="slider_banner">
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#a87430" type = "ball-clip-rotate-multiple" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
+
+<section *ngIf="dataLoaded" class="slider_banner">
       <owl-carousel-o [options]="bannerSlider">
         <ng-template *ngFor="let slider of sliders" style="width: 100%;" carouselSlide>
             <img [src]="getSliderImagePath(slider.image)" alt="">
@@ -8,7 +11,7 @@
   </section>
 
 
-  <section id="bestSellers"  class="section-50 slider_banner">
+  <section *ngIf="dataLoaded" id="bestSellers"  class="section-50 slider_banner">
     <div class="container">
       <div class="section-header">
         <div class="section-header_empty"></div>
@@ -41,7 +44,7 @@
     </div>
   </section>
 
-  <section id="firstPromotion" class="promotions">
+  <section *ngIf="dataLoaded" id="firstPromotion" class="promotions">
     <div class="container">
       <div class="row">
         <div class="col-lg-4 col-md-6 col-s-12">
@@ -88,14 +91,14 @@
   </section>
 
 
-<section class="ADVT">
+<section *ngIf="dataLoaded" class="ADVT">
   <div class="ADVT_banner">
     <img [src]="getSettingImage('SectionAdvertisement1')" alt="">
   </div>
   <a class="ADVT_link" href="#">Indi Alın</a>
 </section>
 
-<section id="bestSellers"  class="section-50 slider_banner">
+<section *ngIf="dataLoaded" id="bestSellers"  class="section-50 slider_banner">
   <div class="container">
     <div class="section-header">
       <div class="section-header_empty"></div>
@@ -128,7 +131,7 @@
   </div>
 </section>
 
-<section class="ADVT">
+<section *ngIf="dataLoaded" class="ADVT">
   <div class="ADVT_banner">
     <img [src]="getSettingImage('SectionAdvertisement2')" alt="">
   </div>
@@ -136,7 +139,7 @@
 </section>
 
 
-<section id="Hamilton"  class="section-50 slider_banner">
+<section *ngIf="dataLoaded" id="Hamilton"  class="section-50 slider_banner">
   <div class="container">
     <div class="section-header">
       <div class="section-header_empty"></div>
@@ -160,7 +163,7 @@
 </section>
 
 
-<section id="secondPromotion" class="promotions">
+<section *ngIf="dataLoaded" id="secondPromotion" class="promotions">
   <div class="container">
     <div class="row">
       <div class="col-lg-4 col-md-6 col-s-12">
@@ -204,7 +207,7 @@
 </section>
 
 
-<section class="brands">
+<section *ngIf="dataLoaded" class="brands">
   <div class="container">
     <div class="section-header">
       <div class="section-header_empty"></div>

@@ -33,7 +33,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
                 throw modelStateError;
               }else{
-                this.toastrService.error(error.statusText,error.status);
+                this.toastrService.error(error.error.ValidationErrors[0].ErrorMessage,error.status);
               }
               break;
 

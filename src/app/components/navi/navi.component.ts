@@ -7,6 +7,7 @@ import { ProductGetDto } from 'src/app/models/dtos/productGetDto';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AuthService } from './../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navi',
@@ -25,7 +26,8 @@ export class NaviComponent implements OnInit {
     private productService:ProductService,
     private localStorageService:LocalStorageService,
     private authService:AuthService,
-    private toastrService:ToastrService
+    private toastrService:ToastrService,
+    private router:Router
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +64,7 @@ export class NaviComponent implements OnInit {
      this.localStorageService.remove('token')
      this.localStorageService.remove('refreshToken')
       this.toastrService.success("Hesabdan çıxış olundu.","Success")
+      this.router.navigateByUrl("/")
     },errorResponse=>{
       console.log(errorResponse);
       this.toastrService.error("Hesabdan çıxış olunarkən xəta baş verdi","Error");

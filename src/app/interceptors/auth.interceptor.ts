@@ -18,11 +18,10 @@ import { RefreshTokenModel } from './../models/auth/refreshTokenModel';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   static accessToken = "";
-  private baseUrl=environment.BASE_URL;
+  refresh:boolean = false;
 
   constructor(
     private localStorageService:LocalStorageService,
-    private httpClient:HttpClient,
     private authService:AuthService
   ) {}
 
@@ -35,7 +34,8 @@ export class AuthInterceptor implements HttpInterceptor {
     
     return next.handle(newRequest).pipe(catchError(( err:HttpErrorResponse )=>{
 
-      if (err.status ===401 ) {
+      if (err.status ===401 && !this.refresh && !this.authService.isAuthenticated) {
+        this.refresh = true;
         let refreshToken : RefreshTokenModel={ refreshToken :this.localStorageService.getItem('refreshToken')};
         refreshToken.refreshToken = this.localStorageService.getItem('refreshToken');
 
@@ -49,14 +49,11 @@ export class AuthInterceptor implements HttpInterceptor {
           newRequest = request.clone({
             headers:request.headers.set("Authorization","Bearer "+token)
           });
-          console.log("error =-----=-dddddddddddddddddddd-0-=-=-=");
 
           return next.handle(newRequest);
-
         })
       }
-      console.log("error =-----=--0-=-=-=");
-      
+      this.refresh = false;
       return throwError(()=>err);
     }));
   }
