@@ -68,13 +68,18 @@
                                         
                                       </ul>
                                 </li>
-                                <li class="nav_item profile">
-                                    <a href="#" class="nav_item__link">
+                                <li *ngIf="!checkAuth()" class="nav_item">
+                                    <a routerLink='/account/login' class="nav_item__link">
+                                        <i class="far fa-user"></i>
+                                    </a>
+                                </li>
+                                <li *ngIf="checkAuth()" class="nav_item profile">
+                                    <a routerLink="profile" class="nav_item__link">
                                         <i class="far fa-user"></i>
                                     </a>
                                     <ul class="profile_items">
-                                        <li class="profile_item profile_name"><a href="#"> User name</a></li>
-                                        <li class="profile_item"><a routerLink="/account">Profile</a></li>
+                                        <li class="profile_item profile_name"><a> User name</a></li>
+                                        <li class="profile_item"><a routerLink="/profile">Profile</a></li>
                                         <li class="profile_item"><a routerLink="/orders">Sifarişlər</a></li>
                                         <li class="profile_item"><a href="#">Seçilmişlər</a></li>
                                         <li (click)="logout()" class="profile_item"><a >Çıxış</a></li>

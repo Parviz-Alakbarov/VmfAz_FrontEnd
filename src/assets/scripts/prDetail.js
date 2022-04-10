@@ -2,8 +2,8 @@ $(function(){
     $(document).on('click','.prDetail_preview__little-item',function (e) {
         $('.prDetail_preview__little-item').removeClass('active');
         $(this).addClass('active');
-        let itemSrc = $(this).children().attr("src");
-        $('.prDetail_preview__wrapper-img').attr('src',itemSrc)
+        // let itemSrc = $(this).children().attr("src");
+        // $('.prDetail_preview__wrapper-img').attr('src',itemSrc)
     })
 
     $('.prDetail_accordion_head').click(function(){

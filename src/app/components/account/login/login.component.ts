@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuthService } from './../../../services/auth.service';
 import { ValidationErrorResponseModel } from './../../../models/responses/validationErrorResponseModel';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { AuthInterceptor } from 'src/app/interceptors/auth.interceptor';
 
 @Component({
   selector: 'app-login',
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
         this.toastrService.success("Hesabiniza daxil olundu!","Success");
         this.storageService.add('token',response.data.accessToken.token);
         this.storageService.add('refreshToken',response.data.refreshToken.token);
+        AuthInterceptor.accessToken = response.data.accessToken.token;
         this.router.navigateByUrl('/')
       },responseError=>{
         this.validationErrors = responseError.error.ValidationErrors; 

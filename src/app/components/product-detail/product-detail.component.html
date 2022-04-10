@@ -12,11 +12,11 @@
       <div class="col-lg-7 col-md-12">
         <div class="prDetail_preview">
           <div class="prDetail_preview__little">
-            <div class="prDetail_preview__little-item active">
+            <div (click)="changeSource(productDetailDto.posterImage)" class="prDetail_preview__little-item active">
               <img [src]="getProductImagePath(productDetailDto.posterImage)" alt="" />
             </div>
 
-            <div *ngFor="let img of productImages" class="prDetail_preview__little-item">
+            <div *ngFor="let img of productImages" (click)="changeSource(img.imagePath)" class="prDetail_preview__little-item">
               <img [src]="getProductImagePath(img.imagePath)" alt="" />
             </div>
 
@@ -29,12 +29,19 @@
                 [src]="getProductImagePath(productDetailDto.posterImage)"
                 alt=""
               /> -->
-              <img
+              <!-- <img
                 class="prDetail_preview__wrapper-img"
                 [src]="getProductImagePath(productDetailDto.posterImage)"
                 [redZoom]="getProductImagePath(productDetailDto.posterImage)"
                 redZoomClass="red-zoom--style--window"
-              >
+              > -->
+
+              <img
+              class="prDetail_preview__wrapper-img"
+              [src]="productCurrentMainImage"
+              [redZoom]="productCurrentMainImage"
+              redZoomClass="red-zoom--style--window"
+            >
             </div>
           </div>
         </div>
@@ -78,7 +85,7 @@
               </div>
               <div *ngIf="productDetailDto.warrantyLimit!=null" class="content_wrapper">
                 <div class="content-left">Zəmanət</div>
-                <div class="content-right">{{productDetailDto.warrantyLimit==0?"yoxdur":productDetailDto.warrantyLimit} il</div>
+                <div class="content-right">{{productDetailDto.warrantyLimit>0?"yoxdur":productDetailDto.warrantyLimit+"il"}} </div>
               </div>
               <div *ngIf="productDetailDto.productionCountry!=null" class="content_wrapper">
                 <div class="content-left">İstehsal Ölkəsi</div>
@@ -125,14 +132,17 @@
             </div>
             <div class="prDetail_accordion_content">
               <div class="content_wrapper">
-                <div class="content-note">
+                <div *ngIf="productShops.length==0" class="content-note">
+                  *Hazırda heç bir mağazamızda mövcud deyil!
+                </div>
+                <div *ngIf="productShops.length!=0" class="content-note">
                   *Bütün ölkə ərazisi üzrə 1 gün ərzində çatdırılma!
                 </div>
               </div>
 
               <div *ngFor="let shop of productShops" class="content_wrapper">
                 <div class="content-shop">
-                  <a href="" class="content-shop-name">{{shop.name}}</a>
+                  <a routerLink="/shops" class="content-shop-name">{{shop.name}}</a>
                   <p class="content-shop-address">
                     {{shop.address}} iş
                     rejimi-{{shop.openHour}}:{{shop.openMinute==0?"00":shop.openMinute}}-{{shop.closeHour}}:{{shop.closeMinute==0?"00":shop.closeMinute}}

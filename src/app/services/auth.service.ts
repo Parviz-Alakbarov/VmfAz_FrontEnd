@@ -1,17 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginModel } from '../models/auth/loginModel';
+import { RefreshTokenModel } from '../models/auth/refreshTokenModel';
 import { RegisterModel } from '../models/auth/registerModel';
 import { TokenRespoinseModel } from '../models/auth/tokenResponseModel';
+import { UserGetDto } from '../models/dtos/userDtos/userGetDto';
 import { SingleResponseModel } from '../models/responses/singleResponseModel';
+import { ResponseModel } from './../models/responses/responseModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private baseUrl = environment.BASE_URL;
+
+  private currentUserSource = new ReplaySubject<TokenRespoinseModel>(1);
+  currentUser$ = this.currentUserSource.asObservable(); 
 
   constructor(private httpClient:HttpClient) { }
 
@@ -25,9 +31,19 @@ export class AuthService {
     return this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,registerModel);
   }
 
-  logout(){
+  logout():Observable<ResponseModel>{
     let newPath = this.baseUrl+"api/auth/logout";
-    return this.httpClient.delete(newPath);
+    return this.httpClient.delete<ResponseModel>(newPath);
+  }
+
+  getUserProfile():Observable<SingleResponseModel<UserGetDto>>{
+    let newPath = this.baseUrl+"api/auth/profile";
+    return this.httpClient.get<SingleResponseModel<UserGetDto>>(newPath);
+  }
+
+  refresh(refreshToken:RefreshTokenModel){
+    let newPath = this.baseUrl+"api/auth/refresh";
+    return this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,refreshToken);
   }
 
   isAuthenticated(){
@@ -36,8 +52,5 @@ export class AuthService {
     }else{
       return false;
     }
-
   }
-
-
 }

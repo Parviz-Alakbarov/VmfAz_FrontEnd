@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountLayoutComponent } from './components/account/account-layout/account-layout.component';
 import { LoginComponent } from './components/account/login/login.component';
+import { ProfileComponent } from './components/account/profile/profile.component';
 import { RegisterComponent } from './components/account/register/register.component';
 import { BrandComponent } from './components/brand/brand.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -15,15 +16,17 @@ import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   { path : "" ,pathMatch:"full", component: HomeComponent },
-  {
-    path : "" ,
-    runGuardsAndResolvers: 'always',
-    canActivate:[LoginGuard],
-    children : [
-      { path : 'profile' ,  component : CartComponent},
-    ]
-  },
+  // {
+  //   path : "" ,
+  //   runGuardsAndResolvers: 'always',
+  //   canActivate:[LoginGuard],
+  //   children : [
+  //     { path : 'profile' ,  component : CartComponent},
+  //   ]
+  // },
+
   { path : "home" , component: HomeComponent },
+  { path : "profile" , component: ProfileComponent ,canActivate: [LoginGuard]},
   { 
     path : "products" , 
     component : ProductComponent ,

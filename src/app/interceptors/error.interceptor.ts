@@ -37,9 +37,9 @@ export class ErrorInterceptor implements HttpInterceptor {
               }
               break;
 
-            case 401:
-              this.toastrService.error("Qeydiyyatdan keçin və ya hesabınıza daxil olmalısınız!",`Error ${error.status}`);
-              break;
+            // case 401:
+            //   this.toastrService.error("Qeydiyyatdan keçin və ya hesabınıza daxil olmalısınız!",`Error ${error.status}`);
+            //   break;
           
             case 404:
               this.router.navigateByUrl('/not-found');
@@ -48,11 +48,6 @@ export class ErrorInterceptor implements HttpInterceptor {
             case 500:
               const navigationExtras:NavigationExtras = {state: {error:error.error.error} }
               this.router.navigateByUrl('/server-error');
-              break;
-              
-            default:
-              this.toastrService.error("Gözlənilməz bir səhv baş verdi!");
-              console.log(error);
               break;
           }
         }

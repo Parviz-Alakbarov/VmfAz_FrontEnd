@@ -29,6 +29,8 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ServerErrorComponent } from './components/server-error/server-error.component';
+import { ProfileComponent } from './components/account/profile/profile.component';
+
 
 
 @NgModule({
@@ -48,6 +50,7 @@ import { ServerErrorComponent } from './components/server-error/server-error.com
     TextInputComponent,
     NotFoundComponent,
     ServerErrorComponent,
+    ProfileComponent,
 
   ],
   imports: [
@@ -70,8 +73,8 @@ import { ServerErrorComponent } from './components/server-error/server-error.com
   ],
   providers: [
     DynamicScriptLoaderService,
-    { provide:HTTP_INTERCEPTORS, useClass : ErrorInterceptor, multi:true },
     { provide:HTTP_INTERCEPTORS, useClass : AuthInterceptor,  multi:true },
+    { provide:HTTP_INTERCEPTORS, useClass : ErrorInterceptor, multi:true },
   ],
   bootstrap: [AppComponent]
 })

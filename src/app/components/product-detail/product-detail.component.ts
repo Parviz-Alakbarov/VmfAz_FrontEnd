@@ -24,6 +24,7 @@ export class ProductDetailComponent implements OnInit {
   productImages:ProductImage[];
   relatedProducts:ProductGetDto[];
 
+  productCurrentMainImage:string;
 
   constructor(
     private dynamicScriptLoader: DynamicScriptLoaderService,
@@ -43,6 +44,7 @@ export class ProductDetailComponent implements OnInit {
       this.getProductImages(params["productId"]);
       this.getRelatedProducts(params["productId"]);
     })
+
   }
 
   private loadScripts() {
@@ -55,9 +57,12 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProductDetail(productId).subscribe(response=>{
       this.productDetailDto = response.data;
       this.dataLoaded = true;
-      console.log(this.productDetailDto.brandName);
-      
+      this.productCurrentMainImage =  this.productService.getProductImagePath()+ response.data.posterImage;
     })
+  }
+
+  changeSource(source:string){
+    this.productCurrentMainImage =  this.productService.getProductImagePath()+ source;
   }
 
   getProductShops(productId:number){
@@ -73,6 +78,12 @@ export class ProductDetailComponent implements OnInit {
       this.dataLoaded = true;
     })
   }
+
+  productMainImage(){
+    return this.productCurrentMainImage;
+  }
+
+
 
   getRelatedProducts(productId:number){
     this.productService.getRelatedProducts(productId).subscribe(response=>{

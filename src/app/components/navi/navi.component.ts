@@ -7,8 +7,6 @@ import { ProductGetDto } from 'src/app/models/dtos/productGetDto';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { AuthService } from './../../services/auth.service';
 import { ToastrService } from 'ngx-toastr';
-import { ReplaySubject } from 'rxjs';
-import { TokenRespoinseModel } from 'src/app/models/auth/tokenResponseModel';
 
 @Component({
   selector: 'app-navi',
@@ -16,11 +14,11 @@ import { TokenRespoinseModel } from 'src/app/models/auth/tokenResponseModel';
   styleUrls: ['./navi.component.scss']
 })
 export class NaviComponent implements OnInit {
+  dataLoaded:boolean=false;
   settings:Setting[]=[];
   searchProducts:ProductGetDto[]=[];
 
-  private currentUserSource = new ReplaySubject<TokenRespoinseModel>(1);
-  currentUser$ = this.currentUserSource.asObservable(); 
+
 
   constructor(
     private settingService:SettingService,
@@ -37,9 +35,9 @@ export class NaviComponent implements OnInit {
   getSettings(){
     this.settingService.getSettings().subscribe(response=>{
       this.settings = response.data;
+      this.dataLoaded= true
     })
   }
-
   getSettingImage(key:string){
     let imageName = this.settings.find(x=>x.key==key)?.value;
     let path = this.settingService.getSettingImagePath();
@@ -51,22 +49,31 @@ export class NaviComponent implements OnInit {
   }
 
   onChangeEvent(event: any){
-    console.log(event.target.value)
-    this.productService.searchProducts(event.target.value).subscribe(response=>{
-      this.searchProducts=response.data;
-      console.log(this.searchProducts)
-    })
+    if (event.target.value.length>0) {
+      this.productService.searchProducts(event.target.value).subscribe(response=>{
+        this.searchProducts=response.data;
+        console.log(this.searchProducts)
+      })
+    }
   }
 
   logout(){
     this.authService.logout().subscribe(response=>{
-      this.localStorageService.remove('token')
-      this.localStorageService.remove('accessToken')
+     this.localStorageService.remove('token')
+     this.localStorageService.remove('refreshToken')
       this.toastrService.success("Hesabdan çıxış olundu.","Success")
     },errorResponse=>{
       console.log(errorResponse);
       this.toastrService.error("Hesabdan çıxış olunarkən xəta baş verdi","Error");
     })
+  }
+
+  checkAuth(){
+    if (this.authService.isAuthenticated()) {
+      return true;
+    }else{
+      return false;
+    }
   }
 
 }
