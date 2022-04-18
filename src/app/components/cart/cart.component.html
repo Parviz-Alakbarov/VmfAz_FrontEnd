@@ -1,4 +1,6 @@
-<section class="cart">
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#a87430" type = "ball-clip-rotate-multiple" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
+<section *ngIf="dataLoaded" class="cart">
     <div class="container">
         <ul class="prDetail_breadcrumbs">
           <li class="prDetail_breadcrumb"><a routerlink="/">Ana səhifə</a></li>
@@ -24,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody class="cart_table__body">
-                    <!-- <tr>
+                    <tr>
                         <th class="cart_table__cross"><i class="fa-solid fa-xmark"></i></th>
                         <th>
                             <div class="cart_table__img">
@@ -73,7 +75,7 @@
                       <th>
                           <p class="cart_table__total">528.00 AZN</p>
                       </th>
-                    </tr> -->
+                    </tr>
                 </tbody>
             </table>
         </div>

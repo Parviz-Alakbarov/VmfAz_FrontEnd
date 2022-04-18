@@ -1,4 +1,7 @@
-<section id="page-head" class="page-head">
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#a87430" type = "ball-clip-rotate-multiple" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
+
+<section *ngIf="dataLoaded" id="page-head" class="page-head">
     <div class="page-head_text">
       <h3 class="page-head_header">MARKALAR</h3>
       <ul class="breadcrumb">
@@ -11,7 +14,7 @@
     </div>
   </section>
 
-  <section class="brands">
+  <section *ngIf="dataLoaded" class="brands">
     <div class="container">
      
       <div class="row">

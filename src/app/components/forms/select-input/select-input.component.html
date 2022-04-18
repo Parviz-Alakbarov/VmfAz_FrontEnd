@@ -1,0 +1,14 @@
+<div class="form-group">
+    <label class="form_label" for="{{label}}">{{label}}</label>
+    <select 
+        [formControl]="ngControl.control"
+        class={{class}}
+        id="{{label}}"
+        [class.form_is-invalid]="ngControl.touched && ngControl.invalid"
+        >
+      <option *ngFor="let value of optionsValue" value="{{value.id}}">{{value.name}}</option>
+    </select>
+   
+      <p *ngIf="ngControl.control.errors?.required" class="form_error">*{{label}} məcburidir!</p>
+      <p *ngIf="ngControl.control.errors?.pattern" class="form_error">*Password-a böyük hərf, kiçik hərf, rəqəm və simvol daxil olmalıdır!</p>
+  </div> 

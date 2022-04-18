@@ -55,7 +55,7 @@
                                           Tapılmadı
                                         </li>
                                         <li *ngFor="let product of searchProducts" class="search_item">
-                                          <a href="">
+                                          <a routerLink="productDetail/{{product.id}}">
                                             <div class="search_item__img">
                                                 <img [src]="getProductImagePath(product.image)" alt="">
                                             </div>

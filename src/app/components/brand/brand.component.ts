@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Brand } from 'src/app/models/entities/brand';
 import { BrandService } from './../../services/brand.service';
 import { SettingService } from './../../services/setting.service';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-brand',
@@ -13,11 +14,13 @@ export class BrandComponent implements OnInit {
   headBannerImagePath:string;
   count:number=0;
   brands:Brand[]=[];
+  dataLoaded:boolean = false;
 
 
   constructor(
     private brandService:BrandService,
-    private settingService:SettingService
+    private settingService:SettingService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -32,14 +35,15 @@ export class BrandComponent implements OnInit {
   }
 
   getBrands(){
+    this.spinner.show();
     this.brandService.getBrands().subscribe(response=>{
       this.brands = response.data;
+      this.dataLoaded = true;
+      this.spinner.hide();
     })
   }
 
   getBrandImagePath(imageName:string){
     return this.brandService.getBrandImagePath()+imageName
   }
-
-
 }

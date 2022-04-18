@@ -1,1 +1,168 @@
-<p>profile works!</p>
+<section *ngIf="dataLoaded" id="updateProfile" class="form">
+    <div class="container">
+      <div class="row">
+        <div class="form_main">
+          <h3 class="form_head" #target>Profilini yenilə</h3>
+          <form
+            [formGroup]="updateProfileForm"
+            method="post"
+            class="form_form"
+            (ngSubmit)="updateProfileForm.valid && updateProfile(target)"
+          >
+              <div class="form-group">
+                  <app-text-input 
+                  [formControl]='updateProfileForm.controls["firstName"]' 
+                  [label]='"Ad"' 
+                  [class]='"form-control"' 
+                  [autoComplete]='"name"'
+                  [type]='"text"'>
+                  </app-text-input> 
+              </div>
+    
+              <div class="form-group">
+                  <app-text-input 
+                  [formControl]='updateProfileForm.controls["lastName"]' 
+                  [label]='"Soyad"' 
+                  [class]='"form-control"' 
+                  [autoComplete]='"family-name"'
+                  [type]='"text"'>
+                  </app-text-input> 
+              </div>
+    
+              <div class="form-group">
+              
+                  <app-text-input 
+                  [formControl]='updateProfileForm.controls["email"]' 
+                  [label]='"Email"' 
+                  [class]='"form-control"' 
+                  [autoComplete]='"family-name"'
+                  [type]='"email"'>
+                  </app-text-input> 
+              </div>
+    
+              <div class="form-group">
+                  <app-text-input 
+                  [formControl]='updateProfileForm.controls["phoneNumber"]' 
+                  [label]='"Telefon"' 
+                  [class]='"form-control"' 
+                  [autoComplete]='"tel"'
+                  [type]='"text"'>
+                  </app-text-input> 
+              </div>
+              <div class="form-group">
+                  <label class="form_label" for="formCountry">Ölkə</label>
+                  <select
+                    formControlName="countryId"
+                    name="Country"
+                    id="formCountry"
+                    autocomplete="country-name"
+                    [class.form_is-invalid]='updateProfileForm.get("countryId").errors && updateProfileForm.get("countryId").touched'
+                  >
+                    <option *ngFor="let country of countries" value="{{country.id}}" [selected]="country.id==user.countryId">{{country.name}}</option>
+                  </select>
+                  <p
+                    *ngIf="updateProfileForm.get('countryId').hasError('required')"
+                    class="form_error"
+                  >
+                    *Ölkənizi seçin!
+                  </p>
+                </div>
+        
+                <div class="form-group">
+                  <label class="form_label" for="formCity">Şəhər</label>
+                  <select
+                    formControlName="cityId"
+                    name="City"
+                    id="formCity"
+                    autocomplete="address-level2"
+                    [class.form_is-invalid]='updateProfileForm.get("cityId").errors && updateProfileForm.get("cityId").touched'
+                  >
+                    <option *ngFor="let city of cities" value="{{city.id}}" [selected]="city.id==user.cityId">{{city.name}}</option>
+                  </select>
+                  <p
+                    *ngIf="updateProfileForm.get('cityId').hasError('required')"
+                    class="form_error"
+                  >
+                    *Şəhər seçin!
+                  </p>
+                </div>
+  
+              <div class="form-group">
+  
+                  <app-text-input 
+                  [formControl]='updateProfileForm.controls["address"]' 
+                  [label]='"Ünvan"' 
+                  [class]='"form-control"' 
+                  [autoComplete]='"street-address"'
+                  [type]='"text"'>
+                  </app-text-input>
+              </div>
+    
+              <ul *ngIf="validationErrors" class="form_error-list">
+                  <li *ngFor="let error of validationErrors" class="form_error_item">*{{error.ErrorMessage}}</li>
+              </ul>
+    
+              <button [disabled]="!updateProfileForm.valid" type="submit" class="form_submitBtn">Yenilə</button>
+    
+          </form>
+        </div>
+        <div class="form_main">
+          <h3 class="form_head" >Passwordu dəyiş</h3>
+          <form
+            [formGroup]="changePasswordForm"
+            method="post"
+            class="form_form"
+            (ngSubmit)="changePasswordForm.valid && changePassword(target)"
+          >
+              <div class="form-group">
+
+                <app-text-input 
+                [formControl]='changePasswordForm.controls["currentPassword"]' 
+                [label]='"Cari Şifrə"' 
+                [class]='"form-control"' 
+                [autoComplete]='"new-password"'
+                [type]='"password"'>
+                </app-text-input> 
+
+              </div>
+
+              <div class="form-group">
+
+                <app-text-input 
+                [formControl]='changePasswordForm.controls["newPassword"]' 
+                [label]='"Yeni Şifrə"' 
+                [class]='"form-control"' 
+                [autoComplete]='"new-password"'
+                
+                [type]='"password"'>
+                </app-text-input> 
+
+              </div>
+
+              <div class="form-group">
+
+                <app-text-input 
+                [formControl]='changePasswordForm.controls["confirmPassword"]' 
+                [label]='"Yeni Şifrə Təkrarı"' 
+                [class]='"form-control"' 
+                [autoComplete]='"new-password"'
+                [type]='"password"'>
+                </app-text-input> 
+
+              </div>
+      
+    
+             
+    
+              <ul *ngIf="validationErrors" class="form_error-list">
+                  <li *ngFor="let error of validationErrors" class="form_error_item">*{{error.ErrorMessage}}</li>
+              </ul>
+    
+              <button [disabled]="!changePasswordForm.valid" type="submit" class="form_submitBtn">Yenilə</button>
+    
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  

@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ValidationErrorResponseModel } from './../../../models/responses/validationErrorResponseModel';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register',
@@ -25,8 +26,8 @@ export class RegisterComponent implements OnInit {
     private authService:AuthService,
     private toastrService:ToastrService,
     private router:Router,
-    private storageService:LocalStorageService
-
+    private storageService:LocalStorageService,
+    private spinner:NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -71,17 +72,29 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  register(){
+  register(el: HTMLElement){
+
     if (this.registerForm.valid) {
-      let registerModel = Object.assign({},this.registerForm.value);
-      this.authService.register(registerModel).subscribe(response=>{
-        this.toastrService.success("Uğurla qeydiyyatdan keçdiniz!","Success");
-        this.storageService.add('token',response.data.accessToken.token)
-        this.router.navigateByUrl('/')
-      },responseError=>{
-        this.validationErrors = responseError.error.ValidationErrors; 
-      })
+      this.spinner.show();
+      let registerModel  =  Object.assign({}, this.registerForm.value)
+      
+      this.authService.register(registerModel).subscribe(data=>{
+        this.spinner.hide();
+        this.toastrService.success('Qeydiyyatdan keçdiniz!', 'Success')
+        this.router.navigateByUrl('/home')
+      });
+    }else{
+      this.toastrService.error("Formu düzgün deyil!", 'Fail', { timeOut: 3000 })
+      for (const key in this.registerForm.controls) {
+        if (this.registerForm.controls.hasOwnProperty(key)) {
+          const control: FormControl = <FormControl>this.registerForm.controls[key];
+          control.markAsTouched();
+        }
+      }
+      el.scrollIntoView({behavior: 'smooth'})
     }
+
+
   }
 
 

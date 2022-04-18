@@ -1,12 +1,12 @@
-<section id="loginForm" class="form">
+<section id="registerForm" class="form">
   <div class="container">
     <div class="form_main">
-      <h3 class="form_head">Qeydiyyatdan keç</h3>
+      <h3 class="form_head" #target>Qeydiyyatdan keç</h3>
       <form
         [formGroup]="registerForm"
         method="post"
         class="form_form"
-        (ngSubmit)="registerForm.valid && register()"
+        (ngSubmit)="registerForm.valid && register(target)"
       >
         <div class="form-group">
           <label class="form_label" for="formName">Ad</label>

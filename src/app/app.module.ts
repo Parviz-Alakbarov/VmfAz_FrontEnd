@@ -32,6 +32,7 @@ import { ServerErrorComponent } from './components/server-error/server-error.com
 import { ProfileComponent } from './components/account/profile/profile.component';
 
 import { NgxSpinnerModule } from "ngx-spinner";
+import { SelectInputComponent } from "./components/forms/select-input/select-input.component";
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     ShopsComponent,
     CartComponent,
     TextInputComponent,
+    SelectInputComponent,
     NotFoundComponent,
     ServerErrorComponent,
     ProfileComponent,

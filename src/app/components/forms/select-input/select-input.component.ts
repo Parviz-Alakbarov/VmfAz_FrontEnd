@@ -2,17 +2,16 @@ import { Component, Input, OnInit, Self } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
  
 @Component({
-  selector: 'app-text-input',
-  templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.scss']
+  selector: 'app-select-input',
+  templateUrl: './select-input.component.html',
+  styleUrls: ['./select-input.component.css']
 })
-export class TextInputComponent implements ControlValueAccessor {
+export class SelectInputComponent implements ControlValueAccessor {
  
   @Input() label: string;
   @Input() class: string;
   @Input() autoComplete: string;
-  @Input() type = 'text';
-  @Input() placeholder = '';
+  @Input() optionsValue;
  
   constructor(@Self() public ngControl: NgControl) { 
     this.ngControl.valueAccessor = this;

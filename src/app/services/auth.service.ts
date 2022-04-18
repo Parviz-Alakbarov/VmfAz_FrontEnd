@@ -9,6 +9,8 @@ import { TokenRespoinseModel } from '../models/auth/tokenResponseModel';
 import { UserGetDto } from '../models/dtos/userDtos/userGetDto';
 import { SingleResponseModel } from '../models/responses/singleResponseModel';
 import { ResponseModel } from './../models/responses/responseModel';
+import { ChangePasswordModel } from './../models/auth/changePasswordModel';
+import { UpdateProfileModel } from '../models/auth/updateProfileModel';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +28,19 @@ export class AuthService {
     return  this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,user);
   }
 
-  register(registerModel:RegisterModel):Observable<SingleResponseModel<TokenRespoinseModel>>{
+  register(registerModel:RegisterModel):Observable<SingleResponseModel<UserGetDto>>{
     let newPath = this.baseUrl+"api/auth/register";
-    return this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,registerModel);
+    return this.httpClient.post<SingleResponseModel<UserGetDto>>(newPath,registerModel);
+  }
+
+  changePassword(changePasswordModel:ChangePasswordModel){
+    let newPath = this.baseUrl+"api/auth/changePassword";
+    return this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,changePasswordModel);
+  }
+
+  updateProfile(updateProfile:UpdateProfileModel):Observable<ResponseModel>{
+    let newPath = this.baseUrl+"api/auth/update";
+    return this.httpClient.post<ResponseModel>(newPath,updateProfile);
   }
 
   logout():Observable<ResponseModel>{
@@ -41,7 +53,7 @@ export class AuthService {
     return this.httpClient.get<SingleResponseModel<UserGetDto>>(newPath);
   }
 
-  refresh(refreshToken:RefreshTokenModel){
+  refresh(refreshToken:RefreshTokenModel):Observable<SingleResponseModel<TokenRespoinseModel>>{
     let newPath = this.baseUrl+"api/auth/refresh";
     return this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,refreshToken);
   }

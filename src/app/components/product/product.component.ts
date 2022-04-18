@@ -8,6 +8,7 @@ import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-load
 import { ProductGetDto } from './../../models/dtos/productGetDto';
 import { PaginationResult } from 'src/app/models/entities/pagination';
 import { ProductEntryDto } from '../../models/dtos/productFeatureDtos/productEntryDto';
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-product',
@@ -37,6 +38,7 @@ export class ProductComponent implements OnInit {
     private settingService:SettingService,
     private brandService:BrandService,
     private dynamicScriptLoader: DynamicScriptLoaderService,
+    private spinner: NgxSpinnerService,
 
     ) { }
 
@@ -58,12 +60,16 @@ export class ProductComponent implements OnInit {
   }
 
   getPaginatedProduct(){
+    this.spinner.show();
     this.productService.getPaginatedProducts(this.pageNumber,this.pageSize).subscribe(response=>{
       this.paginatedResult.result = response.body.data; 
+      this.spinner.hide();
       if (response.headers.get('Pagination') !== null) {
         this.paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))  
       }
       console.log(this.paginatedResult)
+    },errorResponse=>{
+      console.log(errorResponse);
     })
   }
 

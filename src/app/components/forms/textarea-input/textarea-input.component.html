@@ -1,0 +1,14 @@
+<div class="form-group">
+    <label for="{{label}}">{{label}}</label>
+      <textarea 
+          [formControl]="ngControl.control" 
+          rows="4" cols="80" 
+          class={{class}} 
+          placeholder={{placeholder}} 
+          [class.form_is-invalid]="ngControl.touched && ngControl.invalid"
+          id="{{label}}">
+        </textarea>
+      <p *ngIf="ngControl.control.errors?.required" class="form_error">*{{label}} məcburidir!</p>
+      <p *ngIf="ngControl.control.errors?.minlength" class="form_error">*Min. uzunluq {{ngControl.control.errors.minlength['requiredLength']}}!</p>
+      <p *ngIf="ngControl.control.errors?.maxlength" class="form_error">*Max. uzunluq {{ngControl.control.errors.maxlength['requiredLength']}}!</p>
+    </div> 

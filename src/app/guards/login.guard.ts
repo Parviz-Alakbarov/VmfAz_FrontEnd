@@ -20,15 +20,11 @@ export class LoginGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (this.authService.isAuthenticated()) {
-      console.log("asdfasdf");
-      
       return true;
     }else{
       this.toastrService.info("Hesabınıza daxil olmalısınız.")
       this.route.navigateByUrl('/account/login');
       return false;
     }
-
   }
-  
 }

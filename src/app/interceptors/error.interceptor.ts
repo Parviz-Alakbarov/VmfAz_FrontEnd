@@ -24,7 +24,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error) {
           switch (error.status) {
             case 400:
-              if (error.ValidationErrors) {
+              if (!error.ValidationErrors) {
                 const modelStateError = []
                 for(const key in error.ValidationErrors){
                   if (error.ValidationErrors[key]) {

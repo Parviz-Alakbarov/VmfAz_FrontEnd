@@ -34,7 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
     
     return next.handle(newRequest).pipe(catchError(( err:HttpErrorResponse )=>{
 
-      if (err.status ===401 && !this.refresh && !this.authService.isAuthenticated) {
+      if (err.status ===401 && !this.refresh && this.authService.isAuthenticated()) {
         this.refresh = true;
         let refreshToken : RefreshTokenModel={ refreshToken :this.localStorageService.getItem('refreshToken')};
         refreshToken.refreshToken = this.localStorageService.getItem('refreshToken');
