@@ -27,16 +27,18 @@ const routes: Routes = [
 
   { path : "home" , component: HomeComponent },
   { path : "profile" , component: ProfileComponent ,canActivate: [LoginGuard]},
-  { 
-    path : "products" , 
-    component : ProductComponent ,
-    children : [
-      {path : "man", component : ProductComponent },
-      {path : "woman", component : ProductComponent },
-      {path : "child", component : ProductComponent },
-    ]
+  // { 
+  //   path : "products" , 
+  //   component : ProductComponent ,
+  //   children : [
+  //     {path : ":man", component : ProductComponent },
+  //     {path : ":woman", component : ProductComponent },
+  //     {path : ":child", component : ProductComponent },
+  //   ]
       
-  },
+  // },
+  { path : 'products',  component : ProductComponent},
+  { path : 'products/:gender',  component : ProductComponent},
   { path : 'shops',  component : ShopsComponent},
   { path : 'cart' ,  component : CartComponent},
   { path : "brands" , component: BrandComponent },

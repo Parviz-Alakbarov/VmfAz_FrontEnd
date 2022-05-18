@@ -9,13 +9,26 @@ $(function(){
 		$('.nav-res_item').toggleClass('active');
 		$('.search_items').removeClass('active');
 	})
-	$(window).on('scroll', function (e) {
+
+	// $(window).on('scroll', function (e) {
+	// 	if (window.scrollY>120) {
+	// 		$('#scrool-up').addClass("active");
+	// 	}else{
+	// 		$('#scrool-up').removeClass("active")
+	// 	}
+	// });
+
+	document.addEventListener('scroll',  function (e) {
 		if (window.scrollY>120) {
 			$('#scrool-up').addClass("active");
 		}else{
 			$('#scrool-up').removeClass("active")
 		}
-	});
+	}, {passive: true, capture: true});
+
+
+
+
 	$('#searchInput').focus(function () { 
 		if ($(this).val()!="") {
 			$('.search_items').addClass('active');;

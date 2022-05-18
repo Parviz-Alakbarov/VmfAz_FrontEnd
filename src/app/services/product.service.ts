@@ -9,6 +9,7 @@ import { ProductDetailDto } from '../models/dtos/productDetailDto';
 import { SingleResponseModel } from './../models/responses/singleResponseModel';
 import { HttpParams } from '@angular/common/http';
 import { PaginationResponseModel } from './../models/responses/paginationResponseModel';
+import { UserParams } from '../models/entities/userParams';
 
 @Injectable({
   providedIn: 'root'
@@ -24,17 +25,45 @@ export class ProductService {
     return this.httpClient.get<ListResponseModel<Product>>(newUrl);
   }
 
-  getPaginatedProducts(page?:number,itemsPerPage?:number){
-    let params = new HttpParams();
-
-    if (page!=null && itemsPerPage!=null) {
-      params = params.append("pageNumber",page.toString());
-      params = params.append("pageSize",itemsPerPage.toString());
+  getPaginatedProducts(userParams:UserParams){
+    let params = this.getPaginationHeaders(userParams.pageNumber)
+    console.log(userParams);
+    
+    if (userParams.genderIds.length>0) {
+      for (let k = 0; k < userParams.genderIds.length; k++) {
+        params = params.append('genderIds', userParams.genderIds[k].toString());
+      }
     }
+
+    if (userParams.brandIds.length>0) {
+      for (let k = 0; k < userParams.brandIds.length; k++) {
+        params = params.append('brandIds', userParams.brandIds[k].toString());
+      }
+    }
+
+    if (userParams.minPrice) {
+      params = params.append('minPrice',userParams.minPrice);
+    }
+
+    if (userParams.maxPrice) {
+      params = params.append('maxPrice',userParams.maxPrice);
+    }
+
+    if (userParams.orderBy) {
+      params = params.append('orderBy',userParams.orderBy);
+    }
+
     let newUrl = this.baseUrl+"api/products/getpaginatedlist";
 
     return this.httpClient.get<PaginationResponseModel<ProductGetDto>>(newUrl,{observe:'response',params});
   }
+
+  private getPaginationHeaders(pageNumber:number){
+    let params = new HttpParams();
+    params = params.append("pageNumber",pageNumber.toString());
+    return params;
+  }
+
 
   getProdcutsInGetDto():Observable<ListResponseModel<ProductGetDto>>{
     let newUrl = this.baseUrl+"api/products/";

@@ -41,7 +41,7 @@
             ],
             "scripts": [
               "src/assets/scripts/jquery.js",
-              "src/assets/scripts/main.js"
+              "src/assets/scripts/siteMain.js"
             ]
           },
           "configurations": {

@@ -11,7 +11,7 @@
   </div>
 </section>
 
-<section class="shop">
+<section *ngIf="dataLoaded==true" class="shop">
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-md-6 col-xs-8 responsive-filter">
@@ -20,7 +20,7 @@
             <p class="filter-tab_header">Markalar</p>
             <ul class="filter-tab_items">
               <li *ngFor="let brand of brands" class="filter-tab_item">
-                <a class="filter-tab_checkbox" (click)="addBrandToQueryParams(brand.id)" > {{brand.name}} </a>
+                <a class="filter-tab_checkbox {{userParams.brandIds.includes(brand.id)?'isChecked':''}}" (click)="addBrandToQueryParams(brand.id)" > {{brand.name}} </a>
               </li>
             </ul>
           </div>
@@ -38,17 +38,8 @@
           <div class="filter-tab lowerCase">
             <p class="filter-tab_header">Cins</p>
             <ul class="filter-tab_items">
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox isChecked" href="#"> Kişi </a>
-              </li>
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> Qadın </a>
-              </li>
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> Uşaq </a>
-              </li>
-              <li class="filter-tab_item">
-                <a class="filter-tab_checkbox" href="#"> Unisex </a>
+              <li *ngFor="let gender of genders" (click)="addGenderToQueryParams(gender.id)" class="filter-tab_item">
+                <a class="filter-tab_checkbox {{userParams.genderIds.includes(gender.id)?'isChecked':''}}"  > {{gender.name}} </a>
               </li>
             </ul>
           </div>
@@ -57,14 +48,15 @@
       <div class="col-lg-9 col-md-12">
         <div class="filter-result">
           <div class="filter-result_head">
-            <p class="filter-result_res-count"><i class="fa-solid fa-filter"></i> Filter(130)</p>
-            <p class="filter-result_count">130 Məhsul</p>
+            <p class="filter-result_res-count"><i class="fa-solid fa-filter"></i> Filter({{pagination.totalItems}})</p>
+            <p class="filter-result_count">{{pagination.totalItems}} Məhsul</p>
             <label for="sort-result" class="filter-result_sort">Sırala: 
-              <select name="" id="sort-result" class="filter-result_sort__select">
-                <option value=""> Seçin </option>
-                <option value=""> Qiymet Azalan </option>
-                <option value=""> Qiymet Artan </option>
-                <option value=""> Tarixə Görə </option>
+              <select (change)="getPaginatedProduct()" name="" [(ngModel)]="userParams.orderBy" id="sort-result" class="filter-result_sort__select">
+                <!-- <option value=""> Seçin </option> -->
+                <option value="created" selected> Tarixə Görə </option>
+                <option value="priceDesc"> Qiymet Azalan </option>
+                <option value="priceAsc"> Qiymet Artan </option>
+                <option value="discountDesc"> Endirimli </option>
               </select>
             </label>
           </div>
@@ -82,10 +74,10 @@
                       <p class="product-card_price">
                         <span *ngIf="product.discountPersent>0; then discountedPrice else normalPrice"></span>
                         <ng-template #discountedPrice>
-                          <span class="old-price">{{product.salePrice}} AZN </span>{{product.salePrice*(1-product.discountPersent/100)}} AZN
+                          <span class="old-price">{{product.salePrice|formatNumber}} AZN </span>{{(product.salePrice*(1-product.discountPersent/100))| formatNumber}} AZN
                         </ng-template>
                         <ng-template #normalPrice>
-                          {{product.salePrice}} AZN
+                          {{product.salePrice|formatNumber}} AZN
                         </ng-template>
                       </p>
                     </a>
@@ -94,16 +86,12 @@
  
             </div>
           </div>
-          <div class="filter-pagination">
-              <span class="filter-pagination_arrow disabled"><a href="#" class="filter-pagination_link"><i  class="fa-solid fa-arrow-left"></i></a></span>
+          <div class="filter-pagination" >
+              <span class="filter-pagination_arrow {{pagination.currentPage<=1?'disabled':''}}" (click)="pagination.currentPage<=1?'':pageChanged(pagination.currentPage-1)"><a class="filter-pagination_link"><i  class="fa-solid fa-arrow-left"></i></a></span>
               <ul class="filter-pagination_items">
-                  <li class="filter-pagination_item"><a class="filter-pagination_link active" href="#">1</a></li>
-                  <li class="filter-pagination_item"><a class="filter-pagination_link" href="#">2</a></li>
-                  <li class="filter-pagination_item"><a class="filter-pagination_link" href="#">3</a></li>
-                  <li class="filter-pagination_item"><a class="filter-pagination_link" href="#">4</a></li>
-                  <li class="filter-pagination_item"><a class="filter-pagination_link" href="#">5</a></li>
+                  <li (click)="pagination.currentPage==i+1?'':pageChanged(i+1)" *ngFor="let page of counter(pagination.totalPage) ;let i = index" class="filter-pagination_item"><a class="filter-pagination_link {{pagination.currentPage==i+1?'active':''}}">{{i+1}}</a></li>
               </ul>
-              <span class="filter-pagination_arrow"><a href="#" class="filter-pagination_link"><i  class="fa-solid fa-arrow-right"></i></a></span>
+              <span (click)="pagination.currentPage>=pagination.totalPage?'':pageChanged(pagination.currentPage+1)" class="filter-pagination_arrow {{pagination.currentPage>=pagination.totalPage?'disabled':''}}"><a class="filter-pagination_link"><i  class="fa-solid fa-arrow-right"></i></a></span>
           </div>
       </div>
     </div>

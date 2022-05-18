@@ -33,6 +33,7 @@ import { ProfileComponent } from './components/account/profile/profile.component
 
 import { NgxSpinnerModule } from "ngx-spinner";
 import { SelectInputComponent } from "./components/forms/select-input/select-input.component";
+import { FormatNumberPipe } from './pipes/format-number.pipe';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { SelectInputComponent } from "./components/forms/select-input/select-inp
     NotFoundComponent,
     ServerErrorComponent,
     ProfileComponent,
+    FormatNumberPipe,
 
   ],
   imports: [

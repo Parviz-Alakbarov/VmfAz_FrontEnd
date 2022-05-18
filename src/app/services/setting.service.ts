@@ -8,6 +8,7 @@ import { SingleResponseModel } from '../models/responses/singleResponseModel';
 import { ProductEntryDto } from '../models/dtos/productFeatureDtos/productEntryDto';
 import { Country } from '../models/entities/country';
 import { City } from '../models/entities/city';
+import { Gender } from '../models/entities/gender';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,11 @@ export class SettingService {
   getCities(countryId:number):Observable<ListResponseModel<City>>{
     let newUrl = this.baseUrl+`api/settings/getCitiesByCountry/${countryId}`;
     return this.httpClient.get<ListResponseModel<City>>(newUrl);
+  }
+
+  getGenders():Observable<ListResponseModel<Gender>>{
+    let newUrl = this.baseUrl+"api/settings/getgenders";
+    return this.httpClient.get<ListResponseModel<Gender>>(newUrl);
   }
 
 }

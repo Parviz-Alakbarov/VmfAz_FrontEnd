@@ -6,9 +6,11 @@ import { BrandWithOnlyNameDto } from './../../models/dtos/brandDtos/brandWithOnl
 import { BrandService } from './../../services/brand.service';
 import { DynamicScriptLoaderService } from 'src/app/services/dynamic-script-loader-service.service';
 import { ProductGetDto } from './../../models/dtos/productGetDto';
-import { PaginationResult } from 'src/app/models/entities/pagination';
+import { Pagination, PaginationResult } from 'src/app/models/entities/pagination';
 import { ProductEntryDto } from '../../models/dtos/productFeatureDtos/productEntryDto';
 import { NgxSpinnerService } from "ngx-spinner";
+import { UserParams } from '../../models/entities/userParams';
+import { Gender } from 'src/app/models/entities/gender';
 
 @Component({
   selector: 'app-product',
@@ -16,21 +18,19 @@ import { NgxSpinnerService } from "ngx-spinner";
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-
   products:ProductGetDto[] = [];
+  pagination:Pagination;
+
   brands:BrandWithOnlyNameDto[]=[];
   productFunctionalities:ProductEntryDto[];
-  dataLoaded:boolean = false;
+  genders:Gender[] =[];
+
   headBannerImagePath:string;
-  paginatedResult:PaginationResult<ProductGetDto> = new PaginationResult<ProductGetDto>();
-
-
-  queryBrandParams:number[]=[];
-  queryFunctionalityParams:number[]=[];
-  pageNumber=1;
-  pageSize=2;
-
-
+  
+  // paginatedResult:PaginationResult<ProductGetDto> = new PaginationResult<ProductGetDto>();
+  userParams:UserParams = new UserParams();
+  
+  dataLoaded:boolean = false;
 
   constructor(
     private productService:ProductService,
@@ -44,55 +44,48 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScripts();
-    this.getPaginatedProduct()
 
     this.activatedRoute.params.subscribe(params=>{
-      if (params['brandId']) {
-        this.getProductsByBrand(params['brandId']);
-      }else{
-        this.getProductsInGetDto();
+      if (params['gender']=='man') {
+        this.userParams = new UserParams();
+        this.userParams.genderIds.push(1);
       }
+      else if(params['gender']=='woman') {
+        this.userParams = new UserParams();
+        this.userParams.genderIds.push(2);
+      }
+      else if (params['gender']=='child') {
+        this.userParams = new UserParams();
+        this.userParams.genderIds.push(3);
+      }
+      this.getPaginatedProduct()
     })
+
     this.getBrands();
     this.getProductFunctionalities();
+    this.getGenders();
     this.getHeadBannerFromSetting('pageHeadBanner');
-
   }
 
   getPaginatedProduct(){
     this.spinner.show();
-    this.productService.getPaginatedProducts(this.pageNumber,this.pageSize).subscribe(response=>{
-      this.paginatedResult.result = response.body.data; 
-      this.spinner.hide();
+    this.productService.getPaginatedProducts(this.userParams).subscribe(response=>{
+      this.products = response.body.data; 
       if (response.headers.get('Pagination') !== null) {
-        this.paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'))  
+        this.pagination = JSON.parse(response.headers.get('Pagination'))  
       }
-      console.log(this.paginatedResult)
+      console.log(this.pagination)
+      this.dataLoaded = true;
+      this.spinner.hide();
     },errorResponse=>{
       console.log(errorResponse);
     })
   }
 
-
   private loadScripts() {
     this.dynamicScriptLoader.load('shoppage').then(data => {
       console.log('script loaded ', data);
     }).catch(error => console.log(error));
-  }
-
-
-  getProductsInGetDto(){
-    this.productService.getProdcutsInGetDto().subscribe(response=>{
-      this.products = response.data;
-      this.dataLoaded = true;
-    })
-  }
-
-  getProductsByBrand(brandId:number){
-    this.productService.getProductsByBrand(brandId).subscribe(response=>{
-      this.products = response.data;
-      this.dataLoaded = true;
-    })
   }
 
   getProductImagePath(imageName:string){
@@ -112,6 +105,12 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  getGenders(){
+    this.settingService.getGenders().subscribe(response=>{
+      this.genders = response.data;
+    })
+  }
+
   getProductFunctionalities(){
     this.settingService.getProductFuntionalities().subscribe(response=>{
       this.productFunctionalities= response.data;
@@ -119,20 +118,33 @@ export class ProductComponent implements OnInit {
   }
   
   addBrandToQueryParams(id:number){
-    if (this.queryBrandParams.includes(id)) {
-      this.queryBrandParams = this.queryBrandParams.filter(x=>x!=id)
+    if (this.userParams.brandIds.includes(id)) {
+      this.userParams.brandIds = this.userParams.brandIds.filter(x=>x!=id)
     }
     else{
-      this.queryBrandParams.push(id)
+      this.userParams.brandIds.push(id)
     } 
+    this.userParams.pageNumber=1;
+    this.getPaginatedProduct();
   }
 
-  addFunctionalityToQueryParams(id:number){
-    if (this.queryFunctionalityParams.includes(id)) {
-      this.queryFunctionalityParams = this.queryFunctionalityParams.filter(x=>x!=id)
+  addGenderToQueryParams(id:number){
+    if (this.userParams.genderIds.includes(id)) {
+      this.userParams.genderIds = this.userParams.genderIds.filter(x=>x!=id)
     }
     else{
-      this.queryFunctionalityParams.push(id)
+      this.userParams.genderIds.push(id)
     } 
+    this.userParams.pageNumber=1;
+    this.getPaginatedProduct();
+  }
+
+  pageChanged(pageNumber:number){
+    this.userParams.pageNumber=pageNumber;
+    window.scroll(0,180);
+    this.getPaginatedProduct();
+  }
+  counter(i: number) {
+    return new Array(i);
   }
 }

@@ -37,63 +37,64 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-      this.getSettings();
-      this.getSliders();
-      this.getBestSellers();
-      this.getBrandBestSeller(2);
-      this.getDiscountedProducts();
-      this.getBrands();
-      setTimeout(() => {
-        this.spinner.hide();
-      }, 1000);
+    this.getSettings();
+    this.getSliders();
+    this.getBestSellers();
+    this.getBrandBestSeller(2);
+    this.getDiscountedProducts();
+    this.getBrands();  
+    setTimeout(() => {
+      this.spinner.hide();
+      this.dataLoaded= true;
+    }, 800);
   }
 
   getSliders(){
-    this.dataLoaded= false;
+    // this.dataLoaded= false;
     this.sliderService.getSliders().subscribe(response=>{
       this.sliders = response.data;
-      this.dataLoaded= true;
+      // this.dataLoaded= true;
     })
   }
 
   getSettings(){
-    this.dataLoaded= false;
+    // this.dataLoaded= false;
     this.settingService.getSettings().subscribe(response=>{
       this.settings = response.data;
-      this.dataLoaded= true;
+      // this.dataLoaded= true;
     })
   }
 
   getDiscountedProducts(){
-    this.dataLoaded= false;
+    // this.dataLoaded= false;
     this.productService.getDiscountedProdcuts().subscribe(response=>{
       this.discountedProducts = response.data;
-      this.dataLoaded= true;
+      // this.dataLoaded= true;
     })
-    this.dataLoaded = true;
+    // this.dataLoaded = true;
   }
 
   getBestSellers(){
-    this.dataLoaded= false;
+    // this.dataLoaded= false;
     this.productService.getBestSellers(5).subscribe(response=>{
       this.bestSellers = response.data;
-      this.dataLoaded= true;
+      // this.dataLoaded= true;
     })
   }
 
   getBrandBestSeller(brandId:number){
-    this.dataLoaded= false;
+    // this.dataLoaded= false;
     this.productService.getBrandBestSellers(2,5).subscribe(response=>{
       this.bestSellersByBrand = response.data;
-      this.dataLoaded= true;
+      // this.dataLoaded= true;
     })
   }
 
   getBrands(){
-    this.dataLoaded= false;
+    // this.dataLoaded= false;
     this.brandService.getBrands().subscribe(response=>{
       this.brands = response.data;
-      this.dataLoaded= true;
+      // this.dataLoaded= true;
     })
   }
 
@@ -109,10 +110,10 @@ export class HomeComponent implements OnInit {
     return this.brandService.getBrandImagePath()+imageName
   }
 
-
-  getSettingImage(key:string){
+  getSettingImage(key:string):string{
     let imageName = this.settings.find(x=>x.key==key)?.value;
     let path = this.settingService.getSettingImagePath();
+    // console.log(path+"asdfasdf"+imageName);
     return path+imageName
   }
 
@@ -183,7 +184,7 @@ export class HomeComponent implements OnInit {
     touchDrag: true,
     pullDrag: true,
     dots: true,
-    margin:40,
+    // margin:40,
     navSpeed: 700,
     navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
     responsive: {

@@ -1,6 +1,5 @@
         <!-- Header Start -->
-        <header>
-            <a href="" id="#top"></a>
+        <header *ngIf="dataLoaded==true">
             <nav id="navigation" class="nav">
                 <div class="container">
                     <div class="row">
@@ -78,7 +77,7 @@
                                         <i class="far fa-user"></i>
                                     </a>
                                     <ul class="profile_items">
-                                        <li class="profile_item profile_name"><a> User name</a></li>
+                                        <li class="profile_item profile_name"><a> </a></li>
                                         <li class="profile_item"><a routerLink="/profile">Profile</a></li>
                                         <li class="profile_item"><a routerLink="/orders">Sifarişlər</a></li>
                                         <li class="profile_item"><a href="#">Seçilmişlər</a></li>

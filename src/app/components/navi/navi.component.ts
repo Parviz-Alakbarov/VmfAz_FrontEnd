@@ -20,7 +20,6 @@ export class NaviComponent implements OnInit {
   searchProducts:ProductGetDto[]=[];
 
 
-
   constructor(
     private settingService:SettingService,
     private productService:ProductService,

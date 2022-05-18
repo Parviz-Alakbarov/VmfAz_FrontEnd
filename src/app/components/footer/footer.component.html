@@ -1,5 +1,5 @@
 
- <footer>
+ <footer *ngIf="dataLoaded==true">
     <section id="services">
        <div class="services">
            <div class="col-lg-4 col-xs-12">
@@ -84,6 +84,6 @@
         </div>
     </div> 
 </footer>
-<a href="#top" id="scrool-up" >
+<a (click)="scrollToTop()" id="scrool-up" >
     <i class="fas fa-arrow-up"></i>
 </a>

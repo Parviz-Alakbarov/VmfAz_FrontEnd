@@ -4,7 +4,7 @@
 <section *ngIf="dataLoaded" class="slider_banner">
       <owl-carousel-o [options]="bannerSlider">
         <ng-template *ngFor="let slider of sliders" style="width: 100%;" carouselSlide>
-            <img [src]="getSliderImagePath(slider.image)" alt="">
+            <img loading="lazy" [src]="getSliderImagePath(slider.image)" alt="">
         </ng-template>  
        
       </owl-carousel-o>
@@ -25,7 +25,7 @@
             <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
               <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
               <div class="product-card_image">
-                <img [src]="getProductImagePath(product.image)" alt="">
+                <img loading="lazy" [src]="getProductImagePath(product.image)" alt="">
               </div>
               <div class="product-card_name">{{product.name}}</div>
               <p class="product-card_price">
@@ -55,7 +55,7 @@
                 <p href="#" class="promotion_buyNow">INDI ALIN</p>
               </div>
               <div class="promotion_product">
-                <img [src]="getSettingImage('Promotion1product1')">
+                <img loading="lazy" [src]="getSettingImage('Promotion1product1')">
               </div>
             </div>
         </a>
@@ -68,7 +68,7 @@
                 <p href="#" class="promotion_buyNow">INDI ALIN</p>
               </div>
               <div class="promotion_product">
-                <img [src]="getSettingImage('Promotion1product2')" alt="">
+                <img loading="lazy" [src]="getSettingImage('Promotion1product2')" alt="">
               </div>
             </div>
           </a>
@@ -81,7 +81,7 @@
                 <p href="#" class="promotion_buyNow">INDI ALIN</p>
               </div>
               <div class="promotion_product">
-                <img [src]="getSettingImage('Promotion1product3')" alt="">
+                <img loading="lazy" [src]="getSettingImage('Promotion1product3')" alt="">
               </div>
             </div>
           </a>
@@ -90,10 +90,10 @@
     </div>
   </section>
 
-
+ 
 <section *ngIf="dataLoaded" class="ADVT">
   <div class="ADVT_banner">
-    <img [src]="getSettingImage('SectionAdvertisement1')" alt="">
+    <img loading="lazy" [src]="getSettingImage('SectionAdvertisement1')" alt="">
   </div>
   <a class="ADVT_link" href="#">Indi Alın</a>
 </section>
@@ -112,7 +112,7 @@
           <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
             <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
             <div class="product-card_image">
-              <img [src]="getProductImagePath(product.image)" alt="">
+              <img loading="lazy" [src]="getProductImagePath(product.image)" alt="">
             </div>
             <div class="product-card_name">{{product.name}}</div>
             <p class="product-card_price">
@@ -133,7 +133,7 @@
 
 <section *ngIf="dataLoaded" class="ADVT">
   <div class="ADVT_banner">
-    <img [src]="getSettingImage('SectionAdvertisement2')" alt="">
+    <img loading="lazy" [src]="getSettingImage('SectionAdvertisement2')" alt="">
   </div>
   <a class="ADVT_link" href="#">Indi Alın</a>
 </section>
@@ -150,8 +150,9 @@
       <ng-template *ngFor="let product of bestSellersByBrand" style="width: 100%;" carouselSlide>
         <div class="product-card">
           <a routerLink="/productDetail/{{product.id}}" class="product-card_link">
+            <span *ngIf="product.discountPersent>0" class="discount_ribbon">-{{product.discountPersent}}% <i></i></span>
             <div class="product-card_image">
-              <img [src]="getProductImagePath(product.image)" alt="">
+              <img loading="lazy" [src]="getProductImagePath(product.image)" alt="">
             </div>
             <div class="product-card_name">{{product.name}}</div>
             <p class="product-card_price">{{product.salePrice}} AZN</p>
@@ -169,7 +170,7 @@
       <div class="col-lg-4 col-md-6 col-s-12">
         <a href="#">
           <div class="secPromotion">
-            <img class="secPromotion_backImage" [src]="getSettingImage('Promotion2product1')" alt="">
+            <img loading="lazy" class="secPromotion_backImage" [src]="getSettingImage('Promotion2product1')" alt="">
             <div class="secPromotion_overlay">
               <div class="secPromotion_frame">
                 <p class="secPromotion_brandName">Hamilton</p>
@@ -181,7 +182,7 @@
       <div class="col-lg-4 col-md-6 col-s-12">
         <a href="#">
           <div class="secPromotion">
-            <img class="secPromotion_backImage" [src]="getSettingImage('Promotion2product2')"  alt="">
+            <img loading="lazy" class="secPromotion_backImage" [src]="getSettingImage('Promotion2product2')"  alt="">
             <div class="secPromotion_overlay">
               <div class="secPromotion_frame">
                 <p class="secPromotion_brandName">Certino</p>
@@ -193,7 +194,7 @@
       <div class="col-lg-4 col-md-6 col-s-12">
         <a href="#">
           <div class="secPromotion">
-            <img class="secPromotion_backImage" [src]="getSettingImage('Promotion2product3')"  alt="">
+            <img loading="lazy" class="secPromotion_backImage" [src]="getSettingImage('Promotion2product3')"  alt="">
             <div class="secPromotion_overlay">
               <div class="secPromotion_frame">
                 <p class="secPromotion_brandName">Tissot</p>
@@ -220,7 +221,7 @@
         <div class="brands_item">
 
           <a class="brands_item__link" routerLink="/products?brandId={{brand.id}}">
-            <img [src]="getBrandImagePath(brand.image)" alt="">
+            <img loading="lazy" [src]="getBrandImagePath(brand.image)" alt="">
           </a>
 
         </div>
