@@ -27,10 +27,14 @@ export class LoginComponent implements OnInit {
     private toastrService:ToastrService,
     private router:Router,
     private storageService:LocalStorageService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.router.navigateByUrl('/');
+      this.toastrService.warning("Hesabınıza daxil olunub!")
+    }
     this.spinner.show();
     this.createLoginForm();
   }

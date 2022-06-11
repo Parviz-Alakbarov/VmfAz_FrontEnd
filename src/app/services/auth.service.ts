@@ -11,6 +11,9 @@ import { SingleResponseModel } from '../models/responses/singleResponseModel';
 import { ResponseModel } from './../models/responses/responseModel';
 import { ChangePasswordModel } from './../models/auth/changePasswordModel';
 import { UpdateProfileModel } from '../models/auth/updateProfileModel';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { LocalStorageService } from './local-storage.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +24,10 @@ export class AuthService {
   private currentUserSource = new ReplaySubject<TokenRespoinseModel>(1);
   currentUser$ = this.currentUserSource.asObservable(); 
 
-  constructor(private httpClient:HttpClient) { }
+  constructor(
+    private httpClient:HttpClient,
+    public jwtHelper: JwtHelperService,
+    private localStorageService:LocalStorageService) { }
 
   login(user:LoginModel):Observable<SingleResponseModel<TokenRespoinseModel>>{
     let newPath = this.baseUrl+"api/auth/login";
@@ -58,11 +64,9 @@ export class AuthService {
     return this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,refreshToken);
   }
 
-  isAuthenticated(){
-    if (localStorage.getItem('token')) {
-      return true;
-    }else{
-      return false;
-    }
+  public isAuthenticated():boolean{
+    
+    const token = this.localStorageService.getItem('token');
+    return !this.jwtHelper.isTokenExpired(token);
   }
 }

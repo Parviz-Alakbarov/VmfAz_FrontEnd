@@ -35,6 +35,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { SelectInputComponent } from "./components/forms/select-input/select-input.component";
 import { FormatNumberPipe } from './pipes/format-number.pipe';
 
+
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +81,8 @@ import { FormatNumberPipe } from './pipes/format-number.pipe';
   ],
   providers: [
     DynamicScriptLoaderService,
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
     { provide:HTTP_INTERCEPTORS, useClass : AuthInterceptor,  multi:true },
     { provide:HTTP_INTERCEPTORS, useClass : ErrorInterceptor, multi:true },
   ],

@@ -7,7 +7,7 @@ import {
   HttpErrorResponse,
   HttpClient
 } from '@angular/common/http';
-import { Observable, catchError, throwError, switchMap } from 'rxjs';
+import { Observable, catchError, throwError, switchMap, retry } from 'rxjs';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { environment } from 'src/environments/environment';
 import { SingleResponseModel } from '../models/responses/singleResponseModel';
@@ -22,36 +22,64 @@ export class AuthInterceptor implements HttpInterceptor {
 
   constructor(
     private localStorageService:LocalStorageService,
-    private authService:AuthService
+    private authService:AuthService,
+    private http:HttpClient
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    let token = this.localStorageService.getItem('token');
-    let newRequest : HttpRequest<any> ;
-    newRequest = request.clone({
-      headers:request.headers.set("Authorization","Bearer "+token)
-    });
-    
+
+    const newRequest  = request.clone({
+      setHeaders: {
+        Authorization: `Bearer ${this.localStorageService.getToken()}`
+      }
+    })
+
+    // let token = this.localStorageService.getToken();
+    // let newRequest : HttpRequest<any>;
+    // newRequest = request.clone({
+    //   headers:request.headers.set("Authorization","Bearer "+token)
+    // });
+      
+    // console.log(request);
+
     return next.handle(newRequest).pipe(catchError(( err:HttpErrorResponse )=>{
 
-      if (err.status ===401 && !this.refresh && this.authService.isAuthenticated()) {
+      if (err.status == 401 && !this.refresh) {
         this.refresh = true;
-        let refreshToken : RefreshTokenModel={ refreshToken :this.localStorageService.getItem('refreshToken')};
-        refreshToken.refreshToken = this.localStorageService.getItem('refreshToken');
+        let refreshToken : RefreshTokenModel = { refreshToken :this.localStorageService.getRefreshToken()};
+        // refreshToken.refreshToken = this.localStorageService.getRefreshToken();
 
-        this.authService.refresh(refreshToken).subscribe(response=>{
 
-          this.localStorageService.add("token",response.data.accessToken.token);
-          this.localStorageService.add("refreshToken",response.data.refreshToken.token);
+        return this.http.post('https://localhost:44337/api/auth/refresh',refreshToken,{withCredentials:true}).pipe(
+          switchMap((response:any)=>{
+          this.localStorageService.setToken(response.data.accessToken.token);
+          this.localStorageService.setRefreshToken(response.data.refreshToken.token);
+            return next.handle(request.clone({
+              setHeaders:{
+                Authorization : `Bearer ${this.localStorageService.getToken()}`
+              }
+            }))
+          })
+        )
 
-          token = this.localStorageService.getItem('token');
 
-          newRequest = request.clone({
-            headers:request.headers.set("Authorization","Bearer "+token)
-          });
 
-          return next.handle(newRequest);
-        })
+
+
+        // this.authService.refresh(refreshToken).subscribe(response=>{
+        //   this.localStorageService.setToken(response.data.accessToken.token);
+        //   this.localStorageService.setRefreshToken(response.data.refreshToken.token);
+
+        //   console.log(request);
+          
+        //   return next.handle(request.clone({
+        //     setHeaders:{
+        //       Authorization:`Bearer ${this.localStorageService.getToken()}`
+        //     }
+        //   }));
+        // })
+
+        
       }
       this.refresh = false;
       return throwError(()=>err);

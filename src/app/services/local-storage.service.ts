@@ -19,4 +19,19 @@ export class LocalStorageService {
     return localStorage.removeItem(key);
   }
   
+  setToken(token:string){
+    return localStorage.setItem('token',token);
+  }
+
+  setRefreshToken(refreshToken:string){
+    return localStorage.setItem('refreshToken',refreshToken);
+  }
+
+  getToken():string{
+    return localStorage.getItem('token');
+  }
+
+  getRefreshToken():string{
+    return localStorage.getItem('refreshToken');
+  }
 }
