@@ -21,31 +21,33 @@ export class LoginGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // if (this.authService.isAuthenticated()) {
-    //   return true;
-    // }else{
-    //   let userRefreshToken = this.localStorageService.getRefreshToken();
+    if (this.authService.isAuthenticated()) {
+      return true;
+    }else{
+      let userRefreshToken = this.localStorageService.getRefreshToken();
       
-    //   if(userRefreshToken !== '' && userRefreshToken !== null){
+      if(userRefreshToken !== '' && userRefreshToken !== null){
         
-    //     let refreshToken : RefreshTokenModel={ refreshToken : userRefreshToken};
-    //     // refreshToken.refreshToken = this.localStorageService.getItem('refreshToken');
-    //     let newLocation = window.location.href;
-    //     this.authService.refresh(refreshToken).subscribe(response=>{
-    //       this.localStorageService.add("token",response.data.accessToken.token);
-    //       this.localStorageService.add("refreshToken",response.data.refreshToken.token);
-    //       location.replace(newLocation);
-    //       return true;
-    //     },errorResponse=>{
-    //       console.log(errorResponse);
-    //       return false;
-    //     })
-    //   }else{
-    //     this.toastrService.info("Hesabınıza daxil olmalısınız.")
-    //     this.route.navigateByUrl('/account/login');
-    //     return false;
-    //   }
-    // }
-    return true;
+        let refreshToken : RefreshTokenModel={ refreshToken : userRefreshToken};
+        let newLocation = window.location.href;
+        this.authService.refresh(refreshToken).subscribe(response=>{
+          this.localStorageService.setToken(response.data.accessToken.token);
+          this.localStorageService.setRefreshToken(response.data.refreshToken.token);
+          location.replace(newLocation);
+          return true;
+          
+        },errorResponse=>{
+          console.log(errorResponse);
+          this.toastrService.info("Hesabınıza daxil olmalısınız.")
+          this.route.navigateByUrl('/account/login');
+          return false;
+        })
+
+      }else{
+        this.toastrService.info("Hesabınıza daxil olmalısınız.")
+        this.route.navigateByUrl('/account/login');
+        return false;
+      }
+    }
   }
 }

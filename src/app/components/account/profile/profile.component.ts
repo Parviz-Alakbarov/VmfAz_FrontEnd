@@ -19,7 +19,8 @@ export class ProfileComponent implements OnInit {
 
   changePasswordForm:FormGroup;
   updateProfileForm:FormGroup;
-  validationErrors:ValidationErrorResponseModel[]=[];
+  changePasswordValidationErrors:ValidationErrorResponseModel[]=[];
+  updateProfileValidationErrors:ValidationErrorResponseModel[]=[];
   dataLoaded:boolean=false;
   user:UserGetDto;
   countries:Country[]=[];
@@ -37,12 +38,12 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getUserProfile();
     this.getCountries();
-    this.createChangePasswordForm();
 
   }
 
   createChangePasswordForm(){
     this.changePasswordForm = this.formBuilder.group({
+      email:[this.user.email,[]],
       currentPassword:["", 
       [  
         Validators.required, 
@@ -61,7 +62,7 @@ export class ProfileComponent implements OnInit {
       Validators.required, 
       Validators.minLength(8), 
       Validators.maxLength(25),
-      this.matchValues('password')]
+      this.matchValues('newPassword')]
     ]
   }),
   this.changePasswordForm.controls['newPassword'].valueChanges.subscribe(() => {
@@ -102,6 +103,12 @@ updateProfile(el:HTMLElement){
       this.spinner.hide();
       this.toastrService.success('Passwordunuz yeniləndi!', 'Success')
       this.router.navigateByUrl('/account/profile')
+    },error=>{
+      this.updateProfileValidationErrors = error;
+      console.log(error);
+      this.spinner.hide();
+      window.scroll(0,0);
+      
     });
   }else{
     this.toastrService.error("Formu düzgün deyil!", 'Fail', { timeOut: 3000 })
@@ -113,24 +120,28 @@ updateProfile(el:HTMLElement){
     }
     el.scrollIntoView({behavior: 'smooth'})
   }
-
 }
 
 changePassword(el:HTMLElement){
-  if (this.updateProfileForm.valid) {
+  if (this.changePasswordForm.valid) {
     this.spinner.show();
-    let changePasswordModel  =  Object.assign({}, this.updateProfileForm.value)
-    changePasswordModel.email = this.user.email;
-    this.authService.changePassword(changePasswordModel).subscribe(data=>{
+    let changePasswordModel  =  Object.assign({}, this.changePasswordForm.value)
+    this.authService.changePassword(changePasswordModel).subscribe(response =>{
       this.spinner.hide();
       this.toastrService.success('Profiliniz yeniləndi!', 'Success')
-      this.router.navigateByUrl('/account/profile')
+      this.router.navigateByUrl('/profile')
+    },errorResponse=>{
+      this.changePasswordValidationErrors = errorResponse;
+      console.log(errorResponse);
+      this.spinner.hide();
+      window.scroll(0,0);
+      
     });
   }else{
     this.toastrService.error("Formu düzgün deyil!", 'Fail', { timeOut: 3000 })
-    for (const key in this.updateProfileForm.controls) {
-      if (this.updateProfileForm.controls.hasOwnProperty(key)) {
-        const control: FormControl = <FormControl>this.updateProfileForm.controls[key];
+    for (const key in this.changePasswordForm.controls) {
+      if (this.changePasswordForm.controls.hasOwnProperty(key)) {
+        const control: FormControl = <FormControl>this.changePasswordForm.controls[key];
         control.markAsTouched();
       }
     }
@@ -144,6 +155,7 @@ changePassword(el:HTMLElement){
     this.authService.getUserProfile().subscribe(response=>{
       this.user = response.data;
       this.createUpdateProfileForm();
+      this.createChangePasswordForm();
       this.dataLoaded = true;
       
       this.settingService.getCities(response.data.countryId).subscribe(response=>{

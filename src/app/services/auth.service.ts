@@ -39,7 +39,7 @@ export class AuthService {
     return this.httpClient.post<SingleResponseModel<UserGetDto>>(newPath,registerModel);
   }
 
-  changePassword(changePasswordModel:ChangePasswordModel){
+  changePassword(changePasswordModel:ChangePasswordModel):Observable<SingleResponseModel<TokenRespoinseModel>>{
     let newPath = this.baseUrl+"api/auth/changePassword";
     return this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,changePasswordModel);
   }

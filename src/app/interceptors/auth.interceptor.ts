@@ -19,6 +19,8 @@ import { RefreshTokenModel } from './../models/auth/refreshTokenModel';
 export class AuthInterceptor implements HttpInterceptor {
   static accessToken = "";
   refresh:boolean = false;
+  private baseUrl = environment.BASE_URL;
+
 
   constructor(
     private localStorageService:LocalStorageService,
@@ -33,24 +35,13 @@ export class AuthInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${this.localStorageService.getToken()}`
       }
     })
-
-    // let token = this.localStorageService.getToken();
-    // let newRequest : HttpRequest<any>;
-    // newRequest = request.clone({
-    //   headers:request.headers.set("Authorization","Bearer "+token)
-    // });
-      
-    // console.log(request);
-
     return next.handle(newRequest).pipe(catchError(( err:HttpErrorResponse )=>{
 
       if (err.status == 401 && !this.refresh) {
         this.refresh = true;
         let refreshToken : RefreshTokenModel = { refreshToken :this.localStorageService.getRefreshToken()};
-        // refreshToken.refreshToken = this.localStorageService.getRefreshToken();
 
-
-        return this.http.post('https://localhost:44337/api/auth/refresh',refreshToken,{withCredentials:true}).pipe(
+        return this.http.post(this.baseUrl+'api/auth/refresh',refreshToken,{withCredentials:true}).pipe(
           switchMap((response:any)=>{
           this.localStorageService.setToken(response.data.accessToken.token);
           this.localStorageService.setRefreshToken(response.data.refreshToken.token);
@@ -62,24 +53,6 @@ export class AuthInterceptor implements HttpInterceptor {
           })
         )
 
-
-
-
-
-        // this.authService.refresh(refreshToken).subscribe(response=>{
-        //   this.localStorageService.setToken(response.data.accessToken.token);
-        //   this.localStorageService.setRefreshToken(response.data.refreshToken.token);
-
-        //   console.log(request);
-          
-        //   return next.handle(request.clone({
-        //     setHeaders:{
-        //       Authorization:`Bearer ${this.localStorageService.getToken()}`
-        //     }
-        //   }));
-        // })
-
-        
       }
       this.refresh = false;
       return throwError(()=>err);

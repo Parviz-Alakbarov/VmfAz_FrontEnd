@@ -24,16 +24,27 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error) {
           switch (error.status) {
             case 400:
-              if (!error.ValidationErrors) {
-                const modelStateError = []
-                for(const key in error.ValidationErrors){
-                  if (error.ValidationErrors[key]) {
-                    modelStateError.push(error.ValidationErrors[key]);
+              console.log(error);
+              const modelStateError = []
+              if (error.error.ValidationErrors) {
+                for(const key in error.error.ValidationErrors){
+                  if (error.error.ValidationErrors[key]) {
+                    modelStateError.push(error.error.ValidationErrors[key]);
                   }
                 }
+                console.log(modelStateError);
                 throw modelStateError;
-              }else{
-                this.toastrService.error(error.error.ValidationErrors[0].ErrorMessage,error.status);
+              }else if(error.error){
+                console.log("-  2 - - -"+error.error);
+
+                modelStateError.push({ErrorMessage:error.error.message,PropertyName:'Business'})
+                console.log(modelStateError);
+
+                throw modelStateError;
+              }
+              else{
+                console.log("-  3 - - -"+error);
+                this.toastrService.error(error.statusText, error.status)
               }
               break;
 

@@ -114,6 +114,10 @@
             class="form_form"
             (ngSubmit)="changePasswordForm.valid && changePassword(target)"
           >
+                <ul *ngIf="changePasswordValidationErrors" class="form_error-list">
+                  <li *ngFor="let error of changePasswordValidationErrors" class="form_error_item">*{{error.ErrorMessage}}</li>
+                </ul>
+
               <div class="form-group">
 
                 <app-text-input 
@@ -133,7 +137,6 @@
                 [label]='"Yeni Şifrə"' 
                 [class]='"form-control"' 
                 [autoComplete]='"new-password"'
-                
                 [type]='"password"'>
                 </app-text-input> 
 
@@ -154,10 +157,7 @@
     
              
     
-              <ul *ngIf="validationErrors" class="form_error-list">
-                  <li *ngFor="let error of validationErrors" class="form_error_item">*{{error.ErrorMessage}}</li>
-              </ul>
-    
+           
               <button [disabled]="!changePasswordForm.valid" type="submit" class="form_submitBtn">Yenilə</button>
     
           </form>
