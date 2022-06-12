@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
   this.changePasswordForm.controls['newPassword'].valueChanges.subscribe(() => {
     this.changePasswordForm.controls['confirmPassword'].updateValueAndValidity();
   })
-}
+  }
 
 matchValues(matchTo:string): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
@@ -93,61 +93,67 @@ createUpdateProfileForm(){
   })
 }
 
-updateProfile(el:HTMLElement){
-  if (this.updateProfileForm.valid) {
-    this.spinner.show();
-    let registerModel  =  Object.assign({}, this.updateProfileForm.value)
-    console.log(registerModel);
-    
-    this.authService.updateProfile(registerModel).subscribe(data=>{
-      this.spinner.hide();
-      this.toastrService.success('Passwordunuz yeniləndi!', 'Success')
-      this.router.navigateByUrl('/account/profile')
-    },error=>{
-      this.updateProfileValidationErrors = error;
-      console.log(error);
-      this.spinner.hide();
-      window.scroll(0,0);
+  updateProfile(el:HTMLElement){
+    if (this.updateProfileForm.valid) {
+      this.spinner.show();
+      let updateProfileModel = Object.assign({}, this.updateProfileForm.value);
+      console.log(updateProfileModel);
       
-    });
-  }else{
-    this.toastrService.error("Formu düzgün deyil!", 'Fail', { timeOut: 3000 })
-    for (const key in this.updateProfileForm.controls) {
-      if (this.updateProfileForm.controls.hasOwnProperty(key)) {
-        const control: FormControl = <FormControl>this.updateProfileForm.controls[key];
-        control.markAsTouched();
+      this.authService.updateProfile(updateProfileModel).subscribe(data=>{
+        this.spinner.hide();
+        this.toastrService.success('Profiliniz yeniləndi!', 'Success')
+        this.router.navigateByUrl('/profile')
+      },error=>{
+        this.updateProfileValidationErrors = error;
+        console.log(error);
+        this.spinner.hide();
+        window.scroll(0,0);
+        
+      });
+    }else{
+      this.toastrService.error("Formu düzgün deyil!", 'Fail', { timeOut: 3000 })
+      for (const key in this.updateProfileForm.controls) {
+        if (this.updateProfileForm.controls.hasOwnProperty(key)) {
+          const control: FormControl = <FormControl>this.updateProfileForm.controls[key];
+          control.markAsTouched();
+        }
       }
+      el.scrollIntoView({behavior: 'smooth'})
     }
-    el.scrollIntoView({behavior: 'smooth'})
   }
-}
 
-changePassword(el:HTMLElement){
-  if (this.changePasswordForm.valid) {
-    this.spinner.show();
-    let changePasswordModel  =  Object.assign({}, this.changePasswordForm.value)
-    this.authService.changePassword(changePasswordModel).subscribe(response =>{
-      this.spinner.hide();
-      this.toastrService.success('Profiliniz yeniləndi!', 'Success')
-      this.router.navigateByUrl('/profile')
-    },errorResponse=>{
-      this.changePasswordValidationErrors = errorResponse;
-      console.log(errorResponse);
-      this.spinner.hide();
-      window.scroll(0,0);
-      
-    });
-  }else{
-    this.toastrService.error("Formu düzgün deyil!", 'Fail', { timeOut: 3000 })
-    for (const key in this.changePasswordForm.controls) {
-      if (this.changePasswordForm.controls.hasOwnProperty(key)) {
-        const control: FormControl = <FormControl>this.changePasswordForm.controls[key];
-        control.markAsTouched();
+  changePassword(el:HTMLElement){
+    if (this.changePasswordForm.valid) {
+      this.spinner.show();
+      let changePasswordModel  =  Object.assign({}, this.changePasswordForm.value)
+      this.authService.changePassword(changePasswordModel).subscribe(response =>{
+        this.spinner.hide();
+        this.toastrService.success('Profiliniz yeniləndi!', 'Success')
+        this.router.navigateByUrl('/profile')
+      },errorResponse=>{
+        this.changePasswordValidationErrors = errorResponse;
+        console.log(errorResponse);
+        this.spinner.hide();
+        window.scroll(0,0);
+        
+      });
+    }else{
+      this.toastrService.error("Formu düzgün deyil!", 'Fail', { timeOut: 3000 })
+      for (const key in this.changePasswordForm.controls) {
+        if (this.changePasswordForm.controls.hasOwnProperty(key)) {
+          const control: FormControl = <FormControl>this.changePasswordForm.controls[key];
+          control.markAsTouched();
+        }
       }
+      el.scrollIntoView({behavior: 'smooth'})
     }
-    el.scrollIntoView({behavior: 'smooth'})
   }
-}
+
+  changeCountry(deviceValue){
+    this.settingService.getCities(deviceValue).subscribe(response=>{
+      this.cities = response.data;
+    })
+  }
 
 
   getUserProfile(){

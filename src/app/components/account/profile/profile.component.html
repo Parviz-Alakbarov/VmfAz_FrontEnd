@@ -9,6 +9,9 @@
             class="form_form"
             (ngSubmit)="updateProfileForm.valid && updateProfile(target)"
           >
+              <ul *ngIf="updateProfileValidationErrors" class="form_error-list">
+                <li *ngFor="let error of updateProfileValidationErrors" class="form_error_item">*{{error.ErrorMessage}}</li>
+              </ul>
               <div class="form-group">
                   <app-text-input 
                   [formControl]='updateProfileForm.controls["firstName"]' 
@@ -57,6 +60,7 @@
                     id="formCountry"
                     autocomplete="country-name"
                     [class.form_is-invalid]='updateProfileForm.get("countryId").errors && updateProfileForm.get("countryId").touched'
+                    (change)="changeCountry($event.target.value)"
                   >
                     <option *ngFor="let country of countries" value="{{country.id}}" [selected]="country.id==user.countryId">{{country.name}}</option>
                   </select>
@@ -114,52 +118,44 @@
             class="form_form"
             (ngSubmit)="changePasswordForm.valid && changePassword(target)"
           >
-                <ul *ngIf="changePasswordValidationErrors" class="form_error-list">
-                  <li *ngFor="let error of changePasswordValidationErrors" class="form_error_item">*{{error.ErrorMessage}}</li>
-                </ul>
+            <ul *ngIf="changePasswordValidationErrors" class="form_error-list">
+              <li *ngFor="let error of changePasswordValidationErrors" class="form_error_item">*{{error.ErrorMessage}}</li>
+            </ul>
 
-              <div class="form-group">
+            <div class="form-group">
 
-                <app-text-input 
-                [formControl]='changePasswordForm.controls["currentPassword"]' 
-                [label]='"Cari Şifrə"' 
-                [class]='"form-control"' 
-                [autoComplete]='"new-password"'
-                [type]='"password"'>
-                </app-text-input> 
+              <app-text-input 
+              [formControl]='changePasswordForm.controls["currentPassword"]' 
+              [label]='"Cari Şifrə"' 
+              [class]='"form-control"' 
+              [autoComplete]='"new-password"'
+              [type]='"password"'>
+              </app-text-input> 
 
-              </div>
+            </div>
+            <div class="form-group">
 
-              <div class="form-group">
+              <app-text-input 
+              [formControl]='changePasswordForm.controls["newPassword"]' 
+              [label]='"Yeni Şifrə"' 
+              [class]='"form-control"' 
+              [autoComplete]='"new-password"'
+              [type]='"password"'>
+              </app-text-input> 
 
-                <app-text-input 
-                [formControl]='changePasswordForm.controls["newPassword"]' 
-                [label]='"Yeni Şifrə"' 
-                [class]='"form-control"' 
-                [autoComplete]='"new-password"'
-                [type]='"password"'>
-                </app-text-input> 
+            </div>
+            <div class="form-group">
 
-              </div>
+              <app-text-input 
+              [formControl]='changePasswordForm.controls["confirmPassword"]' 
+              [label]='"Yeni Şifrə Təkrarı"' 
+              [class]='"form-control"' 
+              [autoComplete]='"new-password"'
+              [type]='"password"'>
+              </app-text-input> 
 
-              <div class="form-group">
-
-                <app-text-input 
-                [formControl]='changePasswordForm.controls["confirmPassword"]' 
-                [label]='"Yeni Şifrə Təkrarı"' 
-                [class]='"form-control"' 
-                [autoComplete]='"new-password"'
-                [type]='"password"'>
-                </app-text-input> 
-
-              </div>
-      
-    
-             
-    
-           
-              <button [disabled]="!changePasswordForm.valid" type="submit" class="form_submitBtn">Yenilə</button>
-    
+            </div>
+            <button [disabled]="!changePasswordForm.valid" type="submit" class="form_submitBtn">Yenilə</button>
           </form>
         </div>
       </div>

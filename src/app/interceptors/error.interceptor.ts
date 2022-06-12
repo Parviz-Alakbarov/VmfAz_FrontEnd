@@ -37,7 +37,7 @@ export class ErrorInterceptor implements HttpInterceptor {
               }else if(error.error){
                 console.log("-  2 - - -"+error.error);
 
-                modelStateError.push({ErrorMessage:error.error.message,PropertyName:'Business'})
+                modelStateError.push({ErrorMessage:error.error,PropertyName:'Business'})
                 console.log(modelStateError);
 
                 throw modelStateError;
