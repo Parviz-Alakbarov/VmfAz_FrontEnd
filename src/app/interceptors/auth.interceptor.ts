@@ -52,7 +52,6 @@ export class AuthInterceptor implements HttpInterceptor {
             }))
           })
         )
-
       }
       this.refresh = false;
       return throwError(()=>err);

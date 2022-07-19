@@ -37,6 +37,8 @@ import { FormatNumberPipe } from './pipes/format-number.pipe';
 
 
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { ForgotPasswordComponent } from './components/account/forgot-password/forgot-password.component';
+import { ForgotPasswordVerificationComponent } from './components/account/forgot-password-verification/forgot-password-verification.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,8 @@ import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
     ServerErrorComponent,
     ProfileComponent,
     FormatNumberPipe,
+    ForgotPasswordComponent,
+    ForgotPasswordVerificationComponent,
 
   ],
   imports: [

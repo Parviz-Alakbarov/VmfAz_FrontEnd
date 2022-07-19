@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccountLayoutComponent } from './components/account/account-layout/account-layout.component';
+import { ForgotPasswordVerificationComponent } from './components/account/forgot-password-verification/forgot-password-verification.component';
+import { ForgotPasswordComponent } from './components/account/forgot-password/forgot-password.component';
 import { LoginComponent } from './components/account/login/login.component';
 import { ProfileComponent } from './components/account/profile/profile.component';
 import { RegisterComponent } from './components/account/register/register.component';
@@ -47,6 +49,8 @@ const routes: Routes = [
     path: 'account', component: AccountLayoutComponent, children: [
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
+      { path: 'forgotPassword', component: ForgotPasswordComponent },
+      { path: 'forgotPasswordVerification', component: ForgotPasswordVerificationComponent },
       // { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
       // { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] }
     ]

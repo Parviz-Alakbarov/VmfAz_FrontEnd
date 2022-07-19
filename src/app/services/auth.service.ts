@@ -13,6 +13,7 @@ import { ChangePasswordModel } from './../models/auth/changePasswordModel';
 import { UpdateProfileModel } from '../models/auth/updateProfileModel';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LocalStorageService } from './local-storage.service';
+import { ForgottenPasswordChangeModel } from '../models/auth/forgottenPasswordChangeModel';
 
 
 @Injectable({
@@ -62,6 +63,16 @@ export class AuthService {
   refresh(refreshToken:RefreshTokenModel):Observable<SingleResponseModel<TokenRespoinseModel>>{
     let newPath = this.baseUrl+"api/auth/refresh";
     return this.httpClient.post<SingleResponseModel<TokenRespoinseModel>>(newPath,refreshToken);
+  }
+
+  forgotPasswordEmail(email:string):Observable<ResponseModel>{
+    let newPath = this.baseUrl+"api/auth/resetPassword";
+    return this.httpClient.post<ResponseModel>(newPath, email);
+  }
+
+  forgotPasswordChange(forgotPasswordChangeModel:ForgottenPasswordChangeModel):Observable<ResponseModel>{
+    let newPath = this.baseUrl + "api/Auth/forgotPasswordConfirmation";
+    return this.httpClient.post<ResponseModel>(newPath, forgotPasswordChangeModel);
   }
 
   public isAuthenticated():boolean{
